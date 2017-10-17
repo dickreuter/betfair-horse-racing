@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" media="screen" charset="utf-8">
+    <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <title>Layout with Absolutely and Relative content</title>
+    <script type="text/javascript" src="../../common/testdata.js"></script>
+  </head>
+  <body>
+    <style type="text/css">
+      .addButton button{
+        height:44px;
+        border-radius: 60px; font-size: 35px; line-height: 25px;
+        box-shadow: 0px 3px 0px 1px rgba(200,200,200,0.5);
+      }
+    </style>
+    <div id='layout_div' style='width:320px; height:600px; box-shadow: 0 5px 5px 0px #eee;; border:1px solid #eee; margin:20px;'></div>
+    <script type="text/javascript" charset="utf-8">
+
+      webix.ui({
+        container:"layout_div",
+        view:"abslayout",
+        cells:[
+          { view:"list", select:true,
+            item:{
+              height:62,
+              template:"#rank#. #title# <br> #votes#",
+            },
+            data:big_film_set,
+            relative:true },
+          { view:"button", value:"+", css:"addButton",
+            bottom: 20, right:35, width:50, height: 60 }
+        ]
+      }).show();
+
+    </script>
+  </body>
+</html>

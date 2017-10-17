@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+	<title>Events</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+	<script src="../../../webix/sources/core/i18n/ru.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+	<script src="../common/data.js"></script>
+
+</head>
+<body>
+	<script type="text/javascript">
+		
+		webix.ready(function(){
+			webix.ui({
+				view:"spreadsheet",
+				id:"ssheet",
+				data:base_data,
+				toolbar: "full",
+				subbar:{
+					view:"toolbar", css:"webix_ssheet_toolbar", elements:[
+						{},
+						{view:'label', template:'Try to select some cells or change one of them'},
+						{}
+					]
+				}
+			});									
+			
+			$$("ssheet").attachEvent("onCellChange", function(row, column, value){
+				webix.message("Row: "+row+"; column: "+column+"; new value: "+value)
+			});
+			
+			$$("ssheet").attachEvent("onAfterSelect", function(id){
+				webix.message("Selected: "+JSON.stringify(id) );
+			});
+			
+			
+			
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+	<title>Gage Chart</title>
+	<script src="../../../codebase/webix.js" type="text/javascript"></script>
+    <link rel="STYLESHEET" type="text/css" href="../../../codebase/webix.css">
+    <body>
+    	<script>
+            var gage1 = {
+                view: "gage",
+                value: 36,
+                minRange: 0,
+                maxRange: 40,
+                label: "Pressure",
+                placeholder: "MPa"
+            };
+
+            var gage2 = {
+                view: "gage",
+                value: 10,
+                minRange: -100,
+                maxRange: 100,
+                label: "Temperature",
+                placeholder: ""
+            };
+
+            var gage3 = {
+                view: "gage",
+                value: -160,
+                minRange: -200,
+                maxRange: -100,
+                label: "Water level",
+                placeholder: "cm"
+            };
+
+            var gage4 = {
+                view: "gage", id:"g4",
+                value: 60,
+                minRange: 0,
+                maxRange: 100,
+                label: "Network usage",
+                height:210
+            };
+
+            var gage5 = {
+                view: "gage",
+                value: 0,
+                minRange: -100,
+                maxRange: 100,
+                label: "Speed",
+                placeholder: "km/hour",
+                smoothFlow: false
+            };
+
+            var gage6 = {
+                view: "gage", id:"g6",
+                value: 40,
+                minRange: 0,
+                maxRange: 100,
+                label: "CPU usage",
+                height:210,
+                smoothFlow: false
+            };
+
+            webix.ui({ cols:[
+                { rows:[ gage1, gage2, gage3 ], width: 300 },
+                { rows:[ gage4, gage5, gage6, { gravity: 100 } ], width: 250 },
+            ]});
+
+            setInterval(function(){
+                var value = Math.floor(Math.random()*100);
+                webix.message("New value: "+value);
+                $$("g4").setValue(value);
+                $$("g6").setValue(value);
+            }, 1500)
+    	</script>
+    </body>
+</html>

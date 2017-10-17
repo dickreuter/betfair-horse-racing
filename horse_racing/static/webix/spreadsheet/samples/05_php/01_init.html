@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+	<title>Basic Init of Spreadsheet</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+	<script src="../common/data.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		webix.ready(function(){
+			webix.ui({
+				view:"spreadsheet",
+				url: "server/get.php",
+				save: {
+					data:"server/data.php",
+					sizes:"server/sizes.php",
+					spans:"server/spans.php",
+					styles:"server/styles.php"
+				}
+			});
+		});
+	</script>
+</body>
+</html>

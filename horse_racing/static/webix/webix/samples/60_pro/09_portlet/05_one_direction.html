@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+   <head>
+	   <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	   <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	   <title>Portlet: One direction</title>
+   </head>
+   <body>
+
+   	<div id='divA' style='width:600px; height:200px;'></div>
+   	<div id='divB' style='width:200px; height:600px;'></div>
+<script type="text/javascript" charset="utf-8">
+
+webix.ui({
+	container:"divA",
+	type:"space",
+	rows:[
+		{ template:"Only X-snap here", type:"header"},
+		{ type:"wide", cols:[
+			{ view:"portlet", mode:"cols", body:{
+				template:"A col 1"
+			}},
+			{ view:"portlet", mode:"cols", body:{
+				template:"B col 2",
+			}},
+			{ view:"portlet", mode:"cols", body:{
+				template:"C col 3"
+			}},
+		]
+		}
+	]
+});
+
+webix.ui({
+	container:"divB",
+	type:"space",
+	rows:[
+		{ template:"Only Y-snap here", type:"header"},
+		{ type:"wide", rows:[
+			{ view:"portlet", mode:"rows", body:{
+				template:"A col 1"
+			}},
+			{ view:"portlet", mode:"rows", body:{
+				template:"B col 2",
+			}},
+			{ view:"portlet", mode:"rows", body:{
+				template:"C col 3"
+			}},
+		]
+		}
+	]
+});
+
+</script>
+   </body>
+</html>

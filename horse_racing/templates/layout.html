@@ -1,0 +1,42 @@
+{% from "macros.html" import render_field %}
+<html>
+<title>Horse Racing</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+</head>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<div class=page>
+
+  <h1>Horse Racing</h1>
+
+<HEADER>
+      <div class="container">
+        <strong><nav>
+          <ul class="menu">
+            <li><a href="{{ url_for('index') }}">Main</a></li>
+            <li><a href="{{ url_for('pnl_summary') }}">PnL Summary</a></li>
+            <li><a href="{{ url_for('logging') }}">Logging</a></li>
+            <li><a href="{{ url_for('upcoming_races') }}">Upcoming races</a></li>
+          </ul>
+        </nav></strong>
+      </div>
+</HEADER>
+
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+
+  {% endfor %}
+
+  {% block body %}{% endblock %}
+
+</div>

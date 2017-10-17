@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+	<title>Export to Excel:Styles</title>
+	<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+	<link rel="stylesheet" type="text/css" href="../common/samples.css">
+	<script type="text/javascript" src="../../common/testdata.js"></script>
+	<style type="text/css">
+		.green{
+			background-color:#aaffaa;
+		}
+		.violet{
+			background-color:#dcdafd;
+			text-align:center;
+		}
+	</style>
+</head>
+<body>
+	<div id="dataDiv"></div>
+
+	<script>
+
+		webix.ui({
+			container:"dataDiv",
+			padding: 20,
+			rows: [
+				{
+					id: "table",
+					view:"datatable",
+					scheme:{
+						$change:function(item){
+							if (item.year > 2005)
+								item.$css = "green";
+							item.votes =item.votes.replace(",", "");
+						}
+					},
+					footer:true,
+					columns:[
+						{ id:"rank", width:50,
+							header:{ text:"#", rowspan:2, css:{"text-align":"center"}}, 
+							footer:{text:"Total votes:", colspan:3}
+						},
+						{ id:"title",	fillspace:true, 
+							header:[
+								"Film title",
+								{text:"Second line", colspan:3, css:"violet"}
+							]
+						},
+						{ id:"year",	header:["Year",""],	width:80},
+						{ id:"votes",	header:["Votes",""], footer:{content:"summColumn"}, width:100}
+					],
+					width:500,
+					height: 600,
+					data:big_film_set
+				},
+				{ paddingY: 5, paddingX: 10, cols:[
+					{ },
+					{ view: "button", label: "Export to Excel with styles", autowidth:true, click:function(){
+						webix.toExcel($$("table"), {
+							styles:true,
+							spans:true
+						});
+					}}
+				]}
+			]
+		});
+	</script>
+</body>
+</html>

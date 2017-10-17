@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+	<title>Avatar Click</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/kanban.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/kanban.css">
+
+	<script src="../common/data.js"></script>
+	<script src="../common/types.js"></script>
+	<link rel="stylesheet" type="text/css" href="../common/style.css">
+</head>
+<body>
+<script type="text/javascript">
+
+
+	webix.ui({
+		view: "popup",
+		id: "staffPopup",
+		body:{
+			id: "staffList",
+			view: "dataview",
+			xCount: 3,
+			height: 300,
+			borderless: true,
+			css: "members",
+			autoheight: true,
+			select: true,
+			type: "avatars",
+			on:{
+				onItemClick: function(id){
+					var selectedTaskId  = $$("myBoard").getSelectedId();
+					var task = $$("myBoard").getItem(selectedTaskId);
+					task.personId = id;
+					$$("myBoard").refresh(selectedTaskId);
+					$$("staffPopup").hide();
+				}
+			},
+			data: staff
+		}
+	});
+
+	function avatarClick(id,e,node,list){
+		$$("staffPopup").show(node);
+		var personId = this.getItem(id).personId;
+		if(personId)
+			$$("staffList").select(personId);
+	}
+	webix.ready(function(){
+		webix.ui({
+			view:"kanban",
+			id: "myBoard",
+			type:"space",
+			cols:[
+				{ header:"Backlog",
+					body:{ view:"kanbanlist", status:"new", type: "avatars"}},
+				{ header:"In Progress",
+					body:{ view:"kanbanlist", status:"work", type: "avatars"}
+				},
+				{ header:"Testing",
+					body:{ view:"kanbanlist", status:"test", type: "avatars" }},
+				{ header:"Done",
+					body:{ view:"kanbanlist", status:"done", type: "avatars" }}
+			],
+			on:{
+				onAvatarClick: avatarClick
+			},
+			data:base_task_set
+		});
+	});
+</script>
+</body>
+</html>

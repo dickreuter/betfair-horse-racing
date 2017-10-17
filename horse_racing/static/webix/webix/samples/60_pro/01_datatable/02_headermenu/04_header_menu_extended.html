@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Extended Header menu in the DataTable</title>
+		<link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../common/samples.css">
+		<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+        .highlight{
+            background-color:#edf4f9;
+            font-weight:bold;
+        }
+        </style>
+	</head>
+	<body>
+		<div class='header_comment'>Extended Header menu in the DataTable</div>
+		<div class='sample_comment'>Custom menu configuration - right click on any header</div>
+		<div id="testA"></div>
+
+		<script type="text/javascript" charset="utf-8">
+		webix.ready(function(){
+			webix.ui({
+				container:"testA",
+				view:"datatable",
+
+				columns:[
+					{ id:"title", headermenu:false,	header:"Film title", width:250 },
+					{ id:"year",	header:"Released" , width:80 },
+					{ id:"votes",	header:"Votes", 	width:100 },
+                    { id:"rating",	header:"Rating", 	width:100 },
+                    { id:"dummy1",   header:"Dummy column 1", width:100, hidden:true },
+                    { id:"dummy2",   header:"Dummy column 2", width:100, hidden:true },
+                    { id:"dummy3",   header:"Dummy column 3", width:100, hidden:true },
+                    { id:"dummy4",   header:"Dummy column 4", width:100, hidden:true },
+                    { id:"dummy5",   header:"Dummy column 5", width:100, hidden:true },
+                    { id:"dummy6",   header:"Dummy column 6", width:100, hidden:true },
+                    { id:"dummy7",   header:"Dummy column 7", width:100, hidden:true },
+				],
+				autoheight:true,
+				autowidth:true,
+				headermenu:{
+					width:250,
+					autoheight:false,
+					scroll:true
+				},
+                data:small_film_set
+			});
+		});
+		</script>
+		<br>
+		<div class='sample_comment'>Custom menu data - right click on any header</div>
+		<div id="testB"></div>
+		<script type="text/javascript" charset="utf-8">
+		webix.ready(function(){
+			webix.ui({
+				container:"testB",
+				view:"datatable",
+
+				columns:[
+					{ id:"title", 	header:"Film title", width:250 },
+					{ id:"year",	header:"Released" , width:80 },
+					{ id:"votes",	header:"Votes", 	width:100 },
+                    { id:"rating",	header:"Rating", 	width:100 },
+                    { id:"dummy",   header:"Dummy column 1", width:100, hidden:true },
+                    { id:"dummy",   header:"Dummy column 2", width:100, hidden:true },
+                    { id:"dummy",   header:"Dummy column 3", width:100, hidden:true },
+                    { id:"dummy",   header:"Dummy column 4", width:100, hidden:true },
+                    { id:"dummy",   header:"Dummy column 5", width:100, hidden:true },
+                    { id:"dummy",   header:"Dummy column 6", width:100, hidden:true },
+                    { id:"dummy",   header:"Dummy column 7", width:100, hidden:true },
+				],
+				autoheight:true,
+				autowidth:true,
+				headermenu:{
+					data:[
+						{ id:"year", value:"Released"},
+						{ id:"rating", value:"Rating"}
+					]
+				},
+                data:small_film_set
+			});
+		});
+		</script>
+	</body>
+</html>

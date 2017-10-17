@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<title>GoogleMap::HeatMap</title>
+</head>
+<body>
+	<div id="sample_div" style='width:600px; height:300px; margin:50px;'></div>
+	
+	<div style="margin:50px;">
+		<input type="button" value="Show/hide Heatmap" onClick="toggleHeatMap()"/>
+		<input type="button" value="Change opacity and radius" onClick="updateHeatMap()"/>
+		<input type="button" value="Add data" onClick="addData()"/>
+		<input type="button" value="Update data" onClick="updateData()"/>
+		<input type="button" value="Clear map" onClick="clearMap()"/>
+	</div>	
+	
+	<script type="text/javascript">
+	
+		webix.ui({
+			container:"sample_div",
+			// provide your own Google API key
+			// https://developers.google.com/maps/documentation/javascript/get-api-key
+			key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+    		view:"google-map",
+    		id:"map",
+			zoom:13,
+			mapType:"SATELLITE",
+			center:[ 37.774546, -122.433523 ],
+			layerType:"heatmap",
+			heatmapConfig:{
+				opacity:"0.8",
+				radius:"20"
+			},
+			url:"data/heatmap.json"
+		});
+
+		function toggleHeatMap(){
+			var heatmap = $$("map").getHeatmap();
+			if(heatmap)
+				heatmap.setMap(heatmap.getMap()?null: $$("map").getMap());
+		}
+
+		function updateHeatMap(){
+			$$("map").define("heatmapConfig", {
+				opacity: "0.6", 
+				radius: "10"
+			});
+			$$("map").refresh();
+		}
+
+		function addData(){
+			$$("map").parse([
+				{ lat: 37.788, lng:-122.447 },
+				{ lat: 37.788, lng:-122.445 },
+				{ lat: 37.788, lng:-122.443 },
+				{ lat: 37.788, lng:-122.441 },
+				{ lat: 37.788, lng:-122.439 },
+				{ lat: 37.788, lng:-122.437 },
+				{ lat: 37.788, lng:-122.435 }
+			]);
+		}
+
+		function updateData(){
+			var item = $$("map").getItem($$("map").getFirstId());
+			if(item)
+				$$("map").updateItem(item.id, {weight: 3});
+		}
+
+		function clearMap(){
+			$$("map").clearAll();
+		}
+
+		
+
+	</script>
+</body>
+</html>

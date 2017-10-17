@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Querybuilder columns mode</title>
+		<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../../codebase/querybuilder.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+		<link rel="stylesheet" type="text/css" href="../../codebase/querybuilder.css">
+	</head>
+	<style type="text/css">
+		.webix_textarea textarea:focus {
+			border-color: #ccc;
+    		box-shadow: none;
+		}
+	</style>
+	<body>
+		<script type="text/javascript" charset="utf-8">
+			var textarea = {
+				view:"textarea",
+				id: "textarea",
+				css: "webix_textarea",
+				labelAlign:"right"
+			};
+
+			var qb = {
+				view: "querybuilder",
+				id: "querybuilder",
+				fields: [
+					{ id:"fname", value:"First Name", type:"string" },
+					{ id:"lname", value:"Last Name",  type:"string" },
+					{ id:"age",  value:"Age", type:"number" },
+					{ id:"bdate",  value:"Birth Date", type:"date" }
+				],
+				maxLevel: 3,
+				inputWidth: 250,
+				columnMode:true, 
+				width: 600
+			};
+
+			webix.ready(function(){
+				webix.ui({rows:[{cols: [qb, textarea]}]});
+
+				$$("querybuilder").focus();
+				$$("querybuilder").setValue(
+					[{
+						glue:"and",
+						rules:[
+							{ key:"fname", value:"Alex", rule:"equal" },
+							{ 
+							glue:"or",
+							rules:[
+								{ key:"age", value:90, rule:"less" },
+								{ key:"age", value:10, rule:"greater" },
+							]
+							}
+						]
+					}]
+				);
+				$$("textarea").getInputNode().setAttribute("readonly", "true");
+				$$("textarea").define("readonly", "true");
+
+				setBlockValue();
+				$$("querybuilder").attachEvent("onChange", function() {
+					setBlockValue();
+				});
+			});
+
+			function setBlockValue() {
+				webix.stringify = function(obj){
+					var origin = Date.prototype.toJSON;
+					Date.prototype.toJSON = function(){
+						return webix.i18n.parseFormatStr(this);
+					};
+					var result;
+					if (obj instanceof Date)
+						result = obj.toJSON();
+					else
+						result = JSON.stringify(obj, null, 4);
+					Date.prototype.toJSON = origin;
+					return result;
+				}
+				$$("textarea").setValue(webix.stringify($$('querybuilder').getValue()[0]));
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+   <head>
+	   <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	   <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	   <title>Grid Dashboard - action menu</title>
+   </head>
+   <body>
+<script type="text/javascript" charset="utf-8">
+
+function panelFactory(obj){
+	obj.view = "panel";
+	obj.css = "panel_drag_view";
+	obj.body = { template: obj.name };
+	return obj;
+}
+
+var grid = {
+	view:"dashboard", id:"grid",
+	gridColumns:4, gridRows:4,
+	cellHeight: 200,
+	cells:[
+		{ view:"panel", icon:"bars", x:0, y:0, dx:2, dy:1, body:{
+			template:"cell 1" }},
+		{ view:"panel", icon:"bars", x:1, y:1, dx:2, dy:1 , body:{
+			template:"cell 2" }},
+		{ view:"panel", icon:"bars", x:2, y:2, dx:2, dy:1, body:{
+			template:"cell 3" }}
+	],
+	factory:panelFactory
+};
+
+var panels = {
+	rows:[{
+		type:"header", 
+		template:"panels, drag from here",
+	},{
+		view:"list", id:"list",
+		width:200,
+		drag:true,
+		template:"#value# - (#dx#x#dy#)",
+		data:[
+			{ id:"a", value:"panel A", dx:1, dy:1 },
+			{ id:"b", value:"panel B", dx:1, dy:2 },
+			{ id:"c", value:"panel C", dx:2, dy:1 },
+			{ id:"d", value:"panel D", dx:2, dy:2 },
+			{ id:"e", value:"panel E", dx:1, dy:1 },
+			{ id:"f", value:"panel F", dx:1, dy:1 },
+			{ id:"g", value:"panel G", dx:3, dy:1 }
+		]
+	}]
+};
+
+webix.ui({
+	type:"space", rows:[
+		{ type:"header", template:"Click on 'Hamburger' icon to show the menu" },
+		{ type:"wide", cols:[
+			grid,
+			panels
+		]}
+	]
+});
+
+
+var menu = webix.ui({
+	view:"contextmenu",
+	click:function(id){
+		if (id === "delete"){
+			var view = this.getContext();
+			view.getParentView().removeView(view);
+		}
+	},
+	data:[
+		{ id:"n1", value:"Nothing" },
+		{ id:"n2", value:"Nothing" },
+		{ id:"delete", value:"Delete" }
+	]
+});
+webix.event(document.body, "click", function(ev){
+	var css = ev.target.className;
+	if (css && css.toString().indexOf("panel_icon") != -1){
+		menu.setContext(webix.$$(ev.target));
+		menu.show(ev.target);
+	}
+});
+
+
+
+</script>
+   </body>
+</html>

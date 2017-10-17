@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+	<title>Icons</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/kanban.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/kanban.css">
+
+	<script src="../common/data.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+
+	webix.type(webix.ui.kanbanlist,{
+		name: "iconsEdit",
+		icons:[
+			{
+				id: "comments",
+				tooltip: "Comments",
+				icon:"comment-o",
+				show: function(obj){ return !!obj.comments },
+				template:"#comments.length#",
+				click: function(e,id){
+					webix.message("Comments for '"+this.getItem(id).text+"'");
+				}
+			},
+			{
+				id: "edit",
+				icon:"edit",
+				tooltip: "Edit Task",
+				click: function(e,id){
+					var item = $$("myBoard").getItem(id);
+					$$("myWin").show();
+					$$("myForm").setValues(item);
+					$$("myForm").focus();
+				}
+			}
+		]
+	});
+
+	webix.ui({
+		view: "window",
+		width: 400,
+		height: 350,
+		id: "myWin",
+		position: "center",
+		modal: true,
+		head:{
+			view: "toolbar",
+			elements:[
+				{ view: "label", label: "Task form"},
+				{ view: "button", type:"iconButton", label: "Close", icon: "times", click:function(){$$("myWin").hide()}, width:90}
+			]
+		},
+		body:{
+			view: "form",
+			id: "myForm",
+			elementsConfig:{
+				labelPosition: "top"
+			},
+			elements:[
+				{ view: "text", label: "Title", name:"text"},
+				{ view: "textarea", label: "Desription", name:"description", height: 90},
+				{ view: "button",label:"Save", type: "form", inputWidth:120, align: "center",
+					click:function(){
+						$$("myWin").hide();
+						var values = $$("myForm").getValues();
+						var id = $$("myBoard").getSelectedId();
+						var item = $$("myBoard").getItem(id);
+						item.text = values.text;
+						item.description = values.description;
+						$$("myBoard").refresh(id);
+					}}
+			]
+		}
+	});
+
+
+	webix.ready(function(){
+		webix.ui({
+			view:"kanban",
+			id: "myBoard",
+			type:"space",
+			cols:[
+				{ header:"Backlog",
+					body:{ view:"kanbanlist", status:"new", type: "iconsEdit" }},
+				{ header:"In Progress",
+					body:{ view:"kanbanlist", status:"work", type: "iconsEdit"}
+				},
+				{ header:"Testing",
+					body:{ view:"kanbanlist", status:"test", type: "iconsEdit" }},
+				{ header:"Done",
+					body:{ view:"kanbanlist", status:"done", type: "iconsEdit" }}
+			],
+			data:base_task_set
+		});
+
+
+	});
+</script>
+</body>
+</html>

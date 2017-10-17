@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			#areaA, #areaB{
+				margin: 30px;
+			}
+			body{
+				background: #faf6ed;
+			}
+		</style>
+		<title>DateRange::Basic</title>
+	</head>
+	<body>
+
+		<div id="areaA"></div>
+		<div id="areaB"></div>
+	
+
+		<script type="text/javascript" charset="utf-8">
+		
+		webix.ui({
+			container:"areaA",
+			view:"daterange"
+		});	
+
+		webix.ui({
+			container:"areaB",
+			view:"daterange",
+			calendarCount:4,
+			icons:true,
+			timepicker:true,
+			value:{
+				start: new Date(), 
+				end: webix.Date.add(new Date(), 2, "month")
+			}
+		});	
+
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+	<title>onErrorResponse Event</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/filemanager.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/filemanager.css">
+
+	<style>
+		.info .webix_template{
+			padding: 10px
+		}
+	</style>
+</head>
+<body>
+<script type="text/javascript">
+	webix.ready(function(){
+
+		webix.ui({
+			//type: "space",
+			rows:[
+				{
+					template: "Try to execute some operation with files", css: "info", height: 40
+				},
+				{
+					view:"filemanager",
+					id:"files",
+					handlers:{
+						create: "error.php",
+						copy: "error.php",
+						delete: "error.php",
+						download: "error.php",
+						move: "error.php",
+						rename: "rename.php",
+						upload: "upload.php"
+					}
+				}
+			]
+
+		});
+
+		$$("files").load("../common/data.php");
+
+		$$("files").attachEvent("onErrorResponse", function(requestData,response){
+			webix.message({type: "error",text:"Error occured in '"+requestData.action+"' operation"});
+			return true;
+		});
+
+
+	});
+</script>
+</body>
+</html>

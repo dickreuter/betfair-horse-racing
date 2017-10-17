@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./data/data.js" type="text/javascript" charset="utf-8"></script>
+	<title>GeoChart::Data Formats</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+		webix.ui({
+			rows:[
+				{ type:"header", template:"JSON (default) and XML data"},
+				{ cols:[
+					{
+						view:"geochart",
+						// provide your own Google API key 
+						// https://developers.google.com/maps/documentation/javascript/get-api-key
+						key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+						data:json_data
+					},
+					{ view:"resizer"},
+					{
+						view:"geochart",
+						// provide your own Google API key 
+		    			// https://developers.google.com/maps/documentation/javascript/get-api-key
+						key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+						columns:["country", "area"],
+						datatype:"xml",
+						data:xml_data
+					}
+				]},
+				{ height:10 },
+				{ type:"header", template:"JS Array and CSV data"},
+				{ cols:[
+					{
+						view:"geochart",
+						// provide your own Google API key
+						// https://developers.google.com/maps/documentation/javascript/get-api-key
+						key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+						datatype:"jsarray",
+						data:jsarray_data
+					},
+					{ view:"resizer"},
+					{
+						view:"geochart",
+						// provide your own Google API key
+						// https://developers.google.com/maps/documentation/javascript/get-api-key
+						key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+						datatype:"csv",
+						data:csv_data
+					}
+				]}
+			]
+		});
+
+	</script>
+</body>
+</html>

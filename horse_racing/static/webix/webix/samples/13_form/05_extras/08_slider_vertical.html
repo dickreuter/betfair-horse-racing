@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+        <title>Vertical Slider</title>
+	</head>
+	<body>
+
+		<script type="text/javascript" charset="utf-8">
+
+		var ui = webix.ui({
+			padding: 20,
+			cols:[
+
+				{
+					view:"form", id:"myform1", width:600,
+					rows:[
+						{type:"line", rows:[
+							{  type:"section", template:"Sliders with labels" },
+							{ height:200, cols:[
+								{ view:"slider", type:"alt", label:"Fixed title", value:"20", name:"s1", title: webix.template("Selected: #value#"), 
+									vertical:true, moveTitle:false },
+								{ view:"slider", label:"Moving title", labelWidth:100, name:"s2", title: webix.template("Selected: #value#"), 
+									value:"60", vertical:true, min:-200 }
+							]},
+							{ type:"section", template:"Sliders without labels" },
+							{ height:200, cols:[
+								{ view:"slider",  name:"s3", value:85, vertical:true,  title:webix.template("#value#"), width:60 },
+								{ view:"slider",  name:"s4", value:40, vertical:true,  title:webix.template("#value#"), width:60 },
+								{ view:"slider",  name:"s5", value:50, vertical:true,  title:webix.template("#value#"), width:60 },
+								{ view:"slider",  name:"s6", value:70, vertical:true,  type:"alt", title:webix.template("#value#"), width:60, },
+								{ view:"slider",  name:"s7", value:20, vertical:true,  type:"alt", title:webix.template("#value#"), width:60 }
+							]},
+							{ type:"section", template:"Sliders without titles" },
+							{ height:200, cols:[
+								{ view:"slider",  name:"s3", value:85, vertical:true, width:40 },
+								{ view:"slider",  name:"s4", value:40, vertical:true, width:40 },
+								{ view:"slider",  name:"s5", value:50, vertical:true, width:40 },
+								{ view:"slider",  name:"s6", value:70, vertical:true,  type:"alt", width:40, },
+								{ view:"slider",  name:"s7", value:20, vertical:true,  type:"alt", width:40 }
+							]}
+							
+						]}
+					]
+				}
+			]
+
+		});
+
+		function set(){
+			var data = $$('myform2').getValues();
+			$$('myform').setValues(data);
+		}
+		function get(){
+			var data = $$('myform').getValues();
+			$$('myform2').setValues(data);
+		}
+		</script>
+		
+	</body>
+</html>

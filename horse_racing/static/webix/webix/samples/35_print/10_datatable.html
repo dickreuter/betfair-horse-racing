@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../common/testdata.js"></script>
+	<title>Datatable</title>
+</head>
+<body>
+	<div id='testA' style='width:600px; height:800px; margin:20px;'></div>
+	<script type="text/javascript" charset="utf-8">
+
+		webix.ui({
+			container:"testA",
+			margin:10,
+			rows:[
+				{ margin:5, cols:[
+					{ view:"button", value:"Print all records", click:function(){
+						webix.print($$("mytable"));
+					}},
+					{ view:"button", value:"Print visible records", click:function(){
+						webix.print($$("mytable"), { scroll:true });
+					}},
+				]},
+				{ 
+					view:"datatable",
+					id:"mytable",
+					columns:[
+						{ id:"rank",	header:"",  width:50},
+						{ id:"title",	header:"Film title", fillspace:true},
+						{ id:"year",	header:"Released" },
+						{ id:"votes",	header:"Votes" },
+						{ id:"votes",	header:"Rating"}
+					],
+					scrollX:false,
+					data:big_film_set
+				}
+			]
+		});
+
+	</script>
+</body>
+</html>

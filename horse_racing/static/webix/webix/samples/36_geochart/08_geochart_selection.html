@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<title>GeoChart::Selection</title>
+</head>
+<body>
+	<div class="sample_comment" style="margin:20px">The sample shows how to highlight 'selected' areas.</div>
+	<div id="sample_div" style="width:800px; height:500px; margin:20px;"></div>
+	<script type="text/javascript">
+
+		var data = [
+			{ id:1, country:'Germany', selected:0 }, 
+			{ id:2, country:'United States', selected:0}, 
+			{ id:3, country:'Brazil', selected:0}, 
+			{ id:4, country:'Canada', selected:0}, 
+			{ id:5, country:'France', selected:1},
+			{ id:6, country:'Russia', selected:0}
+		];
+
+		webix.ui({
+			container:"sample_div",
+    		view:"geochart", 
+    		id:"map",
+    		data:data,
+		    // provide your own Google API key
+		    // https://developers.google.com/maps/documentation/javascript/get-api-key
+			key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+			tooltip:"",
+			chart:{
+				legend:"none",
+				colorAxis: { minValue: 0, maxValue: 1, colors: ["#f2f28d", "#9370db"]}
+			},
+			on:{
+				onItemClick:function(id){
+					this.data.each(function(obj){
+						obj.selected = (obj.id == id)?1:0 
+					});
+					this.refresh();
+				}
+			}
+		});
+	</script>
+</body>
+</html>

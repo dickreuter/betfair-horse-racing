@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+        <title>Slider: Labels</title>
+	</head>
+	<body>
+		<script type="text/javascript" charset="utf-8">
+			webix.ui({
+				padding: 20,
+				cols:[
+					{},
+					{
+						width:450,
+						rows:[
+							{view:"form", id:"myform",   elements:[
+								{ view:"slider", label:"Slider 1", value:"60", name:"s1",
+									title:webix.template("#value#")},
+								{ view:"slider", label:"Slider 2", value:"12", name:"s2",
+									title:webix.template("Selected: #value#")},
+								{ view:"slider", label:"Slider 3", value:"100", name:"s3",
+									title:webix.template("Selected: #value#"), moveTitle:false},
+
+								{ view:"slider", label:"Slider 4", value:"50", name:"s4",
+									title:function(obj){
+										var text = obj.value > 20 ? "Minimum level reached. " : "";
+										return text + "Value: "+ obj.value;
+									}, moveTitle:false
+								},
+
+
+								{ view:"slider", label:"Slider 5", value:"80", name:"s5",
+									title:"Initial state", moveTitle:false,
+									on:{
+										onChange:function(){
+											this.define("title", "Final value " + this.getValue());
+											this.refresh();
+										},
+										onSliderDrag:function(){
+											this.define("title", "Dragging... Currently "+this.getValue());
+											this.refresh();
+										}
+									}
+								}
+							]},
+							{view:"form", id:"myform2", elements:[
+								{
+									type:"clean",
+									cols:[
+										{},
+										{ view:"button", type: "form", id:"slider_set", label:"Set values", click:"set()",  align:"right" },
+										{ view:"button", id:"slider_get", label:"Get values", click:"get()",  align:"left" }
+									]
+								},
+								{ view: "fieldset", label:"Data", body:{
+									//view:"form",
+									rows:[
+										{ view:"text", label:"Value 1", value:"60", name:"s1"},
+										{ view:"text", label:"Value 2", value:"12", name:"s2"},
+										{ view:"text", label:"Value 3", value:"100", name:"s3"},
+										{ view:"text", label:"Value 4", value:"50", name:"s4"},
+										{ view:"text", label:"Value 5", value:"80", name:"s5"}
+									]
+								}}
+							]}
+						]
+					},
+					{}
+				]
+			});
+
+			function set(){
+				var data = $$('myform2').getValues();
+				$$('myform').setValues(data);
+			}
+			function get(){
+				var data = $$('myform').getValues();
+				$$('myform2').setValues(data);
+			}
+
+		</script>
+		
+	</body>
+</html>

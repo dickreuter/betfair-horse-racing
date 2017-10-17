@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+	<title>Item styling</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/kanban.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/kanban.css">
+
+	<script src="../common/data.js"></script>
+	<script src="../common/types.js"></script>
+	<link rel="stylesheet" type="text/css" href="../common/style.css">
+	<style>
+		.critical .webix_kanban_list_content{
+			background-color: #fff2c1;
+			border-color:  #e0d7b7;
+			border-left-color:  #f5cf3d;
+		}
+	</style>
+</head>
+<body>
+<script type="text/javascript">
+	webix.ready(function(){
+		webix.ui({
+			view:"kanban", type:"space",
+			cols:[
+				{ header:"Backlog",
+					body:{ view:"kanbanlist", status:"new" }},
+				{ header:"In Progress",
+					body:{ view:"kanbanlist", status:"work"}
+				},
+				{ header:"Testing",
+					body:{ view:"kanbanlist", status:"test" }},
+				{ header:"Done",
+					body:{ view:"kanbanlist", status:"done" }}
+			],
+			data: [
+				{ id:1, status:"new", text:"Task 1 (critical)", tags:"webix,docs", $css: "critical" },
+				{ id:2, status:"new", text:"Task 2", tags:"webix" },
+				{ id:3, status:"work", text:"Task 3", tags:"webix,docs" },
+				{ id:4, status:"work", text:"Task 4", tags:"webix" }
+			]
+		});
+	});
+</script>
+</body>
+</html>

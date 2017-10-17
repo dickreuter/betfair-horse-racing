@@ -1,0 +1,316 @@
+{
+	"structure": {
+		"rows": ["year"],
+		"columns": ["continent"],
+		"values": [{ "name":"oil", "operation":["min","sum"]}]
+	},
+	"data": {
+		"columns": [
+			{
+				"id": "column0",
+				"template": "{common.treetable()} #column0#",
+				"header": {}
+			},
+			{
+				"id": "column1",
+				"header": [
+					{
+						"name": "Africa",
+						"colspan": 2
+					},
+					{
+
+						"operation": "min",
+						"name": "oil"
+					}
+				]
+			},
+			{
+				"id": "column2",
+				"header": [
+					{
+						"name": "Africa"
+					},
+					{
+
+						"operation": "sum",
+						"name": "oil"
+					}
+				]
+			},
+			{
+				"id": "column3",
+				"header": [
+					{
+						"name": "Asia",
+						"colspan": 2
+					},
+					{
+
+						"operation": "min",
+						"name": "oil"
+					}
+				]
+			},
+			{
+				"id": "column4",
+				"header": [
+					{
+						"name": "Asia"
+					},
+					{
+
+						"operation": "sum",
+						"name": "oil"
+					}
+				]
+			},
+			{
+				"id": "column5",
+				"header": [
+					{
+						"name": "Australia",
+						"colspan": 2
+					},
+					{
+
+						"operation": "min",
+						"name": "oil"
+					}
+				]
+			},
+			{
+				"id": "column6",
+				"header": [
+					{
+						"name": "Australia"
+					},
+					{
+
+						"operation": "sum",
+						"name": "oil"
+					}
+				]
+			},
+			{
+				"id": "column7",
+				"header": [
+					{
+						"name": "Europe",
+						"colspan": 2
+					},
+					{
+
+						"operation": "min",
+						"name": "oil"
+					}
+				]
+			},
+			{
+				"id": "column8",
+				"header": [
+					{
+						"name": "Europe"
+					},
+					{
+
+						"operation": "sum",
+						"name": "oil"
+					}
+				]
+			},
+			{
+				"id": "column9",
+				"header": [
+					{
+						"name": "North America",
+						"colspan": 2
+					},
+					{
+
+						"operation": "min",
+						"name": "oil"
+					}
+				]
+			},
+			{
+				"id": "column10",
+				"header": [
+					{
+						"name": "North America"
+					},
+					{
+
+						"operation": "sum",
+						"name": "oil"
+					}
+				]
+			},
+			{
+				"id": "column11",
+				"header": [
+					{
+						"name": "South America",
+						"colspan": 2
+					},
+					{
+
+						"operation": "min",
+						"name": "oil"
+					}
+				]
+			},
+			{
+				"id": "column12",
+				"header": [
+					{
+						"name": "South America"
+					},
+					{
+
+						"operation": "sum",
+						"name": "oil"
+					}
+				]
+			}
+		],
+		"data": [
+			{
+				"column11": 0.518,
+				"column12": 13.842,
+				"column5": 2.946,
+				"column6": 10.959999999999999,
+				"column7": 0,
+				"column8": 260.475,
+				"column9": 27.777,
+				"column10": 279.627,
+				"column1": 0.034,
+				"column2": 4.69,
+				"column3": 0.778,
+				"column4": 121.055,
+				"column0": "2005"
+			},
+			{
+				"column11": 0.651,
+				"column12": 17.748,
+				"column5": 3.641,
+				"column6": 13.638,
+				"column7": 0,
+				"column8": 324.75300000000004,
+				"column9": 30.626,
+				"column10": 333.07599999999996,
+				"column1": 0.05,
+				"column2": 6.45,
+				"column3": 1.493,
+				"column4": 163.64899999999997,
+				"column0": "2006"
+			},
+			{
+				"column11": 0.875,
+				"column12": 24.128,
+				"column5": 4.2,
+				"column6": 16.522,
+				"column7": 0,
+				"column8": 351.732,
+				"column9": 34.726,
+				"column10": 381.426,
+				"column1": 0.068,
+				"column2": 4.965,
+				"column3": 1.826,
+				"column4": 194.65599999999998,
+				"column0": "2007"
+			},
+			{
+				"column11": 1.754,
+				"column12": 36.592,
+				"column5": 5.806,
+				"column6": 21.084,
+				"column7": 0,
+				"column8": 494.24499999999995,
+				"column9": 49.833,
+				"column10": 525.958,
+				"column1": 0.092,
+				"column2": 10.69,
+				"column3": 2.773,
+				"column4": 305.97700000000003,
+				"column0": "2008"
+			},
+			{
+				"column11": 1.15,
+				"column12": 20.251,
+				"column5": 3.51,
+				"column6": 13.258,
+				"column7": 0,
+				"column8": 318.055,
+				"column9": 29.701,
+				"column10": 297.401,
+				"column1": 0.065,
+				"column2": 8.2,
+				"column3": 1.446,
+				"column4": 205.804,
+				"column0": "2009"
+			},
+			{
+				"column11": 2.008,
+				"column12": 32.571,
+				"column5": 4.486,
+				"column6": 19.396,
+				"column7": 0,
+				"column8": 368.40200000000004,
+				"column9": 39.361,
+				"column10": 393.111,
+				"column1": 0.082,
+				"column2": 7.023,
+				"column3": 2.402,
+				"column4": 297.836,
+				"column0": "2010"
+			},
+			{
+				"column11": 3.756,
+				"column12": 50.668,
+				"column5": 6.181,
+				"column6": 27.678,
+				"column7": 0,
+				"column8": 478.2729999999999,
+				"column9": 52.574,
+				"column10": 514.874,
+				"column1": 0.1,
+				"column2": 11.99,
+				"column3": 2.502,
+				"column4": 428.26599999999996,
+				"column0": "2011"
+			},
+			{
+				"column11": 4.056,
+				"column12": 52.315,
+				"column5": 6.736,
+				"column6": 29.332,
+				"column7": 0,
+				"column8": 483.4030000000001,
+				"column9": 51.378,
+				"column10": 509.835,
+				"column1": 0.111,
+				"column2": 14.681000000000001,
+				"column3": 2.93,
+				"column4": 458.519,
+				"column0": "2012"
+			},
+			{
+				"column11": 4.219,
+				"column12": 54.718,
+				"column5": 6.485,
+				"column6": 30.134999999999998,
+				"column7": 0,
+				"column8": 476.92900000000003,
+				"column9": 50.408,
+				"column10": 515.3149999999999,
+				"column1": 0.113,
+				"column2": 14.738999999999999,
+				"column3": 3.104,
+				"column4": 466.93,
+				"column0": "2013"
+			}
+		]
+	}
+
+}

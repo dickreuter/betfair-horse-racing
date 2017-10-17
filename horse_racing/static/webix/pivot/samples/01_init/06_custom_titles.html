@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Custom field titles</title>
+		<link rel="stylesheet" href="../../../webix/codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+		<script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+		<script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class='header_comment'>Custom field titles</div>
+		<div id="testA"></div>
+
+        <style type="text/css">
+            html, body {
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                margin: 0;
+            }
+        </style>
+
+		<script type="text/javascript" charset="utf-8">
+
+		webix.ready(function(){
+			grida = webix.ui({
+				container:"testA",
+				id:"pivot",
+				view:"pivot",
+				height:400,
+				width:1000,
+				data:pivot_dataset,
+				max: true,
+				label:"Oil by forms/continents",
+				structure:{
+					rows: ["continent"],
+					columns: ["year"],
+					values: [{ name:"balance", operation:"sum"},{ name:"oil", operation:"sum"}],
+					filters:[{name:"name",type:"text"}]
+				},
+
+				// change sizes
+				popup:{
+					width: 750,
+					fieldsColumnWidth: 200   // width for the "fields" sector in Config popup
+				},
+				columnWidth: 190,   // width for column 2..N
+				yScaleWidth: 220,    // width for the first column
+				filterPlaceholder:true,
+                    
+
+				// change titles
+				fieldMap:{
+					gdp: "GDP",
+					balance: "Balance of Payments",
+					oil: "Oil",
+					form: "Form of Government",
+					name: "Country",
+					year: "Year",
+					continent: "Continent",
+					id: "Id"
+				}
+			});
+			grida.$$("data").define("select","cell");
+
+		});
+		</script>
+	</body>
+</html>

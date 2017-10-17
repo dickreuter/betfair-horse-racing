@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+	<title>Icons</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/filemanager.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/filemanager.css">
+
+	<style>
+
+		.header div{
+			padding: 0 10px;
+		}
+
+	</style>
+</head>
+<body>
+<script type="text/javascript">
+	webix.ready(function(){
+		webix.ui({
+			view: "filemanager",
+			id: "fmanager",
+			templateIcon: function(fileObj, common){
+				var icon = (fileObj.type == "folder"?"folder":"file-o");
+				return "<span class='webix_icon webix_fmanager_icon fa-"+icon+"'></span>";
+			}
+		});
+		$$("fmanager").load("../common/data.php");
+	});
+</script>
+</body>
+</html>

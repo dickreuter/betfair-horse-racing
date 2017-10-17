@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+    <script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="../common/testdata.js"></script>
+    <style>
+        #areaA {
+            margin: 50px 10px;
+            width:320px;
+            height:400px;
+            float: left;
+        }
+
+    </style>
+    <title>Hide options</title>
+</head>
+<body>
+<div id="areaA"></div>
+
+<script type="text/javascript" charset="utf-8">
+
+    var tabbar = {
+        view:"tabbar", id: "tabbar", multiview:true, options: [
+            { value: 'List', id: 'listView'},
+            { value: 'Form', id: 'formView'},
+            { value: 'About', id: 'aboutView'}
+        ]
+    };
+    var data = {
+        cells:[
+            {
+                id:"listView",
+                view:"list",
+                template:"#rank#. #title# <div style='padding-left:18px'> Year:#year#, votes:#votes# </div>",
+                type:{
+                    height:60
+                },
+                select:true,
+                data:big_film_set
+            },
+            {
+                id:"formView",
+                template:"Place for the form control"
+            },
+            {
+                id:"aboutView",
+                template:"About the app"
+            }
+        ]
+    };
+
+    webix.ui({
+        container: "areaA",
+        rows:[
+            tabbar,
+            data,
+            {view: "form", cols:[
+                {},
+                { view:"toggle", offLabel:"Hide Form", onLabel:"Show Form", on:{
+                    onChange: function(value){
+                        if(value)
+                            $$("tabbar").hideOption("formView");
+                        else
+                            $$("tabbar").showOption("formView");
+                    }
+                }}
+            ]}
+        ]
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../common/testdata.js"></script>
+	<title>Dataview</title>
+</head>
+<body>
+	<div id="testA" style="width:550px; height:600px; margin:20px;"></div>
+	<script type="text/javascript" charset="utf-8">
+
+	webix.ui({
+		container:"testA",
+		margin:10,
+		rows:[
+			{ margin:5, cols:[
+				{ view:"button", value:"Print all records", click:function(){
+					webix.print($$("mydata"));
+				}},
+				{ view:"button", value:"Print visible records", click:function(){
+					webix.print($$("mydata"), { scroll:true });
+				}},
+			]},
+			{
+				view:"dataview",
+				id:"mydata",
+				item:{
+					width: 260, height: 90
+				},	
+				template:"<div class='overall'><div class='rank'>#rank#."+
+					"</div><div class='title'>#title#</div><div class='year'>#year# year</div> </div>",
+				data:big_film_set
+			}
+		]
+	});
+
+	</script>
+</body>
+</html>

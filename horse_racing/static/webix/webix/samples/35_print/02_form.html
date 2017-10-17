@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<title>Form</title>
+</head>
+<body>
+	<input type="button" style="margin-left:20px;" value="Print form view" onclick="webix.print($$('myform'))"/>
+	<div id='form_div' style='width:600px; height:500px; margin:20px;'></div>
+	<script type="text/javascript" charset="utf-8">
+
+		webix.ui({
+			container:"form_div",
+			rows:[
+				{ type:"header", template:"Applicant Form"},
+				{ view:"form", id:"myform", elements:[
+					{ view:"text", label:"First Name", value:"Mattew"},
+					{ view:"text", label:"Second Name", value:"Stark"},
+					{ view:"datepicker", label:"Date of birth", value:"1983-03-06"},
+					{ view:"multiselect", label:"Languages", value:"1,4,6", options:[
+						{ id:1, value:"English"}, { id:2, value:"German"},
+						{ id:3, value:"French"}, { id:4, value:"Russian"},
+						{ id:4, value:"Chinese"}, { id:6, value:"Italian"}
+					]},
+					{ view:"textarea", label:"Additional Information", labelPosition:"top", value:"Authoring a personal blog about wildlife"},
+					{ view:"button", type:"form", value:"Submit", align:"center", inputWidth:150}
+				],
+				elementsConfig:{
+					labelWidth:100
+				}}
+			]
+		});
+
+	</script>
+</body>
+</html>

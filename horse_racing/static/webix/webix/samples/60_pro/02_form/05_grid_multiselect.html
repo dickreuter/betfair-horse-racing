@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+		<title>Multi-select grid input</title>
+	</head>
+	<body>
+
+		<div id="areaA"></div>
+	
+
+		<script type="text/javascript" charset="utf-8">
+		webix.protoUI({
+			name:"gridmultisuggest",
+			$init:function(config){
+				var list = config.body.rows[0];
+				list.view = "datatable";
+				list.header = false;
+				list.columns = [
+					{ id:"a", fillspace:1, template:"#a.value#"},
+					{ id:"b", fillspace:1, template:"#b.value#"},
+					{ id:"c", fillspace:1, template:"#c.value#"}
+				];
+				list.select = "cell";
+				list.multiselect = "touch";
+				list.scrollX = false;
+				delete list.yCount;
+				delete list.type;
+			},
+			getValue:function(){
+				var list = this.getList().getSelectedId(true);
+				for (var i=0; i<list.length; i++)
+					list[i] = this.getList().getItem(list[i].row)[list[i].column].id;
+
+				return list.join(this.config.separator);
+			},
+			setValue:function(value){
+				if (typeof value == "string")
+					value = value.split(this.config.separator);
+
+					var text = [];
+					var list = this.getList();
+					list.unselect();
+						
+					if (value[0]){
+						for (var i = 0; i < value.length; i++){
+							var obj = list.find(function(obj){
+								for (var key in obj)
+									if (obj[key] && obj[key].id == value[i]){
+										list.$findColumn = key;
+										return true;
+									}
+							}, true);
+
+							if (obj.id){
+								list.select(obj.id, list.$findColumn, true);
+								text.push(list.getItem(obj.id)[list.$findColumn].value);
+							}
+						}
+					}
+
+					return text.join(this.config.separator+" ");
+			}
+		}, webix.ui.multisuggest);
+
+		var form1 = [
+			{ rows:[
+				{ view:"multiselect", label:"Participant",  options:{
+					view:"gridmultisuggest",
+					body:{
+						data:[
+							{ a:{id:1, value:"January"}, b:{id:2, value:"February"}, c:{id:3, value:"March"}, },
+							{ a:{id:4, value:"April"}, b:{id:5, value:"May"}, c:{id:6, value:"June"}, },
+							{ a:{id:7, value:"July"}, b:{id:8, value:"August"}, c:{id:9, value:"September"}, },
+							{ a:{id:10, value:"October"}, b:{id:11, value:"November"}, c:{id:12, value:"December"} }
+						]}
+					},
+	                value:"1,3" }
+			]},
+			{ margin:5, cols:[
+				{ gravity:2 },
+				{ view:"button", value:"Approve" , type:"form" },
+				{ view:"button", value:"Cancel" }
+			]}
+		];
+
+		
+		webix.ui({
+			container:"areaA",
+			margin:30, width:800, cols:[
+				{ view:"form", scroll:false, elements: form1 }
+			]
+		});
+		</script>
+	</body>
+</html>

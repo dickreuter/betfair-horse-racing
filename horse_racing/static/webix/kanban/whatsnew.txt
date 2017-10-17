@@ -1,0 +1,55 @@
+Version 5.0 (September 2017)
+--------------
+### Fixes
+
+- kanban fails in an isolated scope
+
+Version 4.3 (April 2017)
+---------------
+### Fixes
+
+- kanban index fix
+
+Version 4.0 (September 2016)
+---------------
+### Major Features
+
+- setIndex method
+
+### Fixes
+
+- presort data with $index
+- $index support
+- sorting items
+
+Version 3.3 (April 2016)
+--------------
+### Updates
+
+- new positioning for dragged Kanban items
+
+### Fixes
+
+- items order after drag-n-drop from a different list
+- items order after dnd
+- stable sorting for data items
+
+Version 3.2 (February 2016)
+------------------
+### Major Features
+
+- Custom Kanban layouts
+- Improved drag-n-drop
+
+Version 3.1 (November 24, 2015)
+-------------------
+### Updates
+
+- "multiselect" support for KanbanLists
+
+
+Version 2.5 (July 2015)
+------------
+### Major Features
+
+- Swim lanes in Kanban widget to visualize separate work flows

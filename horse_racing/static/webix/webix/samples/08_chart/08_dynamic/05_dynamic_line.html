@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+    <title>Dynamic "line" chart</title>
+    <script src="../../../codebase/webix.js" type="text/javascript"></script>
+    <link rel="STYLESHEET" type="text/css" href="../../../codebase/webix.css">
+    <script src="../../common/chartdata.js"></script>
+<body>
+    <div id="chartDiv" style="width:600px;height:200px;margin:20px"></div>
+    <script>
+        webix.ui({
+            id: "chart",
+            view:"chart",
+            container: "chartDiv",
+            type:"line",
+            value:"#yValue#",
+            cellWidth: 50,
+            dynamic: true,
+            label: function(obj){
+                return parseInt(obj.yValue,10);
+            },
+            item:{
+                borderColor: "#1293f8",
+                color: "#ffffff"
+            },
+            line:{
+                color:"#1293f8",
+                width:3
+            },
+            xAxis:{
+                template:"#xValue#"
+            },
+            yAxis:{
+                start:0,
+                end:100,
+                step:10,
+                template:function(obj){
+                    return (obj%50?"":obj);
+                }
+            },
+            series:[
+                {
+                    value:"#yValue#",
+                    item:{
+                        borderColor: "#1293f8",
+                        color: "#ffffff"
+                    },
+                    line:{
+                        color:"#1293f8",
+                        width:2
+                    },
+                    tooltip:{
+                        template:"#yValue#"
+                    }
+                }
+            ]
+        });
+
+        var count = 1;
+        $$("chart").add({xValue: count, yValue: Math.random() * 100});
+        setInterval(function () {
+            if(count < 100){
+                count++;
+                $$("chart").add({xValue: count, yValue: Math.random() * 100});
+
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

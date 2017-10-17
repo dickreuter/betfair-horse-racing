@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<title>GeoChart::Basic</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+		webix.ui({
+    		view:"geochart",
+    		id:"map",
+    		// provide your own Google API key 
+		    // https://developers.google.com/maps/documentation/javascript/get-api-key
+			key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+    		data:[
+				{id:1, country:'Germany', area:200},
+				{id:2, country:'United States', area:400},
+				{id:3, country:'Brazil', area:1000},
+				{id:4, country:'Canada', area:500},
+				{id:5, country:'France', area:650},
+				{id:6, country:'RU', area:1180}
+		    ]
+		});
+	</script>
+</body>
+</html>

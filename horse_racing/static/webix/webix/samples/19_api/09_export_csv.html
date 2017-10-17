@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+	<title>Export to CSV</title>
+    <link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+    <script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="../common/samples.css">
+	<script type="text/javascript" src="../common/testdata.js"></script>
+    <style type="text/css">
+	    html,body{
+	    	height:100%;margin:0
+	    }
+        .webix_view.toolbar{
+	        background: #fafafa;
+        }
+    </style>
+</head>
+<body>
+    <div id="dataDiv"></div>
+	<script>
+		webix.csv.delimiter.cols = ", ";
+		webix.ui({
+			container:"dataDiv",
+			padding: 20,
+			rows: [
+				{
+					view:"list",
+					id: "mylist",
+					width:450,
+					height:300,
+					template:"#rank#. #title#",
+					select:"multiselect",
+					data:small_film_set
+				},
+				{
+					view: "form",
+					css: "toolbar",
+					paddingY: 5,
+					paddingX: 10,
+					cols:[
+						{
+							view: "label", label: "Export Data", width: 100
+						},
+						{
+							view: "button", label: "All Fields", click:function(){
+								webix.toCSV($$("mylist"));
+							}
+						},
+						{
+							view: "button", label: "'Rank' and 'Title'", click:function(){
+								webix.toCSV($$("mylist"), {
+									filename: "films",
+									columns:{
+										"rank":true,
+										"title":{header: "Title"}
+									}
+								});
+							}
+						}
+					]
+
+				}
+			]
+		});
+	</script>
+</body>
+</html>

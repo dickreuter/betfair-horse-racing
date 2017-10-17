@@ -1,0 +1,1 @@
+conda env update -n horse_racing --file environment_gpu.yml

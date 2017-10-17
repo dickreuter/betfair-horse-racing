@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sparkline settings</title>
+    <link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../common/samples.css">
+</head>
+<body>
+
+<div id="testA"></div>
+
+<script type="text/javascript" charset="utf-8">
+
+    webix.ready(function(){
+        grida = webix.ui({
+            container:"testA",
+            view:"datatable",
+            columns:[
+                { id:"id", header:" ", width:50},
+                { id:"name", header:"Name", width:160},
+                { id:"income", header:"Average", template:function(obj){
+                    var arr = obj.income;
+                    var sum = 0;
+                    for(var i =0; i< arr.length; i++)
+                        sum +=  arr[i];
+                    return sum?(sum/arr.length).toFixed(2):0;
+                }, width:150},
+
+                // sparklines
+                { id:"income", header:"Custom color", width:200, 
+                    template: webix.Sparklines.getTemplate({
+                        type:"line",
+                        radius:4,
+                        color:"#592584",
+                        paddingY:0,
+                        scale:1000
+                    })
+                },
+                { id:"income", header:"Row color", width:200, 
+                    template: webix.Sparklines.getTemplate({
+                        type:"bar",
+                        paddingY:0,
+                        origin:300
+                    })
+                }
+            ],
+            autoheight:true,
+            autowidth:true,
+            rowHeight:70,
+            rowLineHeight:70,
+            data: [
+                {id: 1, name: "Austria", income: [710, 780, -390, 660, 600] },
+                {id: 2, name: "France", income: [810, 500, 180, 800, 940] },
+                {id: 3, name: "Germany", income: [630, 800, 120, 490, 520] },
+                {id: 4, name: "UK", income: [100, 640, 440, 870, 150] }
+            ]
+        });
+    });
+</script>
+</body>
+</html>

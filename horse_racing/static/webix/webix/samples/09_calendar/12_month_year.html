@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+    <script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <title>"Month" and "year" types</title>
+</head>
+<style type="text/css">
+    #listA, #listB{
+        float:left; margin:20px;
+    }
+    body{
+        background: #faf6ed;
+    }
+    .webix_view{
+        border-radius:3px;
+    }
+</style>
+<body>
+<div id="listA"></div>
+<div id="listB"></div>
+
+
+<script type="text/javascript" charset="utf-8">
+    webix.ui({
+        container:"listA",
+        date:new Date(2016,1,16),
+        view:"calendar",
+        type: "month"
+    });
+
+    webix.ui({
+        container:"listB",
+        date:new Date(2016,3,16, 8, 10),
+        view:"calendar",
+        type:"year"
+    });
+
+
+
+
+
+</script>
+</body>
+</html>

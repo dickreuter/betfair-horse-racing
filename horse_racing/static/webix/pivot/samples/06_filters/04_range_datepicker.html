@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DateRangePicker filter</title>
+    <link rel="stylesheet" href="../../../webix/codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+    <script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+    <script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="testA"></div>
+
+<style type="text/css">
+    html, body {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+</style>
+
+<script type="text/javascript" charset="utf-8">
+    var data = [
+        {id: "1", client: "ACME", company: "A", country: "Germany", date: "2016-11-1", statValue:0.5},
+        {id: "2", client: "ACME", company: "A", country: "Germany", date: "2016-11-1", statValue:0.4},
+        {id: "3", client: "ACME", company: "B", country: "Germany", date: "2016-11-15", statValue:0.3},
+        {id: "4", client: "ACME", company: "B", country: "Germany", date: "2016-11-15", statValue:0.5},
+        {id: "5", client: "ACME", company: "A", country: "France", date: "2016-12-1", statValue:0.4},
+        {id: "6", client: "ACME", company: "A", country: "France", date: "2016-12-1", statValue:0.6},
+        {id: "7", client: "ACME", company: "B", country: "France",date: "2016-12-15", statValue:0.1},
+        {id: "8", client: "ACME", company: "B", country: "France", date: "2016-12-15", statValue:0.5},
+        {id: "9", client: "Samsung", company: "A", country: "Germany", date: "2016-11-1", statValue:0.7},
+        {id: "10", client: "Samsung", company: "A", country: "Germany", date: "2016-11-1", statValue:0.4},
+        {id: "11", client: "Samsung", company: "B", country: "Germany", date: "2016-11-15", statValue:0.3},
+        {id: "12", client: "Samsung", company: "B", country: "Germany", date: "2016-11-15", statValue:0.5},
+        {id: "13", client: "Samsung", company: "A", country: "France", date: "2016-12-1", statValue:0.8},
+        {id: "14", client: "Samsung", company: "A", country: "France", date: "2016-12-1", statValue:0.4},
+        {id: "15", client: "Samsung", company: "B", country: "France", date: "2016-12-15", statValue:0.3},
+        {id: "16", client: "Samsung", company: "B", country: "France", date: "2016-12-15", statValue:0.5}
+    ];
+
+    // a new control (filter type)
+    webix.protoUI({
+        name: "mydaterange",
+        $css: "daterangepicker",
+        // returns string value:
+        // start date timestamp +".."+end date timestamp
+        getValue:function(){
+            var value = this.config.value;
+            if (!value.start && !value.end) return "";
+            
+            var start = value.start?value.start.valueOf():"";
+            var end = value.end?value.end.valueOf():"";
+            return start+".."+end;
+        }
+    },webix.ui.daterangepicker);
+
+    // filter name to display
+    webix.i18n.pivot.mydaterange = "date-range picker";
+
+    webix.ready(function(){
+        webix.ui({
+            container:"testA",
+            id:"pivot",
+            view:"pivot",
+            width: 1000,
+            datatable:{
+                autoheight: true
+            },
+            scheme:{
+                $init: function(item){
+                    // add a new field with "date" timestamp
+                    // fields that begin with "$" are not shown in "Fields" list
+                    item.$date = webix.i18n.parseFormatDate(item.date).valueOf();
+                }
+            },
+            structure: {
+                rows: [ "client"],
+                filters:[{name: "date", type: "mydaterange"}],
+                columns: ["date"],
+                values: [{ name:"statValue", operation:["min","max"]}]
+            },
+            // fields for filtering
+            filterMap: {
+                date: "$date"
+            }
+        });
+        // add new filter type
+        $$("pivot").filters.add("mydaterange");
+        $$("pivot").parse(data);
+    });
+</script>
+</body>
+</html>

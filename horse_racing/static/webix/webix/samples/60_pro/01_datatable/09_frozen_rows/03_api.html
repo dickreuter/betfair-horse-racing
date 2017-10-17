@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Freeze row on the fly</title>
+    <link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../common/samples.css">
+    <script src="../../../15_datatable/common/bigtestdata.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+
+<div id="testA"></div>
+<style type="text/css">
+    .webix_topcell{
+        background: #e7f6ff;
+    }
+    .webix_cell.webix_topcell.webix_row_select{
+        background: #6d89d8;
+    }
+
+</style>
+<script type="text/javascript" charset="utf-8">
+
+    webix.ready(function(){
+        var grid = {
+            container:"testA", height:600, width:250,
+            id:"grid",
+            view:"datatable",
+            columns:[
+                { id:"id", header:" ", width:50, sort:"int"},
+                { id:"title", header:{ content:"textFilter" }, fillspace:true, sort:"string" }
+            ],
+            scrollX:false,
+            topSplit:2, select:true, navigation:true,
+            data: big_wide_film_set
+        };
+
+        var add = { view:"button", value:"Freeze Row", width:120, click:function(){
+            var id =  $$("grid").getSelectedId();
+            $$("grid").freezeRow( id, true );
+        }};
+        var remove = { view:"button", value:"UnFreeze Row", click:function(){
+            var id =  $$("grid").getSelectedId();
+            $$("grid").freezeRow( id, false );
+        }};
+
+        webix.ui({
+            type:"space",
+            cols:[ grid, {
+                rows:[ add, remove, {}]
+            }]
+        })
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			#areaA{
+				margin: 30px;
+			}
+		</style>
+		<title>DateRange Picker</title>
+	</head>
+	<body>
+
+		<div id="areaA"></div>
+	
+
+		<script type="text/javascript" charset="utf-8">
+		
+		webix.ui({
+			container:"areaA",
+			margin:20,
+			view:"form",
+			elements:[
+				{ 	view:"daterangepicker", name:"default", width:500, label:"Default",
+					value:{start: new Date(), end: webix.Date.add(new Date(), 1, "month")}
+				},
+				{ 	view:"daterangepicker", name:"custom", width:500, label:"Custom",
+					stringResult:true, 
+					format:"%Y-%F-%d %H:%i", 
+					suggest:{
+						view:"daterangesuggest",
+						body:{
+							calendarCount:1,
+							icons:false,
+							timepicker:true
+						}
+					}
+				},
+				{ cols:[
+					{ view:"button", value:"Submit", type:"form", click:function(){
+						var values = this.getFormView().getValues();
+						$$("output").setValue(JSON.stringify(values, null, 2));
+					}},
+					{view:"button", value:"Cancel", click:function(){
+						$$("output").setValue("");
+					}}
+				]},
+				{view:"textarea", height:200, id:"output"}
+			]
+		});
+
+		</script>
+	</body>
+</html>

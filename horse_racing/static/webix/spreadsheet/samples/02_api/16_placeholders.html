@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+	<title>Placeholders</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+	<script src="../common/data.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		webix.ready(function(){
+			var placeholders = [
+				{ id: 1, value:"France", expense:1366, income:842 },
+				{ id: 2, value:"Poland", expense:684, income:781 },
+				{ id: 3, value:"China",  expense:8142, income:7813 }
+			];
+
+			var ssheet = {
+				view:"spreadsheet",
+				id:"ssheet",
+				data:{
+				  "styles": [
+					["top","#FFEFEF;#6E6EFF;center;'PT Sans', Tahoma;17px;"],
+					["subtop","#818181;#EAEAEA;center;'PT Sans', Tahoma;15px;;;bold;top;;0-0-0-0,;"],
+					["count","#818181;#EAEAEA;center;'PT Sans', Tahoma;15px;;;;top;;0-0-0-0,;"],
+					["calc-top","#818181;#EAEAEA;;'PT Sans', Tahoma;15px;;;bold;top;;0-0-0-0,;"],
+					["calc-other","#818181;#EAEAEA;;'PT Sans', Tahoma;15px;;;bold;middle;;0-0-0-0,;"]
+				  ],
+				  "data": [
+					[1, 1, "Report 2015", "top"],
+					[2, 1, "Countries:", "subtop"],
+						[3, 1, "={{value}}", "count"],
+					[2, 2, "Expense", "count"],
+						[3, 2, "={{expense}}"],
+					[2, 3, "Income", "count"],
+						[3, 3, "={{income}}"],
+					[2, 6, "Total:", "calc-top"],
+						[3, 6, "=B3-C3"],
+					[2, 7, "Std Deviation:", "calc-top"],
+						[3, 7, "=STDEVP(B3:C3)"]
+				  ],
+				  "spans": [
+					[1, 1, 3, 1]
+				  ],
+				  "sizes":[
+					[0, 7, 130],
+					[0, 8, 200],
+					[0, 5, 20],
+					[0, 4, 20]
+				  ]
+				}
+			};
+
+			var list = {
+				view: "form",
+				rows:[
+					{ view: "label", label: "Select placeholder" },
+					{
+						view:"list",
+						width: 200,
+						borderless: true,
+						autoheight: true,
+						select:true,
+						data:placeholders,
+						on:{
+							onAfterSelect:function(id){
+								var obj = this.getItem(id);
+								$$("ssheet").setPlaceholder(obj);
+							}
+						},
+						ready: function(){
+							this.select(1);
+						}
+					},{}
+				]
+
+			};
+
+			webix.ui({
+				cols:[
+					list,
+					ssheet
+				]
+			});
+
+		});
+	</script>
+</body>
+</html>

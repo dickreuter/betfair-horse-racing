@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DatePicker filter</title>
+    <link rel="stylesheet" href="../../../webix/codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+    <script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+    <script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="testA"></div>
+
+<style type="text/css">
+    html, body {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+</style>
+
+<script type="text/javascript" charset="utf-8">
+    var data = [
+        {id: "1", client: "ACME", company: "A", country: "Germany", date: "11/01/2016", statValue:0.5},
+        {id: "2", client: "ACME", company: "A", country: "Germany", date: "11/01/2016", statValue:0.4},
+        {id: "3", client: "ACME", company: "B", country: "Germany", date: "11/15/2016", statValue:0.3},
+        {id: "4", client: "ACME", company: "B", country: "Germany", date: "11/15/2016", statValue:0.5},
+        {id: "5", client: "ACME", company: "A", country: "France", date: "12/01/2016", statValue:0.4},
+        {id: "6", client: "ACME", company: "A", country: "France", date: "12/01/2016", statValue:0.6},
+        {id: "7", client: "ACME", company: "B", country: "France",date: "12/15/2016", statValue:0.1},
+        {id: "8", client: "ACME", company: "B", country: "France", date: "12/15/2016", statValue:0.5},
+        {id: "9", client: "Samsung", company: "A", country: "Germany", date: "11/01/2016", statValue:0.7},
+        {id: "10", client: "Samsung", company: "A", country: "Germany", date: "11/01/2016", statValue:0.4},
+        {id: "11", client: "Samsung", company: "B", country: "Germany", date: "11/15/2016", statValue:0.3},
+        {id: "12", client: "Samsung", company: "B", country: "Germany", date: "11/15/2016", statValue:0.5},
+        {id: "13", client: "Samsung", company: "A", country: "France", date: "12/01/2016", statValue:0.8},
+        {id: "14", client: "Samsung", company: "A", country: "France", date: "12/01/2016", statValue:0.4},
+        {id: "15", client: "Samsung", company: "B", country: "France", date: "12/15/2016", statValue:0.3},
+        {id: "16", client: "Samsung", company: "B", country: "France", date: "12/15/2016", statValue:0.5}
+    ];
+
+    webix.ready(function(){
+
+        var dateFormat = webix.Date.strToDate("%m/%d/%Y");
+
+        webix.ui({
+            container:"testA",
+            id:"pivot",
+            view:"pivot",
+            width: 1000,
+            datatable:{
+                autoheight: true
+            },
+            scheme:{
+                $init: function(item){
+                    // add a new field with "date" timestamp
+                    // fields that begin with "$" are not shown in "Fields" list
+                    item.$date = dateFormat(item.date).valueOf();
+                }
+            },
+            structure: {
+                rows: [ "client"],
+                filters:[{name: "date", type: "datepicker"}],
+                columns: ["date"],
+                values: [{ name:"statValue", operation:["min","max"]}]
+            },
+            // fields for filtering
+            filterMap: {
+                date: "$date"
+            }
+        });
+        $$("pivot").parse(data);
+    });
+</script>
+</body>
+</html>

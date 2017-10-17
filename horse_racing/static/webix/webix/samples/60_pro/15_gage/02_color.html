@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+	<title>Gage Chart - Custom colors</title>
+	<script src="../../../codebase/webix.js" type="text/javascript"></script>
+    <link rel="STYLESHEET" type="text/css" href="../../../codebase/webix.css">
+    <body>
+    	<script>
+            var color = function(val){
+                if (val < 40) return "green";
+                if (val < 80) return "orange";
+                return "red";
+            }
+            var gage1 = {
+                view: "gage", id:"g1",
+                value: 36,
+                minRange: 0,
+                maxRange: 100,
+                color:color,
+                label: "Pressure",
+                placeholder: "MPa"
+            };
+            var gage2 = {
+                view: "gage",
+                value: 66,
+                minRange: 0,
+                maxRange: 100,
+                color:color,
+                label: "Pressure",
+                placeholder: "MPa"
+            };
+            var gage3 = {
+                view: "gage",
+                value: 86,
+                minRange: 0,
+                maxRange: 100,
+                color:color,
+                label: "Pressure",
+                placeholder: "MPa"
+            };
+
+         
+
+            var gage4 = {
+                view: "gage", id:"g4",
+                value: 60,
+                minRange: 0,
+                maxRange: 100,
+                label: "Network usage",
+                height:210, color:"green",
+            };
+
+           
+            webix.ui({ cols:[
+                { rows:[
+                    { view:"label", label:"Color by value", align:"center" }, 
+                    gage1, gage2, gage3, { gravity: 100 } 
+                ], width: 250 },
+                { rows:[ 
+                    { view:"label", label:"Fixed color", align:"center" },
+                    gage4, { gravity: 100 }
+                ], width: 250 }
+            ]});
+
+            setInterval(function(){
+                var value = Math.floor(Math.random()*100);
+                webix.message("New value: "+value);
+                $$("g1").setValue(value);
+                $$("g4").setValue(value);
+            }, 1500)
+    	</script>
+    </body>
+</html>

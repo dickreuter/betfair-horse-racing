@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+   <head>
+	   <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	   <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	   <title>Portlet: Move cells</title>
+   </head>
+   <body>
+
+   	<div id='divA' style='width:600px; height:400px;'></div>
+<script type="text/javascript" charset="utf-8">
+
+webix.ui({
+	container:"divA",
+	type:"space",
+	rows:[
+		{ template:"Reordering",  type:"header" },
+		{ view:"portlet", body:{
+			template:"Drag and drop portlets"
+		}},
+		{ view:"portlet", body:{
+			template:"row 2"
+		}},
+		{ type:"wide", cols:[
+			{ view:"portlet", body:{
+				template:"col 1"
+			}},
+			{ view:"portlet", body:{
+				template:"col 2",
+			}},
+			{ view:"portlet", body:{
+				template:"col 3"
+			}},
+		]
+		}
+	]
+});
+
+</script>
+   </body>
+</html>

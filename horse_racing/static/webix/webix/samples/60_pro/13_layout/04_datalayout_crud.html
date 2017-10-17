@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+    <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <title>Data Layout - CRUD operations</title>
+  </head>
+  <body>
+    <div id='layout_div' style='width:800px; height:600px; margin:20px;'></div>
+    <div>
+      <input type="button" value = "Add data" onClick="addData();"/>
+      <input type="button" value = "Update Last" onClick="updateLast();"/>
+      <input type="button" value = "Remove First" onClick="removeFirst();"/>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+
+    function addData(){
+      $$("data").add({
+        "month":"April", "data":[{ "income": 5894, "count":4 }, { "income": 1458, "count":2 }] 
+      });
+    }
+
+    function updateLast(){
+      var last = $$("data").getItem($$("data").getLastId());
+      if(last){
+        last.month = "Hello, December";
+        $$("data").updateItem(last.id, last)
+      }
+    }
+
+    function removeFirst(){
+      var first = $$("data").getFirstId();
+      if(first) 
+        $$("data").remove(first);
+    }
+
+   	var left = {
+      
+	    view:"datalayout",
+      id:"data",
+      type:"space",
+      rows:[
+        { name:"$value", type:"header", template:"#month# 2016" },
+        { name:"data", view:"list", autoheight:true, template:"#income#, #count#" }
+      ],
+      url:"data/data.js"
+    };
+
+    webix.ui({
+      container:"layout_div",
+      view:"scrollview",
+      body:left
+    });
+
+    </script>
+  </body>
+</html>

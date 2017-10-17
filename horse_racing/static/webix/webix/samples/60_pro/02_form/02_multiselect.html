@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+		<title>Multi-select input</title>
+	</head>
+	<body>
+
+		<div id="areaA"></div>
+	
+
+		<script type="text/javascript" charset="utf-8">
+		var form1 = [
+			{ rows:[
+				{ view:"multiselect", label:"Participant", labelWidth:100, options:[
+					{ id:1, value:"Alex Brown" },
+					{ id:2, value:"Dan Simons" },
+					{ id:3, value:"Gron Alanski" },
+					{ id:4, value:"Dan Alanski" }
+				],
+                value:"1,3" }
+			]},
+			{ margin:5, cols:[
+				{ gravity:2 },
+				{ view:"button", value:"Approve", type:"form" },
+				{ view:"button", value:"Cancel" }
+			]}
+		];
+
+		var form2 = [
+			{ rows:[
+				{ view:"multiselect", label:"Participant", labelWidth:100,
+				suggest:{
+					data:[
+						{ id:1, value:"Alex Brown" },
+						{ id:2, value:"Dan Simons" },
+						{ id:3, value:"Gron Alanski" },
+						{ id:4, value:"Dan Alanski" }
+					],
+					button:"Approve",
+					view:"multisuggest"
+				},
+                value:"1,3" }
+			]}
+		];
+
+		
+	webix.ui.fullScreen();
+	webix.ui({
+		type:"wide", width:600,
+		margin:100, padding:50,
+		rows:[
+			{ view:"form", rows:form1 },
+			{ view:"form", rows:form2 }
+		]
+	});
+		</script>
+	</body>
+</html>

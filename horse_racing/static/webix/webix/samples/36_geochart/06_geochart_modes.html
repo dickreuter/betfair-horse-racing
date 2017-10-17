@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<title>GeoChart::Modes</title>
+</head>
+<body>
+	<div id="sample_div" style="width:800px; height:500px; margin:50px;"></div>
+	<script type="text/javascript">
+
+		var data = [
+			{id:1, country:"Germany", population:61890000, area:50},
+			{id:2, country:"France", population:55700000, area:45}, 
+			{id:3, country:"Poland", population:48540000, area:50}
+		];
+
+		webix.ui({
+			container:"sample_div",
+			rows:[
+				{
+					view:"geochart", 
+					id:"map",
+					// provide your own Google API key 
+		    		// https://developers.google.com/maps/documentation/javascript/get-api-key
+					key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+					data:data,
+					chart:{
+						displayMode:"regions",
+						region:"150",//Europe
+						colorAxis: {colors: ["#f2f28d", "#9370db"]}
+					}
+				},
+				{ cols:[
+					{view:"button", value:"Show markers", click:function(){
+						$$("map").config.chart.colorAxis = {colors: ["#e7711c", "#4374e0"]};
+						$$("map").config.chart.displayMode =  "markers",
+						$$("map").refresh();
+					}},
+					
+					{view:"button", value:"Show regions", click:function(){
+						$$("map").config.chart.displayMode =  "regions",
+						$$("map").refresh();
+					}},
+					{view:"button", value:"Show text", click:function(){
+						$$("map").setDisplayMode("text");
+					}},
+					{}
+				]}
+			]
+		});
+	</script>
+</body>
+</html>

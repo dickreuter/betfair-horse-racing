@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<head>
+	<title>Events</title>
+	<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="testA" style='width:700px; height:500px;'></div>
+<script type="text/javascript" charset="utf-8">
+	function getCss(item){
+		var color = "",
+			id = item.id,
+			comments = item.comments;
+
+		if(!this.isBranch(id)){
+			if(comments > 30)
+				color ="#26a69a";
+			else if(comments > 20)
+				color ="#4db6ac";
+			else if(comments > 10)
+				color ="#80cbc4";
+			else
+				color ="#b2dfdb";
+		}
+		return { background: color};
+	}
+
+	webix.ready(function(){
+		webix.ui({
+			container:"testA",
+			view:"treemap",
+			value: "#views#",
+			headerTemplate: "#category#",
+			template: function(item){
+				return item.category || "";
+			},
+			type:{
+				cssClass: getCss
+			},
+			on: {
+				onItemClick: function(id){
+					if(this.isBranch(id)){
+						this.showBranch(id);
+					}
+					else{
+						var item = this.getItem(id);
+						webix.message("Views: "+ item.views+" <br/>Comments: "+ item.comments);
+					}
+				}
+			},
+			url: "data/data.json"
+		});
+	});
+</script>
+</body>
+</html>

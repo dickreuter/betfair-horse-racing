@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Value Formatting</title>
+	<link rel="stylesheet" href="../../../webix/codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+	<script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="../../../codebase/i18n/fr.js" type="text/javascript" charset="utf-8"></script>
+
+	<link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+</head>
+<body>
+<div class='header_comment'>Value Formatting</div>
+<div id="testA"></div>
+
+<style type="text/css">
+	html, body {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		margin: 0;
+	}
+</style>
+
+<script type="text/javascript" charset="utf-8">
+
+	webix.ready(function(){
+		webix.i18n.setLocale("fr-FR");
+		grida = webix.ui({
+			container:"testA",
+			id:"pivot",
+			view:"pivot",
+			height:400,
+			width:1000,
+			url:"../common/data.json",
+			max: true,
+			structure:{
+				rows: ["continent","name"],
+				columns: ["year"],
+				values: [{name:"gdp", operation:"sum", format: webix.Number.format}]
+			}
+		});
+
+	});
+</script>
+</body>
+</html>

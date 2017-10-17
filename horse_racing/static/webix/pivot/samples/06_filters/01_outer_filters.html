@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom filter container</title>
+    <link rel="stylesheet" href="../../../webix/codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+    <script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+    <script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="testA"></div>
+
+<script type="text/javascript" charset="utf-8">
+
+    webix.ready(function(){
+        webix.ui({
+            width: 1000,
+            type: "space",
+            rows:[
+                    // pivot table
+                {
+                    height: 400,
+                    cols: [
+                        {
+                            gravity: 2,
+                            id: "pivot",
+                            view: "pivot",
+                            structure: {
+                                rows: ["name"],
+                                columns: ["year"],
+                                values: [{name: "oil", operation: ["min", "sum"]}],
+                                filters: [
+                                    {name: "continent", type: "select"},
+                                    {name: "form", type: "select"}
+                                ]
+                            },
+                            on:{
+                                onViewInit: function(name, config){
+                                    if(name == "filters" && $$("filters"))
+                                        webix.ui(config.elements, $$("filters"));
+                                    config.elements = false;
+                                }
+                            }
+                        },
+                        {
+                            id: "filters",
+                            view: "form",
+                            rows:[{}]
+                        }
+                    ]
+                },
+                    // pivot chart
+                {
+                    height: 400,
+                    cols:[
+                        {
+                            id:"pivotChart",
+                            view:"pivot-chart",
+                            gravity: 2,
+                            structure:{
+                                groupBy: "year",
+                                values: [{name:"balance", operation:"max", color: "#eed236"},{name:"oil", operation:"max", color: "#36abee"},{name:"gdp", operation:"max", color: "#476cee"}],
+                                filters:[{name:"continent", type:"select"},{name:"name", type:"select"}]
+                            },
+                            chartType: "line",
+                            chart: {
+                                scale: "logarithmic",
+                                barWidth: 25,
+                                legend: {
+                                    layout: "x",
+                                    align: "center",
+                                    valign: "bottom"
+                                }
+                            },
+                            on:{
+                                onViewInit: function(name, config){
+                                    if(name == "filters" && $$("chartFilters"))
+                                        webix.ui(config.elements, $$("chartFilters"));
+                                    config.elements = false;
+                                }
+                            }
+                        },
+                        {
+                            view: "form",
+                            rows:[
+                                { id: "chartFilters", rows:[]},
+                                {},
+                                { view: "button", label: "Change Structure", click: function(){
+                                    $$("pivotChart").configure()
+                                }}
+                            ]
+                        }
+                    ]
+                }
+            ]
+
+        });
+
+        $$("pivot").parse(webix.copy(pivot_dataset));
+
+        $$("pivotChart").$$("toolbar").hide();
+        $$("pivotChart").parse(webix.copy(pivot_dataset));
+    });
+</script>
+</body>
+</html>

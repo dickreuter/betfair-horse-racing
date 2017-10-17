@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Using Web Worker (non-blockin UI)</title>
+		<link rel="stylesheet" href="../../../webix/codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="../../codebase/pivot.css" type="text/css" charset="utf-8">
+		<script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+		<script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class='header_comment'>Using Web Worker (non-blockin UI)</div>
+		<div id="testA"></div>
+
+		<style type="text/css">
+			html, body {
+				width: 100%;
+				height: 100%;
+				padding: 0;
+				margin: 0;
+			}
+		</style>
+
+		<script type="text/javascript" charset="utf-8">
+
+		var bad_dataset = [];
+		for (var i=1; i<500; i++)
+			for (var j=1; j<150; j++)
+				for (var k=0; k<2; k++) 
+					bad_dataset.push({ a:"Section "+i, b: "Week "+j, c:Math.floor(Math.random()*100) });
+
+		function runSlowTask(){
+			$$("pivot").setStructure({
+				"rows":["a"],
+				"columns":["b"],
+				"values":[
+					{"name":"c","text":"oil","operation":["min","avr"]}
+				],
+				"filters":[]
+			});
+		}
+
+		webix.debug_pivot = true;
+
+		webix.ready(function(){
+			webix.i18n.myCustomFormat = function(v){
+				return (v*1).toFixed(1);
+			};
+
+			webix.ui({
+				margin:30, 
+				rows: [
+					{
+						id:"pivot", view:"pivot",
+						format:"myCustomFormat",
+						webWorker:"../../codebase/pivot.worker.js",
+
+						height:400, width:1000,
+						data: bad_dataset,
+						max: true
+					},
+					{ view:"button", value:"Build Pivot", inputWidth:200, align:"center", click: runSlowTask }
+				]
+			});
+
+			$$("pivot").addOperation("avr", function(data) {
+				var sum = 0;
+				for (var i = 0; i < data.length; i++) {
+					if( data[i] )
+						sum += parseFloat(data[i], 10);
+				}
+				return data.length?(sum/data.length):0;
+			});
+
+			webix.extend($$("pivot"), webix.ProgressBar);
+			$$("pivot").attachEvent("onWebWorkerStart", function(){
+				this.showProgress();
+			});
+			$$("pivot").attachEvent("onWebWorkerEnd", function(){
+				this.hideProgress();
+			});
+
+		});
+		</script>
+	</body>
+</html>

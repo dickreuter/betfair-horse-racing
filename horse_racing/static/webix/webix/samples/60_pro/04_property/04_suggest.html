@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+	<title>Property Sheet: Suggest box</title>
+	<script src="../../../codebase/webix.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="../../../codebase/webix.css">
+
+<body>
+	<script>
+
+	var colors = ["red", "blue", "green", "orange", "grey", "yellow"];
+
+    var colors1 = { view:"suggest", type:"list", data:[
+    	"red", "blue", "green", "orange", "grey", "yellow"
+    ]};
+
+	var colors2 = { view:"suggest", data:[
+    	"red", "blue", "green", "orange", "grey", "yellow"
+    ]};
+
+    var colors3 = { view:"suggest", data:[
+    	"red", "blue", "green", "orange", "grey", "yellow"
+    ]};
+
+
+	var propertysheet_1 = {
+		view:"property",  id:"sets", width:500,
+		elements:[
+			{ label:"Editors",       type:"label" },
+			{ label:"Select",  	 	 type:"select" ,  	id:"a3",   value: "red", 		options:colors },
+			{ label:"Rich Select",   type:"richselect", id:"a4",   value: "red",	 	suggest:colors1 },
+			{ label:"Combo",  	 	 type:"combo"  ,  	id:"a5",   value: "red", 		suggest:colors2 },
+			{ label:"Suggest",  	 type:"text"   ,  	id:"a6",   value: "red", 		suggest:colors3 },
+            { label:"Color Picker",  type:"color"  ,  	id:"a7",   value: "#ff88a8"}
+		]
+	};
+
+	webix.ui({
+		cols:[
+            { template:"left" },
+			{rows:[
+				propertysheet_1
+			]}
+		]
+	});
+
+	</script>
+
+
+</body>
+</html>

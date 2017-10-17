@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Access Raw data</title>
+	<link rel="stylesheet" href="../../../webix/codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+	<script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+	<link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+	<script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+
+
+<style type="text/css">
+	html, body {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		margin: 0;
+	}
+</style>
+
+<script type="text/javascript" charset="utf-8">
+
+	webix.ready(function(){
+		var pivot = {
+			container:"testA",
+			view:"pivot", id:"pivot",
+			height:400,
+			width:1000,
+
+			structure: {
+				rows: ["form", "name"],
+				columns: ["year"],
+				values: [{ name:"oil", operation:["min","max","sum"]}],
+				filters:[]
+			}
+		};
+
+		var header = { template:"Loading from inline datasource", type:"header" };
+		var rawdata = { view:"datatable", autoConfig:true, id:"raw" };
+
+		webix.ui({
+			rows:[header, pivot, rawdata]
+		});
+
+		$$("pivot").$$("data").attachEvent("onItemClick", function(id){
+			var item = this.getItem(id);
+			var pivot = this.getTopParentView();
+
+			var source = item.$source;
+			if (source){
+				var raw = pivot.data.getItem(source[0]);
+				webix.message("Based on "+source.length+"raw records. Base country: " + raw.name);
+			} else {
+				//group row, collect all sources
+				var source = [];
+				this.data.eachSubItem(id, function(obj){
+					if (obj.$source) source.push.apply(source, obj.$source);
+				});
+			}
+
+			var data = [].concat(source).map(id => pivot.data.getItem(id));
+			$$("raw").clearAll();
+			$$("raw").parse(data);
+		})
+		$$("pivot").parse(pivot_dataset);
+	});
+</script>
+</body>
+</html>

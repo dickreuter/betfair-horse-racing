@@ -1,0 +1,13 @@
+{
+  "jsonrpc": "2.0",
+  "result": [
+    {
+      "eventType": {
+        "id": "7",
+        "name": "Horse Racing"
+      },
+      "marketCount": 866
+    }
+  ],
+  "id": 1
+}

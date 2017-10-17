@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+	<title>onClick for elements inside items</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/kanban.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/kanban.css">
+
+	<script src="../common/data.js"></script>
+	<script src="../common/types.js"></script>
+	<link rel="stylesheet" type="text/css" href="../common/style.css">
+
+</head>
+<body>
+<script type="text/javascript">
+
+	webix.type(webix.ui.kanbanlist,{
+		name: "images",
+		// template for item body
+		// show item image and text
+		templateBody: function(obj){
+			var html = "";
+			if(obj.image)
+				html += "<img class='image' src='../common/imgs/attachments/"+obj.image+"'/>";
+			html += "<div>"+obj.text+"</div>";
+			return html;
+		}
+	});
+
+
+	webix.ready(function(){
+		webix.ui({
+			type:"space",
+			rows:[
+				{  view: "label", label: "You can set onclick handlers for inner elements of list items (for example images)"},
+				{
+					id: "board",
+					view:"kanban",
+					type:"wide",
+					cols:[
+						{ header:"Backlog",
+							body:{ view:"kanbanlist", status:"new", type: "images" }},
+						{ header:"In Progress",
+							body:{ view:"kanbanlist", status:"work", type: "images"}
+						},
+						{ header:"Testing",
+							body:{ view:"kanbanlist", status:"test", type: "images" }},
+						{ header:"Done",
+							body:{ view:"kanbanlist", status:"done", type: "images" }}
+					],
+					data: base_task_set
+				}
+			]
+		});
+
+		// set onclick event handler in each Kanban LIst
+		// for elements with "image" className
+		$$("board").eachList(function(list,status){
+			list.on_click["image"] =  function(e,id){
+				webix.alert("'"+ this.getItem(id).image+"' has been clicked");
+			};
+		});
+	});
+</script>
+</body>
+</html>

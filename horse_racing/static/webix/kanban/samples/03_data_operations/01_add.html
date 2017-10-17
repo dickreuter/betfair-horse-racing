@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+	<title>Adding New Items</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/kanban.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/kanban.css">
+
+	<script src="../common/data.js"></script>
+	<script src="../common/types.js"></script>
+	<link rel="stylesheet" type="text/css" href="../common/style.css">
+
+	<style>
+		.toolbar{
+			background-color: #f8f8f8;
+		}
+		.shadow{
+			box-shadow: inset 0 1px 3px #aaa;
+		}
+	</style>
+</head>
+<body>
+<script type="text/javascript">
+
+
+	function add(){
+		var id = $$("myBoard").add({status: "new", text: ""});
+		$$("myForm").show();
+
+		$$("myBoard").select(id);
+		$$("myBoard").setCursor(id);
+		$$("myForm").focus();
+	}
+
+	function remove(){
+		var id = $$("myBoard").getSelectedId();
+		if(!id){
+			return webix.alert("Please selected a card that you want to remove!");
+		}
+		$$("myBoard").remove(id);
+	}
+	function cancelAdd(){
+		var id = $$("myBoard").getCursor();
+		$$("myBoard").remove(id);
+		$$("myForm").hide();
+	}
+	function save(){
+		$$("myForm").save();
+		$$("myForm").hide();
+	}
+
+	webix.ready(function(){
+		webix.ui({
+			rows:[
+				{
+					css: "toolbar",
+					borderless: true,
+					paddingY:7,
+
+					paddingX:10,
+					margin: 7,
+					cols:[
+						{ view: "label", label: "You can add and remove cards in Kanban Board"},
+						{view: "button", type: "danger", label: "Remove selected", click: remove, width: 150},
+						{view: "button", type: "form",  label: "Add new card", click: add, width: 150}
+					]
+				},
+				{
+					css: "shadow",
+					type:"space",
+					borderless: true,
+					cols:[
+
+						{
+							view:"kanban",
+							id: "myBoard",
+							type: "wide",
+							cols:[
+								{ header:"Backlog",
+									body:{ view:"kanbanlist", status:"new", type: "avatars"}},
+								{ header:"In Progress",
+									body:{ view:"kanbanlist", status:"work", type: "avatars"}
+								},
+								{ header:"Testing",
+									body:{ view:"kanbanlist", status:"test", type: "avatars"}},
+								{ header:"Done",
+									body:{ view:"kanbanlist", status:"done", type: "avatars"}}
+							],
+							data:base_task_set
+						},
+						{
+							id: "myForm",
+							view: "form",
+							width: 300,
+
+							hidden: true,
+							elementsConfig:{
+								labelPosition: "top"
+							},
+							elements:[
+
+								{ view: "text", label: "Title", name: "text", focus: true},
+								{ view: "textarea",	label: "Description", name: "textarea", height: 90},
+								{ view: "richselect",	label: "Assign to", name: "personId", suggest:{
+									padding:0,
+									body:{
+										template: "<img class='list_avatar' src='../common/imgs/#id#.jpg' title='#name#'/> #name#",
+										data:staff
+									}
+
+								}},
+								{
+									borderless: true,
+									paddingY: 20,
+									paddingX: 2,
+									margin: 7,
+									cols:[
+										{},
+										{view: "button", label: "Cancel", click: cancelAdd},
+										{view: "button", type: "form", label: "Save", click: save}
+									]
+								},
+								{}
+							]
+						}
+					]
+				}
+
+			]
+
+		});
+		$$("myForm").bind($$("myBoard"));
+	});
+</script>
+</body>
+</html>

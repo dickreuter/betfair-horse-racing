@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Date-range filter in the DataTable</title>
+		<link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../common/samples.css">
+		<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+        .highlight{
+            background-color:#edf4f9;
+            font-weight:bold;
+        }
+        </style>
+	</head>
+	<body>
+		<div class='header_comment'>Date-range filter in the DataTable</div>
+		<div class='sample_comment'>Standard Date-range filter </div>
+		<div id="testA"></div>
+		<hr>
+		<div class='sample_comment'>Date-range filter with datepicker and 3 calendars </div>
+		<div id="testB"></div>
+		
+
+		<script type="text/javascript" charset="utf-8">
+
+		webix.ready(function(){
+
+
+			var data = [
+				{ id:1, task:"Create snippets for Alan", date:new Date(2016, 07, 07, 14, 55)},
+				{ id:2, task:"Call Barbara for license", date:new Date(2015, 07, 08, 18, 20)},
+				{ id:3, task:"Check newbie's code", date:new Date(2016, 05, 04, 11, 08)},
+				{ id:4, task:"Fix bugs with multi selection", date:new Date(2016, 01, 06, 15, 26)},
+				{ id:5, task:"Answer support letters", date:new Date(2016, 11, 23, 22, 17)},
+				{ id:6, task:"Implement secret functionality", date:new Date(2016, 04, 16, 16, 40)}
+			];
+
+			webix.ui({
+				container:"testA",
+				view:"datatable",
+				columns:[
+					{ id:"id",	header:"", css:"rank",  		width:50,	sort:"int"},
+					{ id:"task", header:"Task title", width:250,	sort:"string"},
+					{ id:"date", format:webix.i18n.dateFormatStr, width:200, header:[
+						"Deadline",
+						{ content:"dateRangeFilter"}
+					]}
+				],
+                height:300,
+				autowidth:true,
+				data:data
+			});
+
+			webix.ui({
+				container:"testB",
+				view:"datatable",
+				columns:[
+					{ id:"id",	header:"", css:"rank",  		width:50,	sort:"int"},
+					{ id:"task", header:"Task title", width:250,	sort:"string"},
+					{ id:"date", format:webix.i18n.fullDateFormatStr,width:350, header:[
+						"Deadline",
+						{ content:"dateRangeFilter", inputConfig:{format:webix.i18n.fullDateFormatStr}, suggest:{
+							view:"daterangesuggest", body:{ timepicker:true, calendarCount:3}
+						}}
+					]}
+				],
+              	height:300,
+				autowidth:true,
+				data:data
+			});			
+		});
+		
+		</script>
+	</body>
+</html>

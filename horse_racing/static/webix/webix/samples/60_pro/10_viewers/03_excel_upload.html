@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+  <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+  <title>Excel file Uploading and Downloading</title>  
+</head>
+<body>
+  <script>
+    webix.ui({
+      type:"space",
+      rows:[
+        { cols:[ 
+          { view:"uploader", value:"Select Excel File", width:200,
+            on:{
+              onBeforeFileAdd:function(upload){
+                $$("excel").clearAll();
+                $$("excel").parse(upload.file, "excel");
+                return false;
+              }
+            }
+          }, 
+          {},
+          { view:"button", value:"Save Excel File", width:200, click:function(){
+            webix.toExcel($$("excel"), { header: false });
+          }}
+        ]},
+        { view:"excelviewer", id:"excel", header:false, spans:true}
+      ]
+    });
+  </script>
+</body>
+</html>

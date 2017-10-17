@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+	<title>Member Avatar</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/kanban.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/kanban.css">
+
+	<script src="../common/data.js"></script>
+	<script src="../common/types.js"></script>
+	<link rel="stylesheet" type="text/css" href="../common/style.css">
+
+</head>
+<body>
+<script type="text/javascript">
+
+	webix.ready(function(){
+		webix.ui({
+			view:"kanban", type:"space",
+			cols:[
+				{ header:"Backlog",
+					body:{ view:"kanbanlist", status:"new", type: "avatars" }},
+				{ header:"In Progress",
+					body:{ view:"kanbanlist", status:"work", type: "avatars"}
+				},
+				{ header:"Testing",
+					body:{ view:"kanbanlist", status:"test", type: "avatars" }},
+				{ header:"Done",
+					body:{ view:"kanbanlist", status:"done", type: "avatars" }}
+			],
+			data:base_task_set
+		});
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Querybuilder as pivot filter</title>
+		<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+		<script src="//cdn.webix.com/site/pivot/pivot.js?v=4.2.16" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../../codebase/querybuilder.js"></script>
+		<script src="../common/testdata_pivot.js" type="text/javascript" charset="utf-8"></script>
+		
+		<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+		<link rel="stylesheet" type="text/css" href="../../codebase/querybuilder.css">
+		<link rel="stylesheet" href="//cdn.webix.com/site/pivot//pivot.css?v=4.2.16" type="text/css" charset="utf-8">
+	</head>
+	<body>
+		<div id='layout_div' style='width:600px; height:620px; margin:20px;'></div>
+		<script type="text/javascript" charset="utf-8">
+		var qb = {
+			view: "querybuilder",
+			id: "querybuilder",
+			maxLevel: 3
+		};
+
+		var grid = {
+			id:"pivot",
+			readonly: true,
+			view:"pivot",
+			height:400,
+			width:1500,
+			data:pivot_dataset,
+			readonlyTitle: "Oil Export Statistics",
+			max: true,
+			structure: {
+				rows: ["form", "name"],
+				columns: ["year"],
+				values: [{ name:"oil", operation:["min","sum"]}],
+				filters:[]
+			}
+		};
+
+		webix.ready(function(){
+			webix.ui({
+				container:"layout_div",
+				multi:true,
+				view:"accordion",
+				rows:[
+					{ header:"Data Filters", body:qb},
+					{ body:grid }
+				]
+			});
+
+			// collect pivot fields 
+			var dataObj = $$("pivot").data.pull[Object.keys($$("pivot").data.pull)[0]];
+			var fields = $$("pivot").getFields().fields.map(function(item, index, arr) {
+				for(var key in dataObj) {
+					if(key === item.name) {
+						// transform into correct Query Builder 'fields' objects 
+						return {id: item.name, value: item.text, type: typeof dataObj[key]}
+					}
+				}
+			});
+
+			$$("querybuilder").setValue([fields]);
+			$$("querybuilder").attachEvent("onChange", function() {
+				$$("pivot").filter($$('querybuilder').getFilterHelper());
+			});
+		});
+		</script>
+	</body>
+</html>

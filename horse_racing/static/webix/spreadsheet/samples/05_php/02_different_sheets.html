@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+	<title>Resizing cells in the Spreadsheet</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+	<script src="../common/data.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		webix.ready(function(){
+			webix.ui({ type:"wide", rows:[
+				{
+					view:"spreadsheet",
+					url: "server/get.php?sheet=3",
+					save: {
+						data:"server/data.php?sheet=3",
+						sizes:"server/sizes.php?sheet=3",
+						spans:"server/spans.php?sheet=3",
+						styles:"server/styles.php?sheet=3"
+					}
+				}, {
+					view:"spreadsheet",
+					url: "server/get.php?sheet=2",
+					save: {
+						data:"server/data.php?sheet=2",
+						sizes:"server/sizes.php?sheet=2",
+						spans:"server/spans.php?sheet=2",
+						styles:"server/styles.php?sheet=2"
+					}
+				}
+			]});
+		});
+	</script>
+</body>
+</html>

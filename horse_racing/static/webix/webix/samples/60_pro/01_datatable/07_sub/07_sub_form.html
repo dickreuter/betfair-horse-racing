@@ -1,0 +1,66 @@
+  <!DOCTYPE html>
+<html>
+	<head>
+		<title>Sub-Form in a DataTable</title>
+		<link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../common/samples.css">
+		<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+        <style type="text/css">
+        .multiline{
+            line-height: 30px !important;
+        }
+        </style>
+	</head>
+	<body>
+		<div class='header_comment'>Sub-Form in a DataTable</div>
+		<div id="testA"></div>
+
+		<script type="text/javascript" charset="utf-8">
+		webix.ready(function(){
+			webix.ui({
+				container:"testA",
+				view:"datatable",
+				subview:{
+					borderless:true,
+					view:"form",
+					elements:[
+						{ view:"text", name:"title", label:"Title"},
+						{ view:"text", name:"year", label:"Year"},
+						{ cols:[
+							{ }, { view:"button", value:"Save", click:function(){
+								var form = this.getFormView();
+								var values = form.getValues();
+								var changed = form.getDirtyValues();
+								var master = form.getMasterView();
+
+								master.updateItem(values.id, changed);
+								master.closeSub(values.id)
+							}}
+						]}
+					]
+				},
+				on:{
+					onSubViewCreate:function(view, item){
+						view.setValues(item);
+					}
+				},
+				columns:[
+					{ id:"title",	header:"Title", sort:"string",
+						template:"{common.subrow()} #title#", width:320 },
+					{ id:"year",	header:"Year", 		width:100, sort:"int"},
+					{ id:"votes",	header:"Votes", 	width:100,	sort:"int"}
+				],
+				autoheight:true,
+				autowidth:true,
+				data:[
+					{ id:1, title:"The Shawshank Redemption", year:1994, votes:678790 },
+					{ id:2, title:"The Godfather", year:1972, votes:511495 },
+					{ id:3, title:"The Godfather: Part II", year:1974, votes:319352 }
+				]
+			});
+		});			
+		</script>
+	</body>
+</html>

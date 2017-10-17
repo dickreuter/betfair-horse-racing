@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Automatic options list for multiselect values</title>
+		<link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../common/samples.css">
+		<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+        .highlight{
+            background-color:#edf4f9;
+            font-weight:bold;
+        }
+        </style>
+	</head>
+	<body>
+		<div class='header_comment'>Multi-select editor in the DataTable</div>
+		<div id="testA"></div>
+
+		<script type="text/javascript" charset="utf-8">
+		function multiSelectCompare(test, filter){
+			if (test){
+				test = test.split(",");
+				for (var i = 0; i < test.length; i++)
+					if (test[i] == filter) 
+						return true;
+			}
+		}
+
+		webix.ready(function(){
+			webix.ui({
+				container:"testA",
+				view:"datatable",
+				on:{
+					onCollectValues:function(id, req){
+						var checks = [];
+							req.values = [];
+
+						this.data.each(function(obj){
+							var test = obj ? obj[id] : "";
+							if (test !== webix.undefined){
+								var parts = test.split(",")
+								for (var i = 0; i < parts.length; i++) {
+									checks[parts[i]] = true;
+									req.values.push({ id:parts[i], value:parts[i] });
+								}
+							}
+						}, this, true);
+
+						req.values.sort(function(a,b){ return a.value > b.value ? 1 : -1;  });
+					}
+				},
+				columns:[
+					{ id:"task", 		header:"Task" ,width:200, editor:"text"},
+					{ id:"assigned",	header:{ content:"selectFilter", compare:multiSelectCompare }, width:500 }
+				],
+                autoheight:true,
+				autowidth:true,
+				data:[
+					{ task:"Fix colspans", assigned:"Alex" },
+					{ task:"Fix rowspans" },
+					{ task:"Add something new", assigned:"Clair,Denis" },
+				]
+			});				
+		});
+		
+		</script>
+	</body>
+</html>

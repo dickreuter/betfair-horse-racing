@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+	<title>Initialization</title>
+	<link rel="stylesheet" type="text/css" href="../../../codebase/webix.css">
+	<script type="text/javascript" src="../../../codebase/webix.js"></script>
+</head>
+<body>
+<script>
+	webix.ready(function(){
+
+
+		webix.ui({
+			view: "barcode",
+			id:"barcode",
+			type: "ean13",
+			value: "123456789012"
+		});
+	});
+
+
+</script>
+</body>
+</html>

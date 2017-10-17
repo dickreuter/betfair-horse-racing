@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Hiding columns: Header spans</title>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../common/samples.css">
+		<script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class='header_comment'>Hiding columns with spanned headers</div>
+		<div id="testA"></div>
+
+		<div style="margin:20px;">
+			<input type='button' value='Hide/show "Title" column' onclick='toggleColumn()'/>
+			<input type='button' value='Hide/show "Title" column with the related one' onclick='toggleColumn(true)'/>
+		</div>	
+
+		<script type="text/javascript" charset="utf-8">
+
+			function toggleColumn(spans){
+				var column = "title";
+				if(grida.isColumnVisible(column))
+					grida.hideColumn(column, {spans:spans});
+				else
+					grida.showColumn(column, {spans:spans});
+
+			}
+
+			grida = webix.ui({
+				container:"testA",
+				view:"datatable",
+				columns:[
+					{ id:"rank",	header:"", css:"rank",  width:50},
+					{ id:"title",	header:[{text:"Film data", colspan:2}, "Title"], width:200},
+					{ id:"year",	header:[null, "Year"] , width:100},
+					{ id:"votes",	header:"Votes", 	width:100},
+					{ id:"rating",	header:"Rating", 	width:100}
+				],
+
+				autowidth:true, autoheight:true,
+				data:small_film_set
+			});	
+
+		</script>
+	</body>
+</html>

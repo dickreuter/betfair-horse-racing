@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+   <head>
+	   <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	   <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	   <title>Grid layout API</title>
+   </head>
+   <body>
+	<style>
+		.boxy .webix_template{
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			text-align: center;
+		}
+	</style>
+<script type="text/javascript" charset="utf-8">
+
+var grid = {
+	view:"gridlayout", id:"grid",
+	gridColumns:4, gridRows:3,
+	cellHeight: 150, cellWidth: 200,
+	cells:[
+		{ id:"a", css:"boxy", template:"Single", x:0, y:0, dx:1, dy:1 },
+		{ id:"b", css:"boxy", template:"Wide 1", x:1, y:0, dx:2, dy:1 },
+		{ id:"c", css:"boxy", template:"Wide 2", x:0, y:1, dx:2, dy:1 },
+		{ id:"d", css:"boxy", template:"Square", x:2, y:1, dx:2, dy:2 },
+	]
+};
+
+webix.ui({
+	type:"space", rows:[
+		grid,
+		{ cols:[
+			{ },
+			{ view:"button", value:"Add Item", click:function(){
+	$$("grid").addView({ template:"Column" });
+			}},
+			{ view:"button", value:"Delete Item", click:function(){
+	$$("grid").removeView("a");
+			}},
+			{ view:"button", value:"Move Item", click:function(){
+	$$("grid").moveView("d", { x:0, y:0, dx:2, dy:2 });
+			}},
+			{ view:"button", value:"Save state", click:function(){
+	var state = $$("grid").serialize();
+	webix.storage.local.put("grid-dashboard-state", state);
+			}},
+			{ view:"button", value:"Restore", click:function(){
+	var state = webix.storage.local.get("grid-dashboard-state");
+	$$("grid").restore(state, function(){
+		return { template:"Column"}
+	});
+			}},
+			{ }
+		]}
+	]
+})
+
+
+</script>
+   </body>
+</html>

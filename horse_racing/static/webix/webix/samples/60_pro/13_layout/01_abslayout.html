@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+    <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <title>Layout with Absolutely Positioned Elements</title>
+  </head>
+  <body>
+    <div id='layout_div' style='width:800px; height:600px; margin:20px;'></div>
+    <script type="text/javascript" charset="utf-8">
+
+      webix.ui({
+        container:"layout_div",
+        view:"abslayout",
+        cells:[
+          { view:"text", label:"Name", labelAlign:"right",
+            top: 100, left:350, width:200, height: 40 },
+          { view:"text", label:"Email", labelAlign:"right",
+            top: 100, left:550, width:200, height: 40 },
+          { view:"textarea", label:"My text box", labelPosition:"top",
+            top: 140, left:100, width:650, height: 100 },
+          { view:"button", label:"My text box",
+            top: 260, left:260, width:400, height: 40 }
+        ]
+      }).show();
+
+    </script>
+  </body>
+</html>

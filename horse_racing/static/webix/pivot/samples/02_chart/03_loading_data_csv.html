@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Loading CSV</title>
+	<link rel="stylesheet" href="../../../webix/codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+	<script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+	<link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+
+	<style type="text/css">
+		html, body {
+			width: 100%;
+			height: 100%;
+			padding: 0;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+<div id="testA"></div>
+
+
+
+<script type="text/javascript" charset="utf-8">
+
+	webix.ready(function(){
+		webix.ui({
+			container:"testA",
+			rows:[
+				{ view: "label", label: "<b>USA  Selection Poll Data</b>"},
+				{
+					id:"pivot",
+					view:"pivot-chart",
+					height:350,
+					width:1000,
+					structure: {
+						groupBy: "data2",
+						values: [{name:"data0", operation:"sum", color: "#36abee"}],
+						filters:[{name:"data1", type:"select"},{name:"data3", type:"select"}]
+					},
+					fieldMap: {
+						"data0": "Voter",
+						"data1": "Party",
+						"data2": "Precinct",
+						"data3": "Age Group",
+						"data4": "Last Voted",
+						"data5": "Years Reg",
+						"data6": "Ballot Status"
+					},
+					chart: {
+						yAxis: {
+							template: function(value){
+								return parseInt(value,10)
+							}
+						},
+						padding:{
+							left: 60
+						}
+					},
+					datatype: "csv",
+					url: "../common/example.csv"
+				}
+			]
+		});
+	});
+
+
+</script>
+</body>
+</html>

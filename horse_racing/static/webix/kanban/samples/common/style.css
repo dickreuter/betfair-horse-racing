@@ -1,0 +1,79 @@
+.avatar{
+	width: 100%;
+
+	height: 100%;
+}
+.large_avatar{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	padding: 2px;
+	border: 1px solid #ddd;
+}
+
+.members .webix_dataview_item{
+	border-color: #fff;
+	line-height: 15px;
+	text-align: center;
+	padding:10px;
+}
+.members .webix_dataview_item.webix_selected{
+	background: #fff;
+	color: #555;
+}
+.members .webix_dataview_item .name{
+	font-size: 13px;
+}
+.members .webix_dataview_item.webix_selected .large_avatar{
+	width: 44px;
+	height: 44px;
+	border: 2px solid #5ea3d2;
+}
+.members .webix_dataview_item.webix_selected .name{
+	color: #1872ae;
+	font-size: 14px;
+}
+
+.members .webix_dataview_item .large_avatar:hover {
+	width: 44px;
+	height: 44px;
+}
+
+.list_avatar{
+	width: 27px;
+	height: 27px;
+	border-radius: 50%;
+	float: left;
+	margin-top: 1px;
+	margin-right: 10px;
+}
+
+.sub_header{
+	background: #fafafa;
+}
+.sub_header .webix_template{
+	padding-left:10px;
+	padding-top:10px;
+}
+.user_header{
+	background: #fafafa;
+}
+.user_header .webix_template{
+	padding-left:10px;
+	padding-top:5px;
+}
+.user_header .webix_icon{
+	color: #888;
+	font-size: 13px;
+}
+
+.image{
+	width:100%;
+	height: auto;
+	max-width: 400px;
+	max-height: 280px;
+}
+
+.webix_noselect img{
+	-ms-user-select: none;
+}

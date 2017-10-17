@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+	<title>Editing Events</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/filemanager.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/filemanager.css">
+
+
+</head>
+<body>
+<script type="text/javascript">
+	var count = 1;
+	webix.ready(function(){
+
+		webix.ui({
+			view:"filemanager",
+			id:"files"
+		});
+
+		$$("files").load("../common/data.php");
+
+		$$("files").attachEvent("onBeforeEditFile",function(ids){
+			webix.message("Edit started: "+ids[0]);
+			return true;
+		});
+
+		$$("files").attachEvent("onBeforeEditStop",function(id,state,editor,view){
+			webix.message("New value: "+state.value);
+			return true;
+		});
+
+		$$("files").attachEvent("onAfterEditStop",function(id,state,editor,view){
+			webix.message("Editor closed: "+ id);
+			return true;
+		});
+	});
+</script>
+</body>
+</html>

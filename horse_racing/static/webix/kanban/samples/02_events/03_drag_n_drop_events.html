@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+	<title>DND Events in Kanban</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/kanban.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/kanban.css">
+
+	<script src="../common/data.js"></script>
+	<script src="../common/types.js"></script>
+	<link rel="stylesheet" type="text/css" href="../common/style.css">
+
+
+</head>
+<body>
+<script type="text/javascript">
+
+
+
+	function onBeforeDrag(dragContext){
+		webix.message("Drag has been started");
+		return true
+	}
+
+	function onBeforeDragIn(dragContext,e,list){
+
+		// item id
+		var item =this.getItem(dragContext.start);
+
+		// if we move an item from one list to another
+		if(dragContext.from != dragContext.to){
+			var statusFrom = dragContext.from.config.status;
+			var statusTo = dragContext.to.config.status;
+			var statusIndex = {"new":0,"work":1, "test": 2, "done":3};
+			var diff = Math.abs(statusIndex[statusFrom] - statusIndex[statusTo]);
+			if(diff>1){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	function onAfterDrop(dragContext,e,list){
+
+		// item id
+		var item =this.getItem(dragContext.start);
+
+		// if we move an item from one list to another
+		if(dragContext.from != dragContext.to){
+			var status = dragContext.to.config.status;
+			// show a message with new status and order
+			webix.message("Item '"+item.text+"' was moved into '"+status+"' column to the "+item.$index +" position");
+		}
+		else
+			webix.message("Item '"+item.text+"' was moved to the "+item.$index +" position");
+	}
+
+	webix.ready(function(){
+		webix.ui({
+			type:"space",
+			rows:[
+				{  view: "label", label: "You can move tasks only between neighbouring columns"},
+				{
+					view:"kanban",
+					id: "myBoard",
+					type: "wide",
+					on:{
+						onListBeforeDrag: onBeforeDrag,
+						onListBeforeDragIn: onBeforeDragIn,
+						onListAfterDrop: onAfterDrop
+					},
+					cols:[
+						{ header:"Backlog",
+							body:{ view:"kanbanlist", status:"new", type: "avatars"}
+						},
+						{ header:"In Progress",
+							body:{ view:"kanbanlist", status:"work", type: "avatars"}
+						},
+						{ header:"Testing",
+							body:{ view:"kanbanlist", status:"test", type: "avatars"}
+						},
+						{ header:"Done",
+							body:{ view:"kanbanlist", status:"done", type: "avatars"}
+						}
+					],
+					data: base_task_set
+				}
+			]
+
+		});
+	});
+</script>
+</body>
+</html>

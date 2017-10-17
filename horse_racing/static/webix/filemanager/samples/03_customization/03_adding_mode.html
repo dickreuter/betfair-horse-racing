@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+	<title>Adding New Mode</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/filemanager.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/filemanager.css">
+
+
+</head>
+<body>
+<script type="text/javascript">
+
+	// create 'filelist' view based  on 'list' view
+	// and extend it with EditAbility module
+ 	webix.protoUI({
+		name:"filelist"
+	}, webix.EditAbility, webix.ui.list);
+
+	webix.ready(function(){
+		webix.ui({
+			view:"filemanager",
+			id:"files",
+			mode: "custom",
+			modes:["files","table","custom"],
+			structure:{
+				"custom": {
+					view: "filelist",
+					template: function(obj,common){
+						return common.templateIcon(obj,common)+obj.value;
+					},
+					select: "multiselect",
+					// editing options
+					editable:true,
+					editor:"text",
+					editValue:"value",
+					// disable editing on double-click
+					editaction: false,
+					// drag-n-drop
+					drag: true,
+					// mouse navigation
+					navigation: true,
+					// tab 'key' navigation
+					tabFocus: true,
+					// context menu
+					onContext:{}
+				}
+
+			},
+			on:{
+				"onViewInit": function(name, obj){
+					if (name == "modes"){
+						obj.width += 32;
+						obj.options.push({
+							id: "custom",
+							width: 32,
+							value: "<span class=\"webix_fmanager_mode_option webix_icon fa-file-o\"></span>"
+						});
+					}
+				}
+			}
+		});
+
+
+		$$("files").load("../common/data.php");
+
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+  <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+  <title>Excel Viewer</title>  
+</head>
+<body>
+  <script>
+    webix.ui({
+      type:"space", margin:-1,
+      rows:[
+        { view:"excelbar", id:"toolbar" },
+        { view:"excelviewer", id:"excel", toolbar:"toolbar", excelHeader:true, url:"binary->files/data.xlsx"},
+        { paddingY:5, cols:[
+          { view:"button", value:"Save current sheet to Excel", width:200, click:function(){
+            webix.toExcel($$("excel"), { header: false });
+          }},
+          { view:"button", value:"Save all sheets to Excel", width:200, click:function(){
+            webix.toExcel($$("excel"), { header: false, sheets:true, filename:"All tabs" });
+          }}
+        ]}
+        
+      ]
+    });
+  </script>
+</body>
+</html>

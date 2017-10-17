@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bar</title>
+    <link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../common/samples.css">
+</head>
+<body>
+
+<div id="testA"></div>
+
+<script type="text/javascript" charset="utf-8">
+
+    webix.ready(function(){
+        grida = webix.ui({
+            container:"testA",
+            view:"datatable",
+            columns:[
+                { id:"id", header:" ", width:50},
+                { id:"name", header:"Name", width:160},
+                { id:"avBalance", header:"Average", template:function(obj){
+                    var arr = obj.balance;
+                    var sum = 0;
+                    for(var i =0; i< arr.length; i++)
+                        sum +=  arr[i];
+                    return sum?(sum/arr.length).toFixed(2):0;
+                }, width:150},
+                // sparklines
+
+                { id:"balance", header:"Balance per Month", template: webix.Sparklines.getTemplate("bar") , width:200}
+            ],
+            autoheight:true,
+            autowidth:true,
+            data: [
+                {id: 1, name: "Austria", balance: [2000,-650,3000,2100, 2500] },
+                {id: 2, name: "France", balance: [1000, 2000, 1500,  3000,  2200] },
+                {id: 3, name: "Germany", balance: [1800,  1500,  2200,  2700,  2100] },
+                {id: 4, name: "UK", balance: [1200,  2500,  1500,  2200, 2600] }
+
+            ]
+        });
+
+
+
+    });
+</script>
+</body>
+</html>

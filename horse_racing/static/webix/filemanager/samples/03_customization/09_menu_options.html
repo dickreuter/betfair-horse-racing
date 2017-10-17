@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+	<title>Custom menu buttons</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/filemanager.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/filemanager.css">
+
+	<style>
+		.header{
+			background: #e5e5e5;
+		}
+		.header div{
+			padding: 0 10px;
+		}
+
+	</style>
+</head>
+<body>
+<script type="text/javascript">
+	webix.ready(function(){
+		webix.ui({
+			rows:[
+				{ view: "label", css: "header", label: "You can add or remove buttons in context menu. In this sample menu has an extra option - Download" },
+				{
+					view:"filemanager",
+					id:"files",
+					handlers:{
+						"download"	: "../common/data.php"
+					},
+					ready:function(){
+						this.getMenu().add({
+							id: "download",
+							icon: "webix_icon fa-download",
+							value: "Download",
+							batch: "file"
+						}, 0);
+
+						this.getMenu().add({
+							$template:"Separator",
+							batch:"file"
+						}, 1);
+					}
+				}
+			]
+
+		});
+
+		$$("files").load("../common/data.php");
+	});
+</script>
+</body>
+</html>

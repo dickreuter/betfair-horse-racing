@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<title>GoogleMap::Markers</title>
+</head>
+<body>
+	<div id="sample_div" style='width:600px; height:300px; margin:50px;'></div>
+	<div style="margin-left:50px;">
+		<input type="button" value="Add marker" onClick="addMarker()"/>
+		<input type="button" value="Clear All" onClick="clearMap()"/>
+	</div>
+	<div style="margin-left:50px;"> "Stuttgart" marker <br>
+		<input type="button" value="Hide/show" onClick="hideMarker()"/>
+		<input type="button" value="Set/remove animation" onClick="animateMarker()"/>
+	</div>	
+	
+	<script type="text/javascript">
+
+		webix.ui({
+			container:"sample_div",
+			// provide your own Google API key
+			// https://developers.google.com/maps/documentation/javascript/get-api-key
+			key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+    		view:"google-map",
+    		id:"map",
+			zoom:6,
+			center:[ 48.724, 8.215 ],
+			data:[
+				{ id:1, lat:48.782, lng:9.177, title:"Stuttgart" },
+				{ id:2, lat:47.366, lng:8.55, title:"Zurich"}
+			]
+		});
+
+
+		function addMarker(){
+			$$("map").add({ lat: 48.137, lng: 11.575, title:"Munich" })
+		}
+
+		function hideMarker(){
+			var item = $$("map").getItem(1);
+			if(!item) return;
+
+			item.hidden = !item.hidden;
+			$$("map").updateItem( 1, item);
+		}
+
+		function animateMarker(){
+			var item = $$("map").getItem(1);
+			if(!item) return;
+
+			var marker = item.$marker;
+
+			if (marker.getAnimation())
+				marker.setAnimation(null);
+			else
+				marker.setAnimation(google.maps.Animation.BOUNCE);
+		}
+
+		function clearMap(){
+			$$("map").clearAll();
+		}
+
+	</script>
+</body>
+</html>

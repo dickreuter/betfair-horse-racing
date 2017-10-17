@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+	<title>Data serialization</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link  rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+	<script src="../common/data.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		function getData(){
+			var text = JSON.stringify( $$("ss").serialize(), null, "  ");
+
+			$$("txt").setValue( text );
+		}
+		function setData(){
+			var data =  $$("txt").getValue();
+			$$("ss").reset();
+			$$("ss").parse(data);
+		}
+
+		webix.ready(function(){
+			var buttons = { width:350, rows:[
+				{ view:"button", value:"Serialize data", click:getData },
+				{ view:"textarea", id:"txt" },
+				{ view:"button", value:"Load data Back", click:setData }
+			]};
+			webix.ui({ 
+				type:"space",
+				cols:[
+					buttons,
+					{
+						view:"spreadsheet",
+						id:"ss",
+						toolbar: "full",
+						data:{
+							styles: [
+								[ "blue", "#FFFFFF;#2244DE;" ]
+							],
+							sizes: [
+								[ 0, 2, 64 ]
+							],
+							data: [
+								[ 3, 2, "Webix", "blue" ],
+								[ 3, 3, "SpreadSheet", "blue" ]
+							]
+						},
+						on:{
+							onAfterLoad: getData
+						}
+					}
+				]
+			});
+		});
+	</script>
+</body>
+</html>

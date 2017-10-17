@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		 <meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+		<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+		<script src="../../codebase/scheduler.js" type="text/javascript"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../../webix/codebase/skins/touch.css">
+		<link rel="stylesheet" type="text/css" href="../../codebase/scheduler.css">
+		<style>
+		/* my_calendar styles */
+		.my_calendar .webix_event_marker div{
+			background-color: rgba(102, 204, 255, 0.9);
+			border-color: #66ccff;
+		}
+		.my_calendar.webix_dayevents_event_item{
+			background-color: rgba(102, 204, 255, 0.3);
+			border-color: #66ccff;
+			color: rgb(63, 127, 159);
+		}
+		.multi_day_events .my_calendar{
+			background-color: rgba(102, 204, 255, 0.3);
+			color: rgb(63, 127, 159);
+		}
+		/* calendar1 styles */
+		.calendar1 .webix_event_marker div{
+			background-color: rgba(204, 153, 255, 0.9);
+			border-color: #cc99ff;
+		}
+		.calendar1.webix_dayevents_event_item{
+			background-color: rgba(204, 153, 255, 0.3);
+			border-color: #cc99ff;
+			color: rgb(127, 95, 159);
+		}
+		.multi_day_events .calendar1{
+			background-color: rgba(204, 153, 255, 0.3);
+			color: rgb(127, 95, 159);
+		}
+		/* calendar2 styles */
+		.calendar2 .webix_event_marker div{
+			background-color: rgba(0, 204, 204, 0.9);
+			border-color: #00cccc;
+		}
+		.calendar2.webix_dayevents_event_item{
+			background-color: rgba(0, 204, 204, 0.3);
+			border-color: #00cccc;
+			color: rgb(0, 127, 127);
+		}
+		.multi_day_events .calendar2{
+			background-color: rgba(0, 204, 204, 0.3);
+			color: rgb(0, 127, 127);
+		}
+		</style>
+
+		<title>Event styling</title>
+		<script type="text/javascript" charset="utf-8">
+			var data = [
+				{id:"1",text:"My event 1",start_date:"2014-07-01 15:00:00","end_date":"2014-07-01 19:00:00"},
+				{id:"2",text:"Meeting",start_date:"2014-07-02 09:30:00","end_date":"2014-07-02 12:00:00", group: 1},
+				{id:"3",text:"Conference",start_date:"2014-07-04 11:00:00","end_date":"2014-07-04 13:45:00", group: 1},
+				{id:"4",text:"My event 2",start_date:"2014-07-03 10:15:00","end_date":"2014-07-03 12:00:00"},
+				{id:"5",text:"My event 3",start_date:"2014-07-03 19:00:00","end_date":"2014-07-03 22:00:00"},
+				{id:"6",text:"Conference",start_date:"2014-07-03 00:00:00","end_date":"2014-07-04 00:00:00", group: 1},
+				{id:"7",text:"Regions partners meeting",start_date:"2014-07-04 14:30:00","end_date":"2014-07-04 18:00:00", group: 2}
+			];
+
+			// template for class name of event container
+			scheduler.templates.event_class =  function(obj, type){
+				return (!obj.group?"my_calendar":"calendar"+obj.group);
+			};
+
+
+			/*initial date (today by default)*/
+			scheduler.config.init_date = new Date(2014,6,3);
+			
+
+			webix.ready(function(){
+				webix.ui.fullScreen();
+    			webix.ui({
+					view: "scheduler",
+					id: "scheduler"
+				});
+				$$("scheduler").parse(data,"json");
+			});
+		</script>
+</head>
+	<body>
+	</body>
+</html>

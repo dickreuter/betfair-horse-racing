@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grouped fields</title>
+    <link rel="stylesheet" href="../../../webix/codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+    <script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+    <script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        .webix_pivot .webix_unit_header{
+            background-color: #fff;
+            color: #888;
+            font-size: 14px;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="testA"></div>
+
+<style type="text/css">
+    html, body {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+</style>
+
+<script type="text/javascript" charset="utf-8">
+    var valueFields = {
+        'Media Source': 1,
+        'Partner': 1,
+        'Campaign': 1,
+        'Adset': 1
+    };
+
+    webix.ready(function(){
+        webix.ui({
+            container: "testA",
+            id: "pivot",
+            view: "pivot",
+            popup:{
+                on:{
+                    onViewInit: function(name, config){
+                        if(name == "fields"){
+                            config.view = "tree";
+                            config.template = "{common.icon()}{common.folder()}#name#";
+                            config.scheme = {
+                                $group:function(obj){
+                                    if (valueFields[obj.text]) {
+                                        return "Dimensions";
+                                    } else {
+                                        return "KPIs";
+                                    }
+
+                                },
+                                $init:function(obj){
+                                    obj.name = obj.name || obj.value;
+                                    if (obj.$group)
+                                        obj.open = true;
+                                }
+                            };
+                        }
+                    }
+                }
+            }
+        });
+
+        $$("pivot").parse([
+            {"Metric A":5, "Media Source":1, Partner:2, Campaign:3, Adset:4, "Metric B":6, "Metric C":7},
+            {"Metric A":5, "Media Source":1, Partner:2, Campaign:3, Adset:4, "Metric B":6, "Metric C":7}]);
+        $$("pivot").configure({});
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TreeTable state object</title>
+		<link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../common/samples.css">
+
+	</head>
+	<body>
+		<div class='header_comment'>TreeTable state object</div>
+		<div class='sample_comment'>Click "save state", collapse/expand and select items, click "restore state".</div>
+		<div id="testA"></div>
+		<input type="button" name="save_state" value="Save state" onclick="save_state(grida)" />
+		<input type="button" name="restore_state" value="Restore state" onclick="restore_state(grida)" />
+
+		
+		<script type="text/javascript" charset="utf-8">
+
+		var grida;
+		webix.ready(function(){
+			grida = webix.ui({
+                container:"testA",
+				view:"treetable",
+				columns:[
+					{ id:"id",	header:"", css:{"text-align":"right"},  	width:50},
+					{ id:"value",	header:"Title",	width:250,
+						template:"{common.treetable()} #value#" },
+					{ id:"chapter",	header:"Mode",	width:200}
+				],
+				select:"row",
+				autoheight:true,
+				autowidth:true,
+				data: [
+					{ "id":"1", "value":"The Shawshank Redemption", "open":true, "data":[
+						{ "id":"1.1", "value":"Part 1", "chapter":"alpha"},
+						{ "id":"1.2", "value":"Part 2", "chapter":"beta", "open":true, "data":[
+							{ "id":"1.2.1", "value":"Part 1", "chapter":"beta-twin"},
+							{ "id":"1.2.2", "value":"Part 1", "chapter":"beta-twin"}
+						]},
+						{ "id":"1.3", "value":"Part 3", "chapter":"gamma" }
+					]},
+					{ "id":"2", "value":"The Godfather", "data":[
+						{ "id":"2.1", "value":"Part 1", "chapter":"alpha" },
+						{ "id":"2.2", "value":"Part 2", "chapter":"beta" }
+					]}
+				]
+			});	
+
+		});
+		
+		function save_state(grid) {
+			webix.storage.local.put("treetable_state", grid.getState());
+		}
+		function restore_state(grid) {
+			var state = webix.storage.local.get("treetable_state");
+			if (state)
+				grid.setState(state);
+		}
+
+		</script>
+
+	</body>
+</html>

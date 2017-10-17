@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resize within header only</title>
+    <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="../common/samples.css">
+    <script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        .header{
+            background-color: #edf7fe;
+        }
+    </style>
+</head>
+<body>
+<div class='header_comment'>headerOnly property</div>
+<div class='sample_comment'>The sample shows 'headerOnly' property of resizeColumn and resizeRow. When the property is set,
+    resize can be initiated only within header (for column resize) and the first column (for row resize).</div>
+<div id="testA" style='width:450px; height:300px;'></div>
+<script type="text/javascript" charset="utf-8">
+    webix.ready(function(){
+        grid = webix.ui({
+            container:"testA",
+            view:"datatable",
+            columns:[
+                { id:"rank", header:"", css:"header", width: 40},
+                { id:"title", header:"Film title" },
+                { id:"year", header:"Released"   },
+                { id:"votes", header:"Votes", fillspace:true  	}
+            ],
+            autowidth: true,
+            autoheight: true,
+            // column resize within header
+            resizeColumn: { headerOnly:true },
+            // row resize within the first column
+            resizeRow: { headerOnly:true },
+
+            data:small_film_set
+        });
+    });
+</script>
+</body>
+</html>

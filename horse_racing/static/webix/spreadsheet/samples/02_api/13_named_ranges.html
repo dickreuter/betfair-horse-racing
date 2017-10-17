@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+    <title>Named ranges</title>
+    <meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+    <script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+    <script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+    <link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+    <script src="../common/data.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+
+        webix.ready(function(){
+
+            function addRange(name,range){
+                $$("ssheet").ranges.add(name, range);
+            }
+
+            function getRanges(){
+                var ranges = $$("ssheet").ranges.getRanges();
+                var text = JSON.stringify(ranges, null," ");
+                $$("txt").setValue(text);
+            }
+
+            var buttons = {
+                width:250, view: "form",
+                rows:[
+                    { view:"button", value:"Add range", click: showDialog},
+                    { view:"button", value:"Get ranges", click:getRanges},
+                    { view:"textarea", id:"txt" }
+                ]
+            };
+            webix.ui({
+                cols:[
+                    buttons,
+                    {
+                        view:"spreadsheet",
+                        id: "ssheet",
+                        data: base_data,
+                        toolbar: "full"
+                    }
+                ]
+
+            });
+
+            function showDialog(){
+                webix.ui({
+                    view: "ssheet-dialog",
+                    id: "myDialog",
+                    move: true,
+                    head: "Range Name",
+                    buttons: true,
+                    autoheight: true,
+                    width: 250,
+                    position: "center",
+                    body: {
+                        view: "form",
+                        elements: [
+                            {view: "text", id: "name", placeholder: "name"}
+                        ]
+                    },
+                    on: {
+                        onSaveClick: function () {
+                            var name = $$("myDialog").$$("name").getValue();
+                            var range = $$("ssheet").getSelectedRange();
+                            if(!range)
+                                $$("ssheet").alert({text:"Please select a range."});
+                            else{
+                                if(name)
+                                    addRange(name, range);
+                                this.close();
+                            }
+
+                        },
+                        onCancelClick: function () {
+                            this.close();
+                        },
+                        onHideClick: function () {
+                            this.close();
+                        }
+                    }
+
+                }).show()
+            }
+        });
+    </script>
+</body>
+</html>

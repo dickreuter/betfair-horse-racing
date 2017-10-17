@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+	<title>Reset Spreadsheet</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+	<script src="../common/data.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		webix.ready(function(){
+			webix.ui({
+				view:"spreadsheet",
+				id:"ss",
+				toolbar: "full",
+				data:{
+					data:[
+						[3,2,"Webix"],
+						[3,3,"SpreadSheet"] ,
+					]
+				},
+				subbar:{
+					view:"toolbar", css:"webix_ssheet_toolbar", elements:[
+						{ view:"button", value:"reset to 5x10", width:240, click:function(){
+							$$("ss").config.columnCount = 5;
+							$$("ss").config.rowCount = 10;
+							$$("ss").reset();
+						}},
+						{ view:"button", value:"reset to 10x20", inputWidth:240, click:function(){
+							$$("ss").config.columnCount = 10;
+							$$("ss").config.rowCount = 20;
+							$$("ss").reset();
+						}}
+					]
+				}
+			});
+		});
+	</script>
+</body>
+</html>

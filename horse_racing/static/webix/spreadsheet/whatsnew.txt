@@ -1,0 +1,89 @@
+Check the full list of changes in SpreadSheet at https://docs.webix.com/spreadsheet__whats_new.html
+
+Version 5.1 (November 2017)
+--------------------
+### Fixes
+
+- Spreadsheet refreshes after adding a locked CSS to a single cell during data loading
+- check columns and rows existence before setting Excel sizes to them
+- IE8 compatibility
+
+[Check the full list of changes](https://docs.webix.com/spreadsheet__whats_new_5_1.html) 
+
+Version 5.0 (September 2017)
+--------------------
+### Major Features
+
+- extended export to Excel
+- extended import from Excel
+- loading CSV data
+- Sheet selection dialog during export to Excel
+- getSheetData API to access data and ranges on all sheets
+
+[Check the full list of changes](https://docs.webix.com/spreadsheet__whats_new_5_0.html) 
+
+Version 4.4 (June 2017)
+--------------------
+### Major Features
+
+The ability to print SpreadSheet or a part of it.
+
+
+Version 4.3 (April 2017)
+-----------------------------
+
+### Fixes
+
+- Improved serialization logic
+- Stable row and column deletion
+- Stable hotkey performance
+
+[Check the full list of changes](https://docs.webix.com/spreadsheet__whats_new_4_3.html) 
+
+
+Version 4.2 (February 2017)
+---------------------------
+
+### Major Features
+
+- ability to define custom math methods
+- cross-sheet math
+- string math methods
+- visual improvement - highlighting row and column's headers on cell selection
+- Shift+Arrow keys navigation for area selection
+
+[Check the full list of changes](https://docs.webix.com/spreadsheet__whats_new_4_2.html) 
+
+Version 4.0 (September 2016)
+----------------------------
+
+### Major Features
+
+- Multiple sheets per widgets
+- Conditional formatting
+- Custom number formats
+- Ribbon like toolbar
+- Named ranges
+- Images and Charts in the spreadsheet
+- Configurable context menu
+- Configurable top level menu
+- Split-columns and split-rows functionality
+- Extended math operations
+- Links in the spreadsheet
+
+
+
+Version 3.2 (February 2016)
+---------------------------
+
+### Major Features
+
+- Editable data sheet
+- Merging and splitting cells
+- Column and row resizing
+- Block selection and block operations
+- Colors, Fonts, Borders and text styling
+- Undo and Redo functionality
+- Fully client side math implementation
+- Ability to load and save to server side
+- Ability to load and export excel files

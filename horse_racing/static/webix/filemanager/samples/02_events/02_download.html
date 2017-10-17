@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+	<title>onBeforeRun event</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/filemanager.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/filemanager.css">
+
+
+</head>
+<body>
+<script type="text/javascript">
+	var count = 1;
+	webix.ready(function(){
+
+		webix.ui({
+			view:"filemanager",
+			id:"files",
+			handlers: {
+				download: "../common/data.php"
+			}
+		});
+		$$("files").load("../common/data.php");
+
+		$$("files").attachEvent("onBeforeRun",function(id){
+			webix.confirm({
+				text:"Do you want to download this file?",
+				ok:"Yes",
+				cancel:"No",
+				callback:function(result){
+					if(result)
+						$$("files").download(id);
+				}
+			});
+			return false;
+		});
+	});
+</script>
+</body>
+</html>

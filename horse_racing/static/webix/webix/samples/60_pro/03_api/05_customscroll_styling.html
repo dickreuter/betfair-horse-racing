@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+    <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        #areaA{
+            margin: 30px; width:700px; height:600px;
+        }
+    </style>
+    <title>Custom Scroll - Custom styling</title>
+</head>
+<body>
+<div id="areaA"></div>
+<style type="text/css">
+    .webix_c_scroll_bar_y{
+        background: #666;
+        width:12px;
+    }
+    .webix_c_scroll_bar_x{
+        background: #666;
+        height:12px;
+    }
+    .webix_c_scroll_y{
+        width:12px;
+    }
+    .webix_c_scroll_x{
+        height:12px;
+    }
+    .webix_c_scroll_y div, .webix_c_scroll_y:hover div{
+        background: #FFF;
+        width:8px; margin:0px 2px;
+    }
+    .webix_c_scroll_x div, .webix_c_scroll_x:hover div{
+        background: #FFF;
+        height:8px; margin:2px 0px;
+    }
+</style>
+<script>
+    webix.ready(function(){
+
+        if (!webix.env.touch && webix.ui.scrollSize){
+            webix.CustomScroll.init();
+            webix.CustomScroll.trackBar = true;
+        }
+
+        webix.ui({
+            container:"areaA",
+            height:600,
+            rows:[
+                {header:"Datatable Row", body:{
+                    view:"datatable",
+                    autoConfig:true,
+                    data:big_film_set
+                }},
+                {header:"List Row", body:{
+                    view:"list",
+                    layout:"x",
+                    data:big_film_set,
+                    scroll:"x",
+                    type:{
+                        template:"#title#<br>#year#",
+                        width:150,
+                        height:70
+                    }
+                }},
+                {header:"Template Row", body:{
+                    scroll:"xy",
+                    template:"<div style='width:750px;'>The Webix UI library supplies over 40 fully customizable components to help you build interfaces of different kinds, nicely present data and work with it. There are also multiple controls and specific features to make your applications good-looking and user-friendly. All the components are objects made with the webix.ui() constructor where the type of the component is set by the 'view' property (the declarative syntax is available as well). <br><br>Layouts help you to organize your web page, define its overall look-and-feel. You can arrange the content in columns and rows, divide it into groups and control through navigation or animation.<br><br>Data components are used to present data of a specified type on the page. Such components manage the space allocated for their data and provide functionality for its access and configuration.<br><br> Context components let displaying spatial and temporal information on some user's action, such as click on a button or filling in a field.<br><br>Html-oriented components supply handy means for using habitual HTML elements in an application. There you can specify HTML templates, inline frames, forms etc.<br><br>Auxiliary components help you to complete the picture of your application, to add special features that can't be achieved with the standard set of components presented above.<br><br> Controls are mainly responsible for handling events since they enable user-app interaction by triggering functions attached to them. Note that any event can be attached to any component by referring to its ID.<br><br>UI extensions are helpful components that are mostly task-oriented and intended to accomplish a certain purpose. They are already quite configurable and need only initializing on the page to start serving.</div>"
+                }}
+            ]
+
+        });
+
+    });
+</script>
+
+</body>
+</html>

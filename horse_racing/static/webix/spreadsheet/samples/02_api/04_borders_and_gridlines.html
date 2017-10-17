@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	<title>Borders and Gridlines</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+	<script src="../common/data.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		webix.ready(function(){
+			var buttons = {
+				width:200,type: "space",
+				rows:[
+					{ view:"toggle", onLabel: "Show gridlines", offLabel: "Hide gridlines",  on:{
+						onChange: function(value){
+							$$("ssheet").hideGridlines(value);
+						}
+					}},
+					{ view:"toggle", onLabel: "Show headers", offLabel: "Hide headers",  on:{
+						onChange: function(value){
+							$$("ssheet").hideHeaders(value);
+						}
+					}},
+					{}
+				]
+			};
+			webix.ui({
+				cols:[
+					buttons,
+					{
+						view:"spreadsheet",
+						id:"ssheet",
+						toolbar: "full",
+						data:{
+							data:[
+								[3,2,"Webix"],
+								[3,3,"SpreadSheet"]
+							]
+						}
+					}
+				]
+
+			});
+		});
+	</script>
+</body>
+</html>

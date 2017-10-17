@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estimate complexity</title>
+    <link rel="stylesheet" href="../../../webix/codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+    <script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+    <script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+
+<div id="testA" style='width:850px; height:600px'></div>
+
+<script type="text/javascript" charset="utf-8">
+    function getDistinct(data, key){
+        var checks = {};
+        var count = 0;
+        data.each(function(obj){
+            var test = obj ? obj[key] : "";
+            if (test !== webix.undefined && !checks[test]){
+                checks[test] = true;
+                count++;
+            }
+        }, this, true);
+        return count;
+    };
+
+    webix.ready(function(){
+        webix.ui({
+            container: "testA",
+            id: "pivot",
+            view: "pivot",
+            structure: {
+                rows: ["form", "name"],
+                columns: ["year"],
+                values: [{ name:"gdp", operation:"sum"}, { name:"oil", operation:"sum"}],
+                filters:[]
+            },
+            on:{
+                onbeforeapply: function(config){
+                   var values = config.values.reduce((a, b) => a+b.operation.length, 1);
+                   var rows = config.rows.reduce((a, b) => a*getDistinct(this.data, b), 1);
+                   var columns = config.columns.reduce((a, b) => a*getDistinct(this.data, b), 1);
+
+                   webix.message("Complexity: "+Math.floor(values*Math.sqrt(rows)*Math.sqrt(columns)));
+                }
+            },
+            data:pivot_dataset
+        });
+    });
+</script>
+</body>
+</html>

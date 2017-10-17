@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <title>Adding sparklines</title>
+    <meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+    <script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+    <script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+    <link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+    <script src="../common/data.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        webix.ready(function(){
+            webix.ui({
+                view:"spreadsheet",
+                id: "ssheet",
+                toolbar: "full",
+                data: math_data_simple
+            });
+
+            $$("ssheet").addSparkline(2,8,{range: "B2:E2", type: "line"});
+            $$("ssheet").addSparkline(3,8,{range: "B3:E3", type: "line"});
+            $$("ssheet").addSparkline(4,8,{range: "B4:E4", type: "line"});
+        });
+    </script>
+</body>
+</html>

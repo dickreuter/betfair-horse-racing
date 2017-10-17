@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+    <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <title>Data Layout</title>
+  </head>
+  <body>
+    <div id='layout_div' style='width:800px; height:600px; margin:20px;'></div>
+    <script type="text/javascript" charset="utf-8">
+
+    var right = {
+      container:"layout_div",
+    	view:"datalayout",
+    	type:"space",
+      rows:[],
+    	data:[
+    		{ id:"a1", template:"A1", type:" header" },
+    		{ id:"a2", template:"A2", type:" header" },
+    		{ id:"a3", template:"A3", type:" header" },
+    		{ id:"a4", template:"A4", type:" header" }
+    	]
+    };
+
+    webix.ui(right);
+
+    </script>
+  </body>
+</html>

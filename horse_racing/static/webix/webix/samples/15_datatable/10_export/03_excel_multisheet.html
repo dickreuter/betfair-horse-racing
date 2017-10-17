@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+	<title>Export to Excel: Multiple sheets</title>
+	<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+	<link rel="stylesheet" type="text/css" href="../common/samples.css">
+	<script type="text/javascript" src="../../common/testdata.js"></script>
+	<script type="text/javascript" src="../../common/chartdata.js"></script>
+	<style type="text/css">
+	</style>
+</head>
+<body>
+	<div id="dataDiv"></div>
+
+	<script>
+
+		webix.ui({
+			container:"dataDiv",
+			padding: 20,
+			width:550,
+			rows: [
+				{ view:"tabbar",  multiview:true, options:[
+					{ id:"table", value:"Big data"},
+					{ id:"list", value: "Small data"},
+					{ id:"chart", value: "Chart data"},
+				]},
+				{ cells:[
+					{
+						id: "table",
+						view:"datatable",
+						columns:[
+							{ id:"rank",	header:"", css:"rank",  		width:50},
+							{ id:"title",	header:"Film title",width:250},
+							{ id:"year",	header:"Released" , width:80},
+							{ id:"votes",	header:"Votes", 	width:100}
+						],
+						height: 450,
+						data:big_film_set
+					},
+					{
+						id:"list",
+						view:"list",
+						data:small_film_set,
+						template:"#id#. #title# - #year#"
+					},
+					{
+						id:"chart",
+						view:"chart",
+						type:"line",
+						value:"#sales#",
+						radius:0,
+						xAxis:{ template:"'#year#" },
+						yAxis:{ start:0, end:100, step:10,
+						template:function(obj){ return (obj%20?"":obj)}},
+						data: dataset
+					}
+				]},
+				{
+					paddingY: 5,
+					paddingX: 10,
+					rows:[
+						{
+							view: "button", label: "Export 'Big data' and 'Small data' with default sheet names", autowidth: true, click:function(){
+								webix.toExcel(
+									[$$("table"), $$("list")], 
+									{ filename: "My data" }
+								);
+							}
+						},
+						{
+							view: "button", label: "Export all tabs with custom sheet names", autowidth: true, click:function(){
+								webix.toExcel(
+									[$$("table"), $$("list"), $$("chart")], 
+									{
+										filename: "My data",
+										sheets:["Big data", "Small data", "Chart data"]
+									}
+								);
+							}
+						}
+					]
+
+				}
+			]
+		});
+	</script>
+</body>
+</html>

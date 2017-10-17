@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Extension to generate SQL code</title>
+		<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../../codebase/querybuilder.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+		<link rel="stylesheet" type="text/css" href="../../codebase/querybuilder.css">
+	</head>
+	<body>
+		<script type="text/javascript" charset="utf-8">
+
+		var qb = {
+			view: "querybuilder",
+			id: "querybuilder",
+			fields: [
+				{ id:"fname", value:"First Name", type:"string" },
+				{ id:"lname", value:"Last Name",  type:"string" },
+				{ id:"age",  value:"Age", type:"number" },
+				{ id:"bdate",  value:"Birth Date", type:"date" }
+			],
+			maxLevel: 4
+		};
+
+		var textarea = {
+			view:"textarea",
+			id: "textarea",
+			css: "webix_textarea",
+			labelPosition:"top",
+			label:"SQL"
+		};
+
+		var textareaStatement = {
+			view:"textarea",
+			id: "textarea_statement",
+			css: "webix_textarea",
+			labelPosition:"top",
+			label:"SQL(?)"
+		};
+
+		webix.ready(function(){
+			webix.ui({rows: [ qb, {cols:[textareaStatement, textarea]}]});
+			$$("querybuilder").focus();
+			$$("querybuilder").setValue(
+				[{
+					glue:"and",
+					rules:[
+						{ key:"fname", value:"Alex", rule:"equal" },
+						{ 
+						glue:"or",
+						rules:[
+							{ key:"age", value:90, rule:"less" },
+							{ key:"age", value:10, rule:"greater" }
+						]
+						}
+					]
+				}]
+			);
+
+			$$("textarea").getInputNode().setAttribute("readonly", "true");
+			$$("textarea").define("readonly", "true");
+			
+			showValue();
+			$$("querybuilder").attachEvent("onChange", function() {
+				showValue();
+			});
+		});
+
+		function showValue(){
+			// get SQL mask only
+			var res1 = $$("querybuilder").toSQL({ placeholders: true });
+
+			$$("textarea_statement").setValue(
+				res1.code+"\n\n"+res1.values.join(", ")
+			);
+
+			// get SQL with values
+			var res2 = $$("querybuilder").toSQL();
+			$$("textarea").setValue(
+				res2.code
+			);
+		}
+		</script>
+	</body>
+</html>

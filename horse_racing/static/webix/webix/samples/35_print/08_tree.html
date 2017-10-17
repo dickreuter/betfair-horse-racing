@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../common/testdata.js"></script>
+	<title>Tree</title>
+</head>
+<body>
+	<div id="testA" style="width:400px; height:600px; margin:20px;"></div>
+
+	<script type="text/javascript" charset="utf-8">
+
+		webix.ui({
+			container:"testA",
+			margin:10,
+			rows:[
+				{ margin:5, cols:[
+					{ view:"button", value:"Print all records", click:function(){
+						webix.print($$("mytree"));
+					}},
+					{ view:"button", value:"Print visible records", click:function(){
+						webix.print($$("mytree"), { scroll:true });
+					}},
+				]},
+				{ 
+					view:"tree",
+					id:"mytree",
+					template:"{common.icon()} {common.folder()}#title#",
+					scheme:{
+						$group:{
+							by:function(obj){ return Math.floor(obj.year/10); },
+							map:{
+								title:[function(obj){ 
+									var min = obj.year - obj.year%10; 
+									return min + " - "+ (min+10) 
+								}]
+							}
+						},
+						$sort:"value"
+					},
+					ready:function(){
+						this.openAll();
+					},
+					data:big_film_set
+				}
+			]
+		});
+
+	</script>
+</body>
+</html>

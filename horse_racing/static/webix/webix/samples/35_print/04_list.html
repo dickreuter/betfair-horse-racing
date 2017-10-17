@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../common/testdata.js"></script>
+	<title>List</title>
+</head>
+<body>
+	<div id="testA" style="width:400px; height:600px; margin:20px;"></div>
+
+	<script type="text/javascript" charset="utf-8">
+
+		webix.ui({
+			container:"testA",
+			margin:10,
+			rows:[
+				{ margin:5, cols:[
+					{ view:"button", value:"Print all records", click:function(){
+						webix.print($$("mylist"));
+					}},
+					{ view:"button", value:"Print visible records", click:function(){
+						webix.print($$("mylist"), { scroll:true });
+					}},
+				]},
+				{ 
+					view:"list", 
+					id:"mylist",
+					template:"#rank#. #title# <div style='padding-left:18px'> Year:#year#, votes:#votes# </div>",
+					item:{
+						height:60
+					},
+					data:big_film_set
+				}
+			]
+		});
+
+	</script>
+</body>
+</html>

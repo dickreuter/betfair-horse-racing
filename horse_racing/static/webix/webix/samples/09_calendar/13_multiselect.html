@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+    <script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <title>Multiselect in the calendar</title>
+</head>
+<body>
+
+<script type="text/javascript" charset="utf-8">
+    function format(obj){
+        if (obj.value){
+            if (webix.isArray(obj.value))
+                return obj.value.map(webix.i18n.dateFormatStr).join("<br>");
+            return webix.i18n.dateFormatStr( obj.value );
+        }
+        return "";
+    }
+
+    var h1 = { type:"section", template:"Mutliselect (Ctrl)" };
+    var h2 = { type:"section", template:"Single-select" };
+    var h3 = { type:"section", template:"Multiselect (Touch)" };
+
+    var c1 = {
+        id:"c1",
+        date:new Date(2016,1,16),
+        view:"calendar",
+        multiselect:true
+    };
+    var c2 = {
+        id:"c2",
+        date:new Date(2016,1,16),
+        view:"calendar"
+    };
+    var c3 = {
+        id:"c3",
+        date:new Date(2016,1,16),
+        view:"calendar",
+        multiselect:"touch"
+    };
+
+    var t1 = {
+        id:"t1", template:format, height: 120
+    };
+    var t2 = {
+        id:"t2", template:format, height: 120
+    };
+    var t3 = {
+        id:"t3", template:format, height: 120
+    };
+
+    var i1 = {
+        id:"i1", view:"datepicker", value:"2016-1-14, 2016-1-16, 2016-1-18",
+        multiselect:true
+    };
+    var i2 = {
+        id:"i2", view:"datepicker", value:"2016-1-16"
+    };
+    var i3 = {
+        id:"i3", view:"datepicker", value:"2016-1-14, 2016-1-16, 2016-1-18",
+        multiselect:"touch", stringResult:true
+    };
+
+    webix.ui({
+        type:"space", cols:[
+            { type:"wide", rows:[ h1, c1, t1, i1 ] },
+            { type:"wide", rows:[ h2, c2, t2, i2 ] },
+            { type:"wide", rows:[ h3, c3, t3, i3 ] },
+        ]
+    });
+
+    $$("c1").selectDate([new Date(2016,2,4), new Date(2016,1,16), new Date(2016,1,18)])
+    $$("t1").bind($$("c1"), "value")
+
+    $$("c2").selectDate(new Date(2016,2,4))
+    $$("t2").bind($$("c2"), "value")
+
+    $$("c3").selectDate([new Date(2016,2,4), new Date(2016,1,16), new Date(2016,1,18)])
+    $$("t3").bind($$("c3"), "value")
+
+</script>
+</body>
+</html>

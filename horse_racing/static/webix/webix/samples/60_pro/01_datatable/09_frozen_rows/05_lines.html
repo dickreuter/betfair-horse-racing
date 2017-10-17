@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Frozen top rows: Lines</title>
+    <link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../common/samples.css">
+    <script src="../../../15_datatable/common/bigtestdata.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        .webix_cell.webix_dtable_colrow{
+            background-color: #ddffdd;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+
+<div id="testA"></div>
+
+<script type="text/javascript" charset="utf-8">
+
+    webix.ready(function(){
+        grida = webix.ui({
+            container:"testA", height:600, width:400,
+            view:"datatable",
+            columns:[
+                { id:"id", header:" ", width:50},
+                { id:"title", header:"Name", fillspace:true },
+                { id:"year", header:"Released" }
+            ],
+            scrollX:false,
+            topSplit:1,
+            data: big_wide_film_set
+        });
+
+        grida.add({ title:"Films Collection", $row:"title"}, 0);
+        grida.add({ title:"First 100", $row:"title"}, 1);
+        grida.add({ title:"Second 100", $row:"title"}, 102);
+    });
+</script>
+</body>
+</html>

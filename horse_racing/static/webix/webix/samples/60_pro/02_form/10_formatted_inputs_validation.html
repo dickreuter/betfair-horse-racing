@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			#areaA{
+				margin: 30px;
+			}
+		</style>
+		<title>Formatted Text Inputs:: Validation</title>
+	</head>
+	<body>
+		<div id="areaA"></div>
+		<script type="text/javascript" charset="utf-8">
+
+			webix.ui({
+				container:"areaA",
+				view:"form", scroll:false,
+				width:400,
+				elements:[
+					{ view:"text", name:"phone", value:123478658712345, label:"Phone number", pattern:webix.patterns.phone},
+					{ view:"text", name:"card", label:"Credit card", pattern:webix.patterns.card, validate:function(value){
+            			return /^5[1-5][0-9]{14}$/.test(value);
+     				}, invalidMessage:"Invalid card number"},
+					{ view:"text", name:"date", label:"Date", pattern:webix.patterns.date},
+					{ margin:5, cols:[
+						{ view:"button", value:"Validate all", click:function(){
+							this.getFormView().validate();
+						}},
+						{ view:"button", value:"Clear validation", click:function(){
+							this.getFormView().clearValidation();
+						}}
+					]}
+				],
+				elementsConfig:{
+					labelWidth:120,
+					on:{
+						onChange:function(){
+							this.validate();
+						}
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

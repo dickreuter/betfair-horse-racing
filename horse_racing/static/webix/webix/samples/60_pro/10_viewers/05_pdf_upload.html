@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<title>PDF File Uploading and Downloading</title>  
+</head>
+<body>
+	<script>
+		webix.ui({
+			type:"space",
+			cols:[
+				{rows:[
+					{view:"uploader", width:200, height:45, type:"form", value:"Choose a PDF file to upload", accept:"application/pdf", on:{
+						onBeforeFileAdd:function(upload){
+							$$("pdf").parse(upload.file);
+							return false;
+						}
+					}},
+					{view:"button", width:200, height:45, value:"Clear", click:function(){
+						$$("pdf").clear();
+					}},
+					{}
+				]},
+				{rows:[
+					{ view:"pdfbar", id:"toolbar" },
+					{ view:"pdfviewer", id:"pdf", toolbar:"toolbar"}
+				]}
+			]
+		});
+	</script>
+</body>
+</html>

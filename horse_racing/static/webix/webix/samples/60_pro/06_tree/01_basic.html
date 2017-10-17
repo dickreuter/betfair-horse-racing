@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tree State Object</title>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../common/samples.css">
+	</head>
+	<body>
+		<div class='header_comment'>DataTree state object</div>
+		<div class='sample_comment'>Click "Save state", collapse/expand and select items, and then  click "Restore state".</div>
+		<div id="test" style='width:250px; height:250px; float:left'></div>	
+
+		<script type="text/javascript" charset="utf-8">
+
+		var tree, state = null;
+		webix.ready(function(){
+
+			//loading from file
+			tree = webix.ui({
+				container:"test",
+				view:"tree",
+				data:tree_data,
+				select: true
+			});
+		});
+		function save_state() {
+			webix.storage.local.put("state", tree.getState());
+		}
+		function restore_state() {
+			var state = webix.storage.local.get("state");
+			if (state)
+				tree.setState(state);
+		}
+
+		</script>
+		<input type="button" name="save_state" value="Save state" onclick="save_state()" />
+		<input type="button" name="restore_state" value="Restore state" onclick="restore_state()" />
+	</body>
+</html>

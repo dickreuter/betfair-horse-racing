@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			#areaA{
+				margin: 30px;
+			}
+		</style>
+		<title>Formatted Text Inputs</title>
+	</head>
+	<body>
+		<div id="areaA"></div>
+		<script type="text/javascript" charset="utf-8">
+
+			webix.ui({
+				container:"areaA",
+				view:"form", scroll:false,
+				width:400,
+				elements:[
+					{ view:"text", name:"phone", value:12347865871, label:"Phone number", pattern:webix.patterns.phone},
+					{ view:"text", name:"card", label:"Credit card", pattern:webix.patterns.card},
+					{ view:"text", name:"date", label:"Date", pattern:webix.patterns.date},
+					{ view:"text", name:"custom", label:"Custom ", pattern:{ 
+						mask:"###-## ########", allow:/\w/g
+					}},
+					{ margin:5, cols:[
+						{ view:"button", value:"Get raw values", click:function(){
+							var values = this.getFormView().getValues();
+							webix.message("<pre>"+JSON.stringify(values, null, 2)+"</pre>");
+						}},
+						{ view:"button", value:"Get formatted values", click:function(){
+							var form = this.getFormView();
+							var values = {
+								phone:form.elements.phone.getText(),
+								card:form.elements.card.getText(),
+								date:form.elements.date.getText(),
+								custom:form.elements.custom.getText()
+							};
+							webix.message("<pre>"+JSON.stringify(values, null, 2)+"</pre>");
+						}}
+					]}
+				],
+				elementsConfig:{
+					labelWidth:120
+				}
+			});
+		</script>
+	</body>
+</html>

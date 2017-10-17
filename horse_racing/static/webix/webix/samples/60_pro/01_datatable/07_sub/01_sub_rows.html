@@ -1,0 +1,41 @@
+  <!DOCTYPE html>
+<html>
+	<head>
+		<title>SubRows in DataTable</title>
+		<link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../common/samples.css">
+		<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+        <style type="text/css">
+        .multiline{
+            line-height: 30px !important;
+        }
+        </style>
+	</head>
+	<body>
+		<div class='header_comment'>Sub-rows in DataTable</div>
+		<div id="testA"></div>
+
+		<script type="text/javascript" charset="utf-8">
+
+		webix.ready(function(){
+			webix.ui({
+				container:"testA",
+				view:"datatable",
+				subrow:"Rating: #rating#, Category: #category#",
+				columns:[
+					{ id:"title",	header:"Title", 
+						template:"{common.subrow()} #title#", width:220 },
+					{ id:"year",	header:"Year", 		width:100, sort:"int"},
+					{ id:"votes",	header:"Votes", 	width:100,	sort:"int"}
+				],
+				autoheight:true,
+				autowidth:true,
+				data:small_film_set
+			});	
+		});
+
+		</script>
+	</body>
+</html>

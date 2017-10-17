@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+   <head>
+	   <link rel="stylesheet" href="../../codebase/webix.css" type="text/css" charset="utf-8">
+	   <script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	   <title>Flex Layout as part of Webix UI</title>
+   </head>
+   <body>
+
+<script type="text/javascript" charset="utf-8">
+webix.ready(function(){
+	if (webix.CustomScroll && !webix.env.touch) webix.CustomScroll.init();
+
+	var flex = {
+		margin:10, padding:0, type:"wide",
+		view:"flexlayout",
+		cols:[
+			{ view:"list", data:[
+				{ value:"Albert Brown" },{ value:"Mono Delorini" },{ value:"Sergey Bobrovski" }, { value:"Mikita Alaev" }
+			], minWidth:320, select:true },
+			{ view:"list", data:[
+				{ value:"Accounts" },{ value:"History" },{ value:"Settings" }
+			], minWidth:320, select:true },
+			{   
+				template:"Try to resize screen, or open this sample on a mobile device",
+				minWidth:320, minHeight:600, scroll:false
+			},
+			{
+				template:"column 3", minWidth:320, minHeight:600, scroll:false
+			}
+		]
+	};
+
+	webix.ui({
+		rows:[
+			{ template:"My App", type:"header" },
+			{ cols:[
+				{ view:"scrollview", body:flex },
+				{ view:"resizer" },
+				{ }
+			]},
+			{ template:"Status: all data is saved", height:30}
+		]
+	});
+	webix.ui.fullScreen();
+})
+	   </script>
+   </body>
+</html>

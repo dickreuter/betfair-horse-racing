@@ -1,0 +1,1 @@
+conda env export --name horse_racing | grep -v "^prefix: " > environment.yml

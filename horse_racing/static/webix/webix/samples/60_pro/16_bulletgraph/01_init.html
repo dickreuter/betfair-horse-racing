@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+	<title>Bullet Graph</title>
+	<script src="../../../codebase/webix.js" type="text/javascript"></script>
+	<link rel="STYLESHEET" type="text/css" href="../../../codebase/webix.css">
+	<style type="text/css">
+		.webix_bullet_graph_svg {
+			margin: 10px;
+		}
+	</style>
+	<body>
+		<script>
+		var bullet1 = {
+			view:"bullet", id:"b1",
+			minRange:0, 
+			maxRange:120,
+			value:40, 
+			bands:[
+			  { value:120, color:"#b4e5fb"},
+			  { value:80, color:"#55c2f3"},
+			  { value:60, color:"#1997dc"},
+			], 
+			label:"2015 YTD", 
+			placeholder:"expected #value#", 
+			marker:70, 
+			stroke: 8, 
+			scale: { 
+				step:20,
+				template:"#value#%"
+			}
+		};
+
+		var bullet2 = {
+			view:"bullet", 
+			value:88,  smoothFlow:false,
+			label:"2016 YTD", 
+			placeholder:"estimated"
+		};
+
+		var bullet3 = {
+			view:"bullet", id:"b3",
+			value:76, 
+			label:"2017 YTD",  marker: 85,
+			placeholder:"average", 
+			stroke:16,
+			color:"#ffffff",
+			bands:[
+			  { value:120, color:"#47c6b9"},
+			  { value:80, color:"#fec02f"},
+			  { value:60, color:"#f0443d"},
+			], 
+		};
+
+		var bulletNoScaleX = {
+			view:"bullet", 
+			value:90, 
+			scale:false, layout:"x",
+			stroke:16, smoothFlow:false,
+			color:"#ffffff",
+			bands:[
+			  { value:120, color:"#47c6b9"},
+			  { value:80, color:"#fec02f"},
+			  { value:60, color:"#f0443d"},
+			], 
+		};
+
+		var bulletNarrow = {
+			view:"bullet", 
+			value:40, 
+			label:"Sales [#value#k]",
+			barWidth:25, layout:"x", scale:false, height: 45,
+			stroke:23, smoothFlow:false,
+			color:"#f0443d",
+			bands:[
+			  { value:580, color:"#47c6b9"}
+			], 
+		};
+
+		var bulletNoScaleY = {
+			view:"bullet", 
+			value:90, smoothFlow:false,
+			scale:false, layout:"y",
+			stroke:16,
+			color:"#ffffff",
+			bands:[
+			  { value:120, color:"#47c6b9"},
+			  { value:80, color:"#fec02f"},
+			  { value:60, color:"#f0443d"},
+			], 
+		};
+
+		var bullet4 = {
+			view:"bullet",  layout:"y",
+			value:62, smoothFlow:false, 
+			label:"Expenses", labelHeight:40, 
+			placeholder:"average", 
+			marker:75
+		};
+
+		var bullet5 = {
+			view:"bullet",  layout:"y", id:"b5",
+			value:88,
+			label:"Revenue", labelHeight:40,
+			placeholder:"average", 
+			marker:70,
+			bands:[
+			  { value:120, color:"#47c6b9"},
+			  { value:80, color:"#fec02f"},
+			  { value:60, color:"#f0443d"},
+			],
+			stroke:16,
+			color:"#ffffff",
+		};
+
+			webix.ui({
+				type:"space", cols:[{
+					type:"wide", rows:[
+						bullet1,
+						bullet2,
+						bullet3,
+						bulletNoScaleX,
+						bulletNarrow,
+						{ gravity: 0.1 }
+					]},
+					bullet4,
+					bullet5,
+					bulletNoScaleY,
+					{ gravity: 0.1 }
+				],
+			});
+
+			setInterval(function(){
+				var value = Math.floor(Math.random()*100);
+				$$("b1").setValue(value);
+				$$("b3").setValue(100-value);
+				$$("b5").setValue(100-value);
+			}, 3000)
+
+		</script>
+	</body>
+</html>

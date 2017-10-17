@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" media="screen" charset="utf-8">
+        <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+        <title>Custom Form Inputs</title>
+
+        <!-- You can get these files from https://github.com/webix-hub/components -->
+        <script type="text/javascript">
+            webix.require.disabled = true;
+            webix.codebase = "https://cdn.webix.com/components/ckeditor/";
+            window.CKEDITOR_BASEPATH = webix.codebase+"ckeditor/";
+        </script>
+        
+        <script src="//cdn.webix.com/components/ckeditor/ckeditor.js"></script>
+        <script src="//cdn.webix.com/components/ckeditor/ckeditor/ckeditor.js"></script>
+
+    </head>
+    <body>
+        <script type="text/javascript" charset="utf-8">
+
+var editor = {
+    view:"ckeditor"
+};
+var grid = {
+    view:"datatable", autoheight:true, select:true,
+    columns:[
+        { id:"fname", header:"First Name", fillspace: 1},
+        { id:"lname", header:"Last Name", fillspace: 1},
+        { id:"email", header:"Email", fillspace: 1},
+    ],
+    data:[
+        { fname:"Alex", lname:"Brown", email:"alex.brown@gmail.com" },
+        { fname:"Julia", lname:"Welner", email:"juliaw@gmail.com" },
+        { fname:"Maksim", lname:"Resvik", email:"resvik12@hotmail.com" }
+    ]
+}
+
+            webix.ui({
+                view:"form",
+                elementsConfig:{ labelWidth: 140, labelAlign:"right" },
+                rows:[
+                { view:"text", label:"User Name" },
+                { view:"forminput", label:"Rich Editor", body:editor, value:"Some value here"},
+                { view:"forminput", label:"Embedded Grid", body:grid },
+                { view:"button", value:"Save", inputWidth: 200, align:"right" }
+              ],
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mapping field names</title>
+		<link rel="stylesheet" href="../../../webix/codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+		<script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+		<script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			html, body {
+				width: 100%;
+				height: 100%;
+				padding: 0;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class='header_comment'>Mapping field names</div>
+		<div id="testA"></div>
+		<script type="text/javascript" charset="utf-8">
+
+			webix.ready(function(){
+				webix.ui({
+					container:"testA",
+					id:"pivot",
+					view:"pivot-chart",
+					height:350,
+					width:1000,
+
+					structure:{
+						groupBy: "year",
+						values: [{name:"balance", operation:"max"},{name:"oil", operation:"max"}],
+						filters:[{name:"name", type:"select"}]
+					},
+					data:pivot_dataset,
+
+					// change titles
+					fieldMap:{
+						gdp: "GDP",
+						balance: "Balance of Payments",
+						oil: "Oil",
+						form: "Form of Government",
+						name: "Country",
+						year: "Year",
+						continent: "Continent",
+						id: "Id"
+					},
+					filterLabelWidth: 140,
+					chart: {
+						legend:{
+							width: 200
+						}
+					}
+				});
+		});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <title>Text buttons</title>
+    <meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+    <script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+    <script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+    <link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+    <script src="../common/data.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+
+
+
+    webix.ready(function(){
+        webix.ui({
+            view:"spreadsheet",
+            data: base_data,
+            buttons: {
+                "undo-redo": ["undo","redo"],
+                "font": ["font-family","font-size","font-weight","font-style","text-decoration","color","background","borders"],
+                "align": ["text-align","vertical-align","wrap","span"],
+                "format": ["format"],
+                "My Block": [
+                    {
+                        view: "button", name: "a", width: 40, label: "A",
+                        tooltip: "Click this button", click: function(){webix.message("Click "+this.config.name)}
+                    },
+                    {
+                        view: "button", name: "b", width: 40, label: "B",
+                        tooltip: "Click this button", click: function(){webix.message("Click "+this.config.name)}
+                    },
+                    {
+                        view: "button", name: "c", width: 40, label: "C",
+                        tooltip: "Click this button", click: function(){webix.message("Click "+this.config.name)}
+                    }
+                ]
+            }
+        });
+    });
+</script>
+</body>
+</html>

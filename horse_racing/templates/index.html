@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<BR>
+
+<img src="{{ url_for('static', filename='chart_cumulative.png',rnd=rnd) }}"> <br>
+Source: place_bets collection
+
+<img src="{{ url_for('static', filename='chart_cumulative_year.png',rnd=rnd) }}"> <br>
+Source: place_bets collection
+
+<img src="{{ url_for('static', filename='orders_wins_overall.png',rnd=rnd) }}"> <br>
+<img src="{{ url_for('static', filename='orders_losses_overall.png',rnd=rnd) }}"> <br>
+<img src="{{ url_for('static', filename='orders_wins.png',rnd=rnd) }}"> <br>
+<img src="{{ url_for('static', filename='orders_losses.png',rnd=rnd) }}"> <br>
+<img src="{{ url_for('static', filename='bets.png',rnd=rnd) }}"> <br>
+Source: orders collection
+
+<img src="{{ url_for('static', filename='chart.png',rnd=rnd) }}"> <br>
+Source: place_bets collection
+
+
+
+<BR><BR>
+<center>
+    {% for table in tables %}
+    <h2>{{titles[loop.index]}}</h2>
+    {{ table|safe }}
+    {% endfor %}
+</center>
+
+{% endblock %}
+
+
