@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+	<title>Complex status (Swimlanes)</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/kanban.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/kanban.css">
+
+	<link rel="stylesheet" type="text/css" href="../common/style.css">
+	<script src="../common/data.js"></script>
+
+	<script src="../common/types.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	webix.ready(function(){
+		webix.ui({
+			view:"kanban",
+			id: "board",
+
+			type: "space",
+			cols:[
+				{ header:"Backlog",
+					body:{ view:"kanbanlist", status:"new", type: "users" }},
+				{ header:"In progress",
+					body:{ rows:[
+						{ template: "<span class='webix_icon fa-code'></span> Development", height: 27, css: "user_header"},
+						{ view:"kanbanlist", type: "users", status:{ status: "work", team: 1 }},
+						{ template: "<span class='webix_icon fa-pencil'></span> Design", height: 27, css: "user_header"},
+						{ view:"kanbanlist", type: "users", status:{ status: "work", team: 2 }}
+					]}
+				},
+
+				{ header:"Test",
+					body:{ view:"kanbanlist", status:"test", type: "users" }},
+
+				{ header:"Done",
+					body:{ view:"kanbanlist", status:"done", type: "users" }}
+			],
+			data: team_task_set
+		});
+
+
+
+	});
+</script>
+</body>
+</html>

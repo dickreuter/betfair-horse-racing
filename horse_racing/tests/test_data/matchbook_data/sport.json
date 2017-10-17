@@ -1,0 +1,107 @@
+{
+  "total": 31,
+  "per-page": 20,
+  "offset": 0,
+  "sports": [
+    {
+      "name": "American Football",
+      "id": 1,
+      "type": "SPORT"
+    },
+    {
+      "name": "Athletics",
+      "id": 555636871580009,
+      "type": "SPORT"
+    },
+    {
+      "name": "Australian Rules",
+      "id": 112,
+      "type": "SPORT"
+    },
+    {
+      "name": "Auto Racing",
+      "id": 13,
+      "type": "SPORT"
+    },
+    {
+      "name": "Baseball",
+      "id": 3,
+      "type": "SPORT"
+    },
+    {
+      "name": "Basketball",
+      "id": 4,
+      "type": "SPORT"
+    },
+    {
+      "name": "Boxing",
+      "id": 14,
+      "type": "SPORT"
+    },
+    {
+      "name": "Cricket",
+      "id": 110,
+      "type": "SPORT"
+    },
+    {
+      "name": "Current Events",
+      "id": 11,
+      "type": "SPORT"
+    },
+    {
+      "name": "Cycling",
+      "id": 115,
+      "type": "SPORT"
+    },
+    {
+      "name": "Darts",
+      "id": 116,
+      "type": "SPORT"
+    },
+    {
+      "name": "Gaelic Football",
+      "id": 117,
+      "type": "SPORT"
+    },
+    {
+      "name": "Golf",
+      "id": 8,
+      "type": "SPORT"
+    },
+    {
+      "name": "Greyhound Racing",
+      "id": 241798357140019,
+      "type": "SPORT"
+    },
+    {
+      "name": "Horse Racing",
+      "id": 24735152712200,
+      "type": "SPORT"
+    },
+    {
+      "name": "Horse Racing (Ante Post)",
+      "id": 222109340250019,
+      "type": "SPORT"
+    },
+    {
+      "name": "Horse Racing Beta",
+      "id": 231138347942400,
+      "type": "SPORT"
+    },
+    {
+      "name": "Hurling",
+      "id": 118,
+      "type": "SPORT"
+    },
+    {
+      "name": "Ice Hockey",
+      "id": 6,
+      "type": "SPORT"
+    },
+    {
+      "name": "MMA",
+      "id": 126,
+      "type": "SPORT"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<title>PDF::File Loading</title>  
+</head>
+<body>
+	<script>
+		webix.ui({
+			type:"space",
+			rows:[
+				{view:"button", height:45, inputWidth:300, type:"form", value:"Reload with 'page-width' adjustment",  click:function(){
+					$$("pdf").define('scale', 'page-width');
+					$$("pdf").load("binary->files/WebixDocs.pdf");
+				}},
+				{ view:"pdfbar", id:"toolbar" },
+				{ view:"pdfviewer",id:"pdf", url:"binary->files/WebixDocs.pdf", toolbar:"toolbar", on:{
+					onDocumentReady:function(){
+						webix.message("Loaded and rendered")
+					}
+				}}
+			]
+		});
+	</script>
+</body>
+</html>

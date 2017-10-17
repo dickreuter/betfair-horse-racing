@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+	<title>Export to .xlsx, .pdf and .png</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+	<script src="../common/data.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		webix.ready(function(){
+			var buttons = {
+				width:150, type:"space",
+				rows:[
+					{ view:"button", value:"Export to Excel", click: function(){
+						webix.toExcel("ss1");
+					}},
+					{ view:"button", value:"Export to PNG", click:function(){
+						webix.toPNG("ss1");
+					}},
+					{ view:"button", value:"Export to PDF", click:function(){
+						webix.toPDF("ss1", {autowidth:true});
+					}},
+					{ view:"button", value:"Export to CSV", click:function(){
+						webix.toCSV("ss1");
+					}},
+					{}
+				]
+			};
+
+			webix.ui({
+				cols:[ buttons, {
+					id:"ss1",
+					view:"spreadsheet",
+					toolbar: "full",
+					data: sheet1_data
+
+				}]
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+		
+		<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+		<script src="../../codebase/scheduler.js" type="text/javascript"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../../webix/codebase/skins/touch.css">
+		<link rel="stylesheet" type="text/css" href="../../codebase/scheduler.css">
+
+        <title>Recurring view</title>
+	</head>
+	<body>
+	
+		<script>
+			// enable recurring view for scheduler
+			scheduler.config.recurring = true;
+			// initial date
+			scheduler.config.init_date = new Date();
+
+			webix.ready(function(){
+				webix.ui.fullScreen();
+				webix.ui(
+					{
+						view:"scheduler",
+						id:"scheduler"
+					}
+				);
+				var data = [
+					{
+						id:1,
+						start_date:"2014-06-01 09:00:00",
+						end_date:"9999-02-01 00:00:00",
+						text:"Each working day",
+						details:"",
+						rec_type:"week_1___1,2,3,4,5",
+						event_length:"7200"
+					},
+					{
+						id:2,
+						start_date:"2014-06-01 10:00:00",
+						end_date:"9999-02-01 00:00:00",
+						text:"Every first day of the month",
+						details:"",
+						rec_type:"month_1___1",
+						event_length:"3600"
+					}
+				];
+
+
+				$$("scheduler").parse(data);
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+   <head>
+	   <link rel="stylesheet" href="../../codebase/webix.css" type="text/css" charset="utf-8">
+	   <script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	   <title>Align content in Layout</title>
+   </head>
+   <body>
+
+<script type="text/javascript" charset="utf-8">
+webix.ready(function(){
+	webix.ui({
+		type:"space", rows:[
+			{ align:"center,middle", body:{ view:"datepicker", width:200 }},
+			{ type:"header", template:"-"},
+			{ align:"bottom,right", body:{ view:"datepicker", width:200 }},
+			{ type:"header", template:"-"},
+			{ align:"absolute", left:30, top:30, bottom:60, body:{ view:"datepicker", width:200 }},
+		]
+	});
+})
+	   </script>
+   </body>
+</html>

@@ -1,0 +1,21 @@
+#----------#
+# DATABASE #
+#----------#
+
+COLLECTIONS
+price_scrape: raw price scraped from BF and MB. It is performed every minute. Each entry corresponds to a single horse
+price_scrape_enriched: 2015-2017 from BF tarballs (but no bookie data)
+price_scrape_enriched_bookies: scraped data including bookies, so only for the last few weeks in 2018
+results_scrape: results collected every hour from BF and used for PnL calculations
+place_bets: bets details as placed by the algo
+orders: bets details retrieved from BF and used for PnL calculations
+
+USAGE
+For training/backtesting we only need to use price_scrape_enriched and price_scrape_enriched_bookies.
+Once we have a model we need to use price_scrape to process scraped data on-the-fly and create the input array
+
+MIRROR A LOCAL COPY
+Open mongodb shell from LOCAL db and run:
+db.copyDatabase("horse_racing","horse_racing","dickreuter.com","rj","rj","SCRAM-SHA-1" )
+Or even better to mimimize cost: Instead just copy the price_scrape_enriched_bookies collection with 3t studio.
+The collection is updated automatically once a week.

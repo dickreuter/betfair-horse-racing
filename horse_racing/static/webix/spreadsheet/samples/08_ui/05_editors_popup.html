@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+    <title>Popup with Form</title>
+    <meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+    <script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+    <script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+    <link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+    <script src="../common/data.js"></script>
+
+    <style>
+        .myicon{
+            background: url("images/edit.svg");
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+
+
+    webix.ui({
+        id: "mypopup",
+        view: "ssheet-form-popup",
+        padding:0,
+        width: 300,
+        body: {
+            view: "form",
+            borderless: true,
+            elements:[
+                {
+                    margin: 10,
+                    cols:[
+                        {view: "label", label: "Option 1", width: 70},
+                        {view: "text", placeholder: "Name"},
+                        {view: "richselect", placeholder: "Select", suggest:{
+                            view:  "ssheet-form-suggest",
+                            data:["One","Two","Three"]
+                        }}
+                    ]
+                },
+                {
+                    margin: 10,
+                    cols:[
+                        {view: "label", label: "Option 2", width: 70},
+                        {view: "text", placeholder: "Name"},
+                        {view: "richselect", placeholder: "Select", suggest:{
+                            view:  "ssheet-form-suggest",
+                            data:["One","Two","Three"]
+                        }}
+                    ]
+                }
+            ]
+        }
+    });
+    webix.ready(function(){
+        webix.ui({
+            view:"spreadsheet",
+            data: base_data,
+            buttons: {
+                "undo-redo": ["undo","redo"],
+                "font": ["font-family","font-size","font-weight","font-style","text-decoration","color","background","borders"],
+                "align": ["text-align","vertical-align","wrap","span"],
+                "number": ["format"],
+                "Editors": [
+                    {
+                        view: "button", type:"htmlbutton", name: "a", width: 40,
+                        label: "<span class='webix_ssheet_button_icon myicon'></span>",
+                        tooltip: "Insert image", popup: "mypopup"
+                    }
+                ]
+            }
+        });
+    });
+</script>
+</body>
+</html>

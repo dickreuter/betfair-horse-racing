@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./data/data.js" type="text/javascript" charset="utf-8"></script>
+	<title>GeoChart::Operations with Data</title>
+</head>
+<body>
+	<script type="text/javascript">
+var form = {
+	width: 600, padding:20, rows:[
+		{ type:"section", template:"Editing"},
+		{ view:"form",  padding:0,  borderless:true, id:"editForm", cols:[
+			{ view:"select", name:"country", options:"data/countries.json", on:{
+				onChange:function(newv){
+					$$("editForm").clearValidation();
+					var item = $$("map").find(function(obj){
+						return obj.country.toLowerCase() === newv.toLowerCase();
+					});
+
+					if(item.length)
+						$$("editForm").setValues(item[0]);
+					else
+						$$("editForm").setValues({country:newv, id:"", area:""});
+				}
+			}},
+			{ view:"text", name:"area"},
+			{ view:"button", value:"Add/Update Item", click:function(){
+				if($$("editForm").validate()){
+					var values = $$("editForm").getValues();
+					if(values.id)
+						$$("map").updateItem(values.id, { area:values.area});
+					else{
+						var id = $$("map").add({ country:values.country, area:values.area});
+						$$("editForm").setValues($$("map").getItem(id));
+					}
+				}
+			}},
+			{ view:"button", value:"Remove Item", click:function(){
+				if($$("editForm").validate()){
+					var id = $$("editForm").getValues().id;
+					if(id){
+						$$("map").remove(id);
+						$$("editForm").clear();
+					}
+				}
+			}}
+		],
+		rules:{
+			area:webix.rules.isNumber,
+			country:function(value){ return value !=0; }
+		}
+	},
+	{ type:"section", template:"Data loading"},
+	{ margin:10, cols:[
+		{ view:"button", value:"Clear all", click:function(){ $$("map").clearAll(); }},
+		{ view:"button", value:"Load data", click:function(){ $$("map").parse(json_data); }},
+		{},{}
+	]},
+]};
+
+		webix.ui({
+			rows:[
+				{
+					view:"geochart",
+					id:"map",
+					//provide your own Google API key
+					key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+					on:{
+						onItemClick:function(id){
+							var item = $$("map").getItem(id);
+							$$("editForm").setValues(item);
+						}
+					},
+					data:json_data
+				},
+				{ cols:[
+					form, {}
+				]},
+				{ }
+			]
+		});
+
+	</script>
+</body>
+</html>

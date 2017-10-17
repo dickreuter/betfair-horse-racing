@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/
+horse_racing.iml
+/horse_racing/model.h5
+/horse_racing/model.json
+/horse_racing/Graph
+/horse_racing/static/*.png

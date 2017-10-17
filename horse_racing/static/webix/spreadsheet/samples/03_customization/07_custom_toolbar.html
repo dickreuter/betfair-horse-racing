@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+    <title>Custom toolbar</title>
+    <meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+    <script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+    <script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+    <link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+    <script src="../common/data.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+
+
+
+    webix.ready(function(){
+        webix.ui({
+            view:"spreadsheet",
+            data: base_data,
+            toolbar: [
+                {
+                    padding: 3,
+                    rows:[
+                        {
+                            margin: 2,
+                            cols: [
+                                {$button: "undo"},
+                                {$button: "redo"}
+                            ]
+                        },
+                        {},
+                        {template: "Undo/Redo", view: "ssheet-bar-title", height: 24}
+                    ]
+                },
+                {view: "ssheet-separator"},
+                {
+                    padding: 3,
+                    rows:[
+                        {
+                            margin: 2,
+                            cols:[
+                                {$button: "font-family", width: 167},
+                                {$button: "font-size", width: 90}
+
+                            ]
+                        },
+                        {
+                            margin: 10,
+                            cols:[
+                                {
+                                    margin: 2,
+                                    cols:[
+                                        {$button: "font-weight"},
+                                        {$button: "font-style"},
+                                        {$button: "text-decoration"}
+                                    ]
+                                },
+                                {
+                                    margin: 2,
+                                    cols:[
+                                        {$button: "borders"},
+                                        {$button: "background"}
+                                    ]
+                                }
+                            ]
+
+                        },
+                        {template: "Font/Borders", view: "ssheet-bar-title", height: 24}
+                    ]
+                },
+                {view: "ssheet-separator"},
+                {
+                    padding: 3,
+                    rows:[
+                        {
+                            margin: 2,
+                            cols:[
+                                {$button: "text-align"},
+                                {$button: "span"}
+                            ]
+                        },
+                        {
+                            margin: 2,
+                            cols:[
+                                {$button: "vertical-align"},
+
+                                {$button: "wrap"}
+                            ]
+                        },
+                        {template: "Align", view: "ssheet-bar-title", height: 24}
+                    ]
+                },
+
+                {view: "ssheet-separator"},
+                {
+                    padding: 3,
+                    rows:[
+                        {
+                            cols:[
+                                {$button: "format"}
+                            ]
+                        },
+                        {
+                        },
+                        {template: "Number", view: "ssheet-bar-title", height: 24}
+                    ]
+                },
+                {view: "ssheet-separator"}
+            ]
+        });
+    });
+
+
+</script>
+</body>
+</html>

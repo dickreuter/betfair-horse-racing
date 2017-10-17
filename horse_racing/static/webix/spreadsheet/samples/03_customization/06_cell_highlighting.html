@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+	<title>Search: cell highlighting</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+	<script src="../../../webix/sources/core/i18n/ru.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+	
+	<script src="../common/data.js"></script>
+	
+	<style>
+		.cellHighlight{
+			background: #ffa !important;
+		}
+	</style>
+
+</head>
+<body>
+	<script type="text/javascript">
+		
+		
+			
+		var elements = [			
+			{
+				view:"text", id:"input", placeholder:'Type here to search...',
+				on:{onTimedKeyPress:function(){			
+					filter();
+				}}
+			}, {}
+		];		
+
+	
+		webix.ready(function(){
+			webix.ui({
+				view:"spreadsheet", id:"ss",
+				columnCount:15,					
+				subbar:{
+					view:"toolbar", css:"webix_ssheet_toolbar", elements:elements
+				},				
+				data:sheet1_data				
+			});	
+			
+			
+			function equals(a,b){			
+				a = a? a.toString().toLowerCase():"";				
+				return a.indexOf(b) !== -1;
+			}	
+			
+			filter = function(){		
+				var text = $$('ss').$$('input').getValue().toLowerCase();							
+				$$('ss').$$('cells').eachColumn( 
+					function (columnId){ 											
+						$$('ss').$$('cells').eachRow( 
+							function (row){ 					
+								var item = $$('ss').$$('cells').getItem(row)[columnId];
+								if (text && equals(item, text)){									
+									$$('ss').$$('cells').addCellCss(row, columnId, 'cellHighlight');
+								}
+								else $$('ss').$$('cells').removeCellCss(row, columnId, 'cellHighlight');
+							}
+						)						
+					}
+				);
+			};					
+		});
+	</script>
+</body>
+</html>

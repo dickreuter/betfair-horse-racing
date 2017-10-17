@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block body %}
+
+bet.log<BR>
+<textarea rows="50" cols="160">
+{{bet}}
+</textarea>
+<BR><BR>
+
+bet_errors.log<BR>
+<textarea rows="50" cols="160">
+{{bet_errors}}
+</textarea>
+<BR><BR>
+
+update_orders.log<BR>
+<textarea rows="50" cols="160">
+{{update_orders}}
+</textarea>
+<BR><BR>
+
+update_orders_errors.log<BR>
+<textarea rows="50" cols="160">
+{{update_orders_errors}}
+</textarea>
+<BR><BR>
+
+collect_prices.log<BR>
+<textarea rows="50" cols="160">
+{{collect_prices}}
+</textarea>
+<BR><BR>
+
+collect_prices_errors.log<BR>
+<textarea rows="50" cols="160">
+{{collect_prices_errors}}
+</textarea>
+<BR><BR>
+
+
+collect_prices_contd.log<BR>
+<textarea rows="50" cols="160">
+{{collect_prices_contd}}
+</textarea>
+<BR><BR>
+
+collect_prices_contd_errors.log<BR>
+<textarea rows="50" cols="160">
+{{collect_prices_contd_errors}}
+</textarea>
+<BR><BR>
+
+
+uncaught_exceptions.log<BR>
+<textarea rows="50" cols="160">
+{{uncaught_exceptions}}
+</textarea>
+
+{% endblock %}
+
+

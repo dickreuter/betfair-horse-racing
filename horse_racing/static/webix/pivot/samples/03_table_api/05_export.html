@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Export data from the Pivot</title>
+	<link rel="stylesheet" href="../../../webix/codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+	<script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+	<link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+	<script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div class='header_comment'>Export data from the Pivot</div>
+
+<style type="text/css">
+	.bline input{
+		width:150px;margin:5px 25px; float:left;
+	}
+	.bline{
+		clear:both;
+		height: 30px;
+	}
+	html, body {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		margin: 0;
+	}
+</style>
+
+<div class='bline'>
+	<input type="button" value="get PDF" onclick="webix.toPDF(grida);">
+	<input type="button" value="get flat PDF" onclick="webix.toPDF(grida, options);">
+	<input type="button" value="get fill PDF" onclick="webix.toPDF(grida, options2);">
+</div>
+<div class='bline'>
+	<input type="button" value="get Excel" onclick="webix.toExcel(grida);">
+	<input type="button" value="get flat Excel" onclick="webix.toExcel(grida, options);">
+	<input type="button" value="get fill Excel" onclick="webix.toExcel(grida, options2);">
+</div>
+<div class='bline'>
+	<input type="button" value="get CSV" onclick="webix.toCSV(grida);">
+	<input type="button" value="get flat CSV" onclick="webix.toCSV(grida, options);">
+	<input type="button" value="get fill CSV" onclick="webix.toCSV(grida, options2);">
+</div>
+
+<div id="testA"></div>
+
+<script type="text/javascript" charset="utf-8">
+		var options = { 
+			flatTree:{
+				id:"value",
+				columns:[
+					{ header:"Form" },
+					{ header:"Country" },
+				]
+			}
+		};
+		var options2 = { 
+			flatTree:{
+				id:"value",
+				fill:true
+			}
+		};
+
+	webix.ready(function(){
+		grida = webix.ui({
+			popup:{
+				width:800, height:600
+			},
+			container:"testA",
+			id:"pivot",
+			view:"pivot",
+			height:400,
+			width:1000,
+			totalColumn: true,
+			footer: true,
+
+			max: true,
+			structure: {
+				rows: ["form", "name"],
+				columns: ["year"],
+				values: [{ name:"oil", operation:["min","max","sum"]}],
+				filters:[]
+			}
+		});
+		grida.$divider = "**";
+		grida.parse(pivot_dataset);
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+  <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+  <title>Excel Proxy</title>  
+</head>
+<body>
+  <script>
+    webix.ui({
+      type:"space",
+      cols:[
+        { 
+          view:"list",
+          url:"binary->files/data.xlsx@Data[1-10]",
+          datatype:"excel",
+          width:320,
+          template:"#data1#, #data2#",
+          select:true
+        },
+        { 
+          view:"datatable",
+          autoConfig:true,
+          spans:true,
+          url:"binary->files/data.xlsx@Files[1-]",
+          datatype:"excel",
+        }
+      ]
+    });
+  </script>
+</body>
+</html>

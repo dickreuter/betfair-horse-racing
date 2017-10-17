@@ -1,0 +1,21 @@
+Check the full list of changes in Query Builder at https://docs.webix.com/querybuilder__whats_new.html
+
+Version 5.1 (November 2017)
+------------------
+### Major Features
+
+- the ability to convert Query Builder value to SQL
+- validation of input fields in the rules
+- each rule in Query Builder represents a form
+
+[Check the full list of changes](https://docs.webix.com/querybuilder__whats_new_5_1.html) 
+
+Version 5.0 (September 2017)
+------------------
+### Major Features
+
+- the sorting functionality
+- the ability to arrange filtering inputs in columns
+- the maxLevel option to limit the number of nesting filtering fields
+
+[Check the full list of changes](https://docs.webix.com/querybuilder__whats_new_5_0.html) 

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Number Editor</title>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../common/samples.css">
+		<script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class='header_comment'> Number editors</div>
+		<div class='sample_comment'> Default text editor:</div>
+		<div id="testA"></div>
+		<hr>
+		<div class='sample_comment'> Text editor with dot based format:</div>
+		<div id="testB"></div>
+		<hr>
+		<div class='sample_comment'> Text editor with comma based format:</div>
+		<div id="testC"></div>
+		<hr>
+
+		<script type="text/javascript" charset="utf-8">
+
+		webix.ready(function(){
+			webix.ui({
+				container:"testA",
+				view:"datatable",
+				columns:[
+					{ id:"id",							header:"", css:"rank",  		width:50},
+					{ id:"title",	editor:"text",		header:"Film title",width:200},
+					{ id:"votes",	editor:"text",		header:"Votes" , 	width:120},
+					{ id:"rating",	editor:"text",		header:"Rating", 	width:120}
+				],
+				
+				editable:true,
+				autoheight:true,
+				autowidth:true,
+
+				data: [
+					{ id:1, title:"The Shawshank Redemption", votes:"623630", rating:"4.943" },
+					{ id:2, title:"The Godfather", votes:"458966", rating:"4.921" }
+				]
+			});
+		
+		});
+
+
+
+
+		webix.ready(function(){
+			webix.ui({
+				container:"testB",
+				view:"datatable",
+				columns:[
+					{ id:"id",							header:"", css:"rank",  		width:50},
+					{ id:"title",	editor:"text",		header:"Film title",width:200},
+					{ id:"votes", editor:"text", numberFormat:"1'111.00", header:"Votes" , width:120 },
+					{ id:"rating", editor:"text", numberFormat:"1'111.00", header:"Rating" , width:120 }
+				],
+				
+				editable:true,
+				autoheight:true,
+				autowidth:true,
+
+				data: [
+					{ id:1, title:"The Shawshank Redemption", votes:"623630", rating:"4.943" },
+					{ id:2, title:"The Godfather", votes:"458966", rating:"4.921" }
+				]
+			});
+		});
+
+		webix.ready(function(){
+			webix.ui({
+				container:"testC",
+				view:"datatable",
+				columns:[
+					{ id:"id",							header:"", css:"rank",  		width:50},
+					{ id:"title",	editor:"text",		header:"Film title",width:200},
+					{ id:"votes", editor:"text", numberFormat:"1.111,00",
+						header:"Votes" , width:120 },
+					{ id:"rating", editor:"text", numberFormat:"1.111,00",
+						header:"Rating" , width:120 }
+				],
+				
+				editable:true,
+				autoheight:true,
+				autowidth:true,
+
+				data: [
+					{ id:1, title:"The Shawshank Redemption", votes:"623630", rating:"4.943" },
+					{ id:2, title:"The Godfather", votes:"458966", rating:"4.921" }
+				]
+			});
+		});
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <title>Custom context menu</title>
+    <meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+    <script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+    <script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+    <link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+    <script src="../common/data.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    
+    webix.ready(function(){
+        webix.ui({
+            view:"spreadsheet",
+            data: math_data_simple,
+
+            on:{
+                onContextMenuConfig:function(ev){
+                    if (ev.area == "column") return false;
+                    if (ev.area == "data")
+                        ev.data = [
+                            { id:"com-1", group:"myContext", value:"Command 1" },
+                            { id:"com-2", group:"myContext", value:"Command 2" },
+                            { id:"com-3", group:"myContext", value:"Command 3" }
+                        ];
+                },
+                onCommand:function(obj){
+                    if (obj.group == "myContext")
+                        webix.message("Context menu: "+obj.id);
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

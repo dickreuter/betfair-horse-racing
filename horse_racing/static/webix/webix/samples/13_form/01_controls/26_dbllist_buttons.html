@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" media="screen" charset="utf-8">
+        <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+        <title>Double List : Custom buttons</title>
+    </head>
+    <body>
+        <style type="text/css">
+            .select_one{
+                float:right;
+                line-height: 28px;
+            }
+        </style>
+        <script type="text/javascript" charset="utf-8">
+
+
+var list3 = { 
+    view:"dbllist", 
+    list:{ height: 200, scroll:false },
+    labelBottomLeft:"User groups",
+    labelBottomRight:"Selected",
+
+    buttons:"<button class='dbllist_button' action='select_one' style='width:100%; margin-right:0;'>Select</button><button class='dbllist_button' action='deselect_one' style='width:100%;margin-left:0;'>Remove</button>",
+
+    data:[
+        {id:"1", value:"Guest"},
+        {id:"2", value:"Member"},
+        {id:"3", value:"Moderator"},
+        {id:"4", value:"Admin"},
+        {id:"5", value:"Super Admin"}
+    ]
+};
+
+var list4 = { 
+    view:"dbllist",
+    list:{ 
+        autoheight: true,
+        select: false,
+        template:function(obj, common){
+            var dir = (common.id  === "left" ? "right" : "left");
+            return obj.value + "<span class='select_one webix_icon fa-arrow-"+dir+"'></span>"
+        },
+        onClick:{
+            "select_one":function(e, id){
+                var mode = this.config.$id === "left";
+                this.getTopParentView().select(id, mode);
+                return false;
+            }
+        }
+    },
+    labelLeft:"Available screens",
+    labelRight:"Selected",
+
+    buttons:false,
+
+    data:[
+        {id:"1", value:"Contacts"},
+        {id:"2", value:"Products"},
+        {id:"3", value:"Reports"},
+        {id:"4", value:"Customers"},
+        {id:"5", value:"Deals"}
+    ]
+};
+
+            webix.ui({
+                view:"form", id:"f1", width:700,
+                rows:[
+
+                { template:"Custom Buttons", type:"section"},
+                { view:"forminput", name:"access", body:list3, labelWidth:0 },
+
+                { template:"Without Buttons", type:"section"},
+                { view:"forminput", name:"screens", body:list4, labelWidth:0 }
+              ],
+            });
+
+            $$("f1").setValues({
+                access:"1,2",
+                screens:"3"
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+	<title>Swimlanes: multiple columns</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/kanban.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/kanban.css">
+
+	<link rel="stylesheet" type="text/css" href="../common/style.css">
+	<script src="../common/data.js"></script>
+
+	<script src="../common/types.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	webix.ready(function(){
+		var staff= [
+			{id:1, name:"Paul"},
+			{id:2, name:"Vera"},
+			{id:3, name:"Tomas"}
+		];
+
+		var getRows = function(statuses){
+			var rows = [];
+			for(var i=0;i < staff.length; i++){
+				rows.push({ template: staff[i].name, height: 27, css: "user_header"});
+				var cols = [];
+				for(var j=0; j< statuses.length; j++){
+					cols.push({ view:"kanbanlist", type: "users", status:{ status: statuses[j], user: staff[i].id }})
+				}
+				rows.push({cols: cols});
+			}
+			return rows;
+		};
+
+		webix.ui({
+			view:"kanban",
+			id: "board",
+			padding: 5,
+			margin: 5,
+			cols:[
+				{ header:"Backlog",
+					body:{ view:"kanbanlist", status:"new", type: "users" }},
+				{
+					type: "line",
+					gravity:2,
+					rows:[
+						{
+							cols:[
+								{template: "In Progress", type: "header"},
+								{template: "Testing", type: "header"}
+							]
+						},
+						{
+							rows: getRows(["work","test"])
+						}
+					]
+
+				}
+				,
+				{ header:"Done",
+					body:{ view:"kanbanlist", status:"done", type: "users" }}
+			],
+			data: user_task_set
+		});
+
+
+
+	});
+</script>
+</body>
+</html>

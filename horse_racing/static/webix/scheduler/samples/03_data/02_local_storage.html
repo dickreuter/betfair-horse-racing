@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+		<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+		<script src="../../codebase/scheduler.js" type="text/javascript"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../../webix/codebase/skins/touch.css">
+		<link rel="stylesheet" type="text/css" href="../../codebase/scheduler.css">
+
+		<title>Initialization</title>
+		<script type="text/javascript" charset="utf-8">
+
+			webix.ready(function(){
+				webix.ui.fullScreen();
+				webix.ui({
+    			    view: "scheduler",
+					id: "scheduler",
+					save: "local->data/events.php"
+				});
+				
+				$$("scheduler").load("local->data/events.php");
+			});
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>

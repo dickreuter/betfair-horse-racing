@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+	<title>Import from Excel</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+	<script src="../common/data.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		webix.ready(function(){
+			var buttons = {
+				width:250, type:"space",
+				rows:[
+					{ view:"uploader", value:"Load from Excel file", on:{
+						onBeforeFileAdd: function(upload){
+							$$("ss1").reset();
+							$$("ss1").parse(upload.file, "excel");
+							return false;
+						}
+					}},
+					{ view:"button", value:"Save to Excel file", click:function(){
+						webix.toExcel("ss1");
+					}},
+					{}
+				]
+			};
+			webix.ui({
+				cols:[ buttons, {
+					id:"ss1",
+					view:"spreadsheet",
+					url: "binary->../common/test.xlsx",
+					datatype:"excel",
+					toolbar:"full"
+				}]
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<head>
+	<title>Templates</title>
+	<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<script src="common/data.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="../common/samples.css">
+	<style>
+		.photo{
+			width: 40px;
+			height: 42px;
+			float:left;
+		}
+	</style>
+</head>
+<body>
+
+<div id="testA" style='width:900px; height:450px; '></div>
+
+
+<script type="text/javascript" charset="utf-8">
+
+
+	webix.ready(function(){
+		var orgChart = new webix.ui({
+			container:"testA",
+			view:"organogram",
+			borderless: true,
+			select: true,
+			template: function(obj, type, marks){
+				var pId = this.getParentId(obj.id);
+				var html = "";
+				// if top-level item
+				if(!pId){
+					html = "<img src='common/photo.png' class='photo' >";
+				}
+				// if list child item
+				else if(this.getItem(pId).$type == "list"){
+					html = " &gt; ";
+				}
+				return html+obj.value;
+			},
+			data: [
+				{id:"1", value:"Center Director", data:[
+					{ id:"1.1", value:"Research &amp; Development", data:[
+						{ id:"1.1.1", value:"Research", $type: "list", data:[
+							{ id:"1.1.1.1", value:"Base research" },
+							{ id:"1.1.1.2", value:"Collaborative research with industries and academia" }
+						]},
+						{ id:"1.1.2", value:"Development", $type: "list", data:[
+							{ id:"1.1.2.1", value:"Faculty development workshops" },
+							{ id:"1.1.2.2", value:"Student development" }
+						]}
+					]},
+					{ id:"1.2", value:"Teaching &amp Training", data:[
+						{ id:"1.2.1", value:"Teaching", $type: "list", data:[
+							{ id:"1.2.1.1", value:"Course development" },
+							{ id:"1.2.1.2", value:"Teaching" }
+						]},
+						{ id:"1.2.2", value:"Training", $type: "list", data:[
+							{ id:"1.2.2.1", value:"Conduct workshops" },
+							{ id:"1.2.2.2", value:"Conduct seminars" }
+						]}
+					]}
+				]}
+			]
+
+		});
+
+
+
+
+	});
+</script>
+</body>
+</html>

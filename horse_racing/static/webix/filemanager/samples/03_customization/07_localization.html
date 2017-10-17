@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+	<title>Localization</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+	<meta charset="utf-8">
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/filemanager.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/filemanager.css">
+
+
+	<script src="../../../webix/codebase/i18n/ru.js" type="text/javascript"></script>
+</head>
+<body>
+<script type="text/javascript">
+	// locale values
+	webix.i18n.locales["ru-RU"].filemanager= {
+		actions: "Действия",
+		back: "Назад",
+		forward: "Вперед",
+		levelUp: "Вверх",
+		name: "Имя",
+		size: "Размер",
+		type: "Тип",
+		date: "Дата",
+		copy: "Копировать",
+		cut: "Вырезать",
+		paste: "Вставить",
+		upload: "Загрузить",
+		remove: "Удалить",
+		create: "Создать папку",
+		rename: "Переименовать",
+		location: "Расположение",
+		select: "Выбрать файлы",
+		sizeLabels: ["Б","КБ","МБ","ГБ"],
+		iconsView: "Значки",
+		tableView: "Таблица",
+		hideTree: "Спрятать дерево",
+		showTree: "Показать дерево",
+		collapseTree: "Закрыть все папки",
+		expandTree: "Открыть все папки",
+		saving: "Сохранение...",
+		errorResponse: "Ошибка: изменения не были сохранены!",
+		replaceConfirmation: "Папка уже содержит файлы с такми именами. Хотите ли вы заменить существующие файлы ?",
+		createConfirmation: "Папка с таким именем уже существует. Хотите ли вы заменить её ?",
+		renameConfirmation: "Файл с таким именем уже существует. Хотите ли вы заменить его ?",
+		yes: "Да",
+		no: "Нет",
+		types:{
+			folder: "Папка",
+			doc: "Документ MS Word",
+			excel: "Документ MS Excel",
+			pdf: "PDF Документ",
+			pp: "Документ MS PowerPoint",
+			text: "Текстовый Документ",
+			video: "Видео",
+			image: "Изображение",
+			code: "Код",
+			audio: "Аудио",
+			archive: "Архив",
+			file: "Файл"
+		}
+	};
+	webix.i18n.setLocale("ru-RU");
+
+	webix.ready(function(){
+		webix.ui({
+			view:"filemanager",
+			url:"../common/data.php"
+		});
+	});
+</script>
+</body>
+</html>

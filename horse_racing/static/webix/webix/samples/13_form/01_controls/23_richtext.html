@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+        <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+        <title>Rich Text</title>
+    </head>
+<body>
+    <script type="text/javascript" charset="utf-8">
+var left = { view:"form", elements:[
+    {   view: "text", label:"text",
+        value: "When you set dimensions of component items, you use the type property that contains an object with an item's width and height. There you can as well put other parameters including template and css."
+    },
+    {   view: "textarea", label:"textarea",
+        value: "When you set dimensions of component items, you use the type property that contains an object with an item's width and height. There you can as well put other parameters including template and css."
+    },
+    {   view: "richtext", label:"richtext",
+        value: "When you set dimensions of component items, you use the type property that contains an object with an item's width and height. There you can as well put other parameters including template and css."
+    }
+]};
+
+var right = { view:"form", elements:[
+    {   view: "text", label:"text", labelPosition:"top",
+        value: "When you set dimensions of component items, you use the type property that contains an object with an item's width and height. There you can as well put other parameters including template and css."
+    },
+    {   view: "textarea", label:"textarea", labelPosition:"top",
+        value: "When you set dimensions of component items, you use the type property that contains an object with an item's width and height. There you can as well put other parameters including template and css."
+    },
+    {   view: "richtext", label:"richtext", labelPosition:"top",
+        value: "When you set dimensions of component items, you use the type property that contains an object with an item's width and height. There you can as well put other parameters including template and css."
+    }
+]};
+        webix.ui({
+            cols:[ left, right]
+        });
+    </script>
+    </body>
+</html>

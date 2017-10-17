@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+    <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <title>Data Layout - Saving complex data</title>
+  </head>
+  <body>
+    <div id='layout_div' style='width:800px; height:600px; margin:20px;'></div>
+    <script type="text/javascript" charset="utf-8">
+
+    var subconfig = {
+      isolate:true,
+      rows:[
+        { view:"toolbar", elements:[
+          { view:"button", value:"Add record", click:function(){
+            this.getTopParentView().$$("l1").add({ income: 0, count: 10 });
+          }, width: 120 },
+          { view:"label", name:"month" }
+        ]},
+        { rows:[
+          { view:"text", label:"Name", name:"month"},
+          { view:"datatable", id:"l1", name:"data", autoheight:true, editable:true,
+            columns:[{ id:"count", editor:"text"}, {id:"income", editor:"text"}]
+          }
+        ]}
+      ]
+    };
+
+    var left = {
+      view:"datalayout",
+      id:"data",
+      type:"space",
+      rows:[
+        subconfig
+      ]
+    };
+
+    var save = {
+      view:"button", value:"Save", inputWidth: 120, 
+      align:"right", click:function(){
+        webix.editStop();
+        $$("log").setValue( JSON.stringify($$("data").getValue(), null, "  ") );
+      }
+    }
+
+    var log = {
+      view:"textarea", readonly:true, height:200, id:"log"
+    }
+
+    webix.ui({
+      container:"layout_div",
+      rows:[ left, save, log ]
+    });
+
+    $$("data").setValue([
+      { "id":"m2", "month":"February", "data":[
+        { "income": 2342, "count":14 },
+        { "income": 92342, "count":28 },
+        { "income": 224442, "count":50 }
+      ]},
+      { "id":"m3", "month":"March", "data":[
+        { "income": 1844, "count":12 },
+        { "income": 239242, "count":28 },
+        { "income": 440340, "count":20 }
+      ]}
+    ]);
+
+    </script>
+  </body>
+</html>

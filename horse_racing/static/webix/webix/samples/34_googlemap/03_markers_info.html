@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<title>GoogleMap::Markers with Info Windows</title>
+</head>
+<body>
+	<div style="margin-left:50px;">Click any marker to display Info Window</div>
+	<div id="sample_div" style='width:600px; height:300px; margin:50px;'></div>
+	
+	<script type="text/javascript">
+		
+		webix.ui({
+			container:"sample_div",
+			// provide your own Google API key
+			// https://developers.google.com/maps/documentation/javascript/get-api-key
+			key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+    		view:"google-map",
+    		id:"map",
+			zoom:6,
+			center:[ 48.724, 8.215 ],
+			data:[
+				{ id:1, lat:48.782, lng:9.177, title:"Stuttgart" },
+				{ id:2, lat:47.366, lng:8.55, title:"Zurich" },
+				{ id:3, lat: 48.137, lng: 11.575, title:"Munich" }
+			]
+		});
+
+		var infoWindows = {};
+
+		$$("map").attachEvent("onAfterLoad", function(){
+			this.data.each(function(obj){
+				infoWindows[obj.id] = new google.maps.InfoWindow({ content: obj.title });
+			});
+		});
+
+		
+		$$("map").attachEvent("onItemClick", function(id, marker){
+			var info = infoWindows[id];
+			info.open($$("map").map, marker);
+		});
+
+		
+
+	</script>
+</body>
+</html>

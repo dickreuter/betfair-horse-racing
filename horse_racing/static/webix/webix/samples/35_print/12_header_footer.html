@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../common/testdata.js"></script>
+	<title>Document header and Footer</title>
+</head>
+<body>
+	<div id="testA" style="width:350px; height:600px; margin:20px;"></div>
+
+	<script type="text/javascript" charset="utf-8">
+
+		webix.ui({
+			container:"testA",
+			margin:10,
+			rows:[
+				{ view:"button", value:"Print with custom header and footer", click:function(){
+					webix.print($$("mylist"), {
+						docHeader: "<span style='color:#7e58a9;'>My Film's List</span>",
+    					docFooter:"The end",
+    					margin:{
+							top:0, bottom:0,
+						}
+					});
+				}}, 
+				{ 
+					view:"list", 
+					id:"mylist",
+					template:"#rank#. #title# <div style='padding-left:18px'> Year:#year#, votes:#votes# </div>",
+					item:{
+						height:60
+					},
+					autoheight:true,
+					data:small_film_set
+				}
+			]
+		});
+
+	</script>
+</body>
+</html>

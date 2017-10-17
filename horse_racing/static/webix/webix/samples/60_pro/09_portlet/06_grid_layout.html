@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+   <head>
+	   <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	   <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	   <title>Grid layout</title>
+   </head>
+   <body>
+	<style>
+		.boxy .webix_template{
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			text-align: center;
+		}
+	</style>
+<script type="text/javascript" charset="utf-8">
+
+webix.ui({
+	view:"gridlayout",
+	gridColumns:4, gridRows:3,
+	cells:[
+		{ css:"boxy", template:"Single", x:0, y:0, dx:1, dy:1 },
+		{ css:"boxy", template:"Wide 1", x:1, y:0, dx:2, dy:1 },
+		{ css:"boxy", template:"Wide 2", x:0, y:1, dx:2, dy:1 },
+		{ css:"boxy", template:"Square", x:2, y:1, dx:2, dy:2 },
+	]
+});
+
+</script>
+   </body>
+</html>

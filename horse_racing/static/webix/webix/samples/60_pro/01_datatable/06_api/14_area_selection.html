@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Area Selection</title>
+	<link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../common/samples.css">
+	<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+	<style>
+		.my-css.webix_area_selection{
+			background: green;
+		}
+		.my-css.webix_area_selection_handle{
+			background: green;
+		}
+	</style>
+</head>
+<body>
+<div class='header_comment'>Area selection </div>
+<div class='sample_comment'>Click on any cell and drag to select an area. </div>
+
+<div id="testA"></div>
+
+
+<script type="text/javascript" charset="utf-8">
+	webix.ready(function(){
+		grid = webix.ui({
+			container:"testA",
+			rows:[
+				{
+					view:"datatable",
+					id: "table",
+					columns:[
+						{ id:"rank",	header:"", css:"rank",  		width:50},
+						{ id:"title",	header:"Film title",width:200},
+						{ id:"year",	header:"Released" , width:80},
+						{ id:"votes",	header:"Votes", 	width:120},
+						{ id:"rating",	header:"Rating", 	width:80},
+
+					],
+					areaselect:true, multiselect:true,
+					autoheight: true,
+					autowidth: true,
+					data:small_film_set
+				},
+				{
+					view: "form",
+					padding: 7,
+					cols:[
+						{
+							view: "button", label: "Set Custom Area", click: function(){
+								var start = {row:2,column:"title"};
+								var end = {row:3,column:"year"};
+								$$("table").addSelectArea(start, end, false, "area", "my-css");
+							}
+						},
+						{
+							view: "button", label: "Remove Custom Area", click: function(){
+								$$("table").removeSelectArea("area");
+							}
+						}
+					]
+				}
+
+			]
+		});
+
+	});
+</script>
+</body>
+</html>

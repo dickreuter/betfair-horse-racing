@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Freeze/unfreeze selected</title>
+    <link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../common/samples.css">
+    <script src="../../../15_datatable/common/bigtestdata.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        .fa-star{
+            color:#3498db;
+        }
+        .fa-star-o{
+            color:#bbb;
+        }
+    </style>
+</head>
+<body>
+
+<div id="testA"></div>
+
+<script type="text/javascript" charset="utf-8">
+
+    webix.ready(function(){
+        webix.ui({
+            container:"testA", height:350, width:500,
+            view:"datatable",
+            columns:[
+                { id:"stared",	header:"", sort:"int", width:40,
+                    template:function(obj){
+                        return "<span class='webix_icon star fa-"+(obj.star?"star":"star-o")+"'></span>";
+                    }
+                },
+                { id:"id",	header:"", sort:"int", width:40},
+                { id:"value", header:"Name", fillspace:true, template: "#last_name#, #name#" },
+                { id:"address", header:"Address", width: 230 }
+            ],
+            scrollX: false,
+            url: "data/data.json",
+            ready: function(){
+                var starred = 0;
+                this.data.each(function(item){
+                    if(item.star)
+                        starred++;
+                });
+                this.define("topSplit",starred);
+                this.refresh();
+            },
+            onClick:{
+                star: function(ev, id, node){
+                    var item = this.getItem(id);
+                    var star  = item.star?0:1;
+                    if( star && this.config.topSplit >6 )
+                        return webix.message("The limit of selected rows has been exceeded");
+                    item.star = star;
+                    this.freezeRow(id,  !!star);
+                }
+            }
+        });
+
+
+    });
+</script>
+</body>
+</html>

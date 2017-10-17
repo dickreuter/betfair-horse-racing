@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Auto height for header lines</title>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../common/samples.css">
+		<script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class='header_comment'>Auto height for header lines</div>
+		<div id="testA"></div>
+		<style type="text/css">
+		.multiline{
+			line-height: 30px !important;
+		}
+		</style>
+		<script type="text/javascript" charset="utf-8">
+		webix.ready(function(){
+
+			webix.ui({
+				container:"testA",
+				view:"datatable",
+				columns:[
+					{ 	id:"title", width:220,
+						header:{
+							text:"A multiline header for a film title column containing two or three lines, or more, but does it really matter?",
+							autoheight:true,
+							css:"multiline"
+						},
+						footer: { 
+							text:"A multiline footer for a film title column containing two or three lines, or more, but does it really matter?", 
+							colspan:3, 
+							css:"multiline",
+							autoheight:true 
+						}, 
+					},
+					{ id:"year",	header:"Released" , width:180,	sort:"int", adjust:"header"},
+					{ id:"votes",	header:"Votes", 	width:100,	sort:"int"}
+				],
+				footer:true,
+				autoheight:true,
+				autowidth:true,
+				data:small_film_set
+			});	
+		});		
+		</script>
+	</body>
+</html>

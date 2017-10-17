@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+	<title>Folder Selection</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/filemanager.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/filemanager.css">
+
+
+</head>
+<body>
+<script type="text/javascript">
+	var count = 1;
+	webix.ready(function(){
+
+		webix.ui({
+			view:"filemanager",
+			id:"files",
+			on:{
+				onFolderSelect: function(id){
+					webix.message("Active folder is '" +this.getItem(id).value+"'");
+				}
+			}
+		});
+		$$("files").load("../common/data.php");
+
+
+	});
+</script>
+</body>
+</html>

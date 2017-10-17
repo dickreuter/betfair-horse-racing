@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+    <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="../common/testdata.js"></script>
+    <title>Application state::Session</title>
+</head>
+<body>
+<div class='sample_comment' style="margin:20px;">Perform actions over the application (resize views, expand and collapse headers, switch the tabs) and refresh the page.</div>
+<div id='layout_div' style='margin:20px; width:700px; height:600px;'></div>
+
+<script type="text/javascript" charset="utf-8">
+
+    webix.ready(function(){
+
+
+    var tabs = {
+        id:"tabs",
+        rows:[
+            {
+                view:"tabbar", type: "bottom", id:'tabbar', value: 'listView', multiview:true, options: [
+                { value: 'List', id: 'listView'},
+                { value: 'Form', id: 'formView'},
+                { value: 'Empty', id: 'emptyView'}
+            ]
+            },
+            {
+                fitBiggest:true,
+                cells:[
+                    {
+                        id:"listView",
+                        view:"list",
+                        template:"#rank#. #title# <div style='padding-left:18px'> Year:#year#, votes:#votes# </div>",
+                        type:{ height:60},
+                        select:true,
+                        data:big_film_set
+                    },
+                    {
+                        id:"formView",
+                        view:"form",
+                        elements:[
+                            {view:"text", label:"Title"},
+                            {view:"text", label:"Year"},
+                            {view:"text", label:"Votes"},
+                            {view:"button", type:"form", value:"Submit"}
+
+                        ]
+                    },
+                    { id:"emptyView", template:"Empty view"}
+                ]
+            }
+       ]};
+
+        var row1 = {
+            gravity:3,
+            cols:[
+                { header:"col 1", body:"content 1", width:200},
+                { body:tabs},
+                { header:"col 3",body:"content 2", width:200}
+        ]};
+
+        var row2 = {
+            cols:[
+                { template:"content 3"},
+                { view:"resizer"},
+                { template:"content 4"}
+            ]
+        };
+
+        webix.ui({
+            container:"layout_div",
+            type:"space",
+            id:"main",
+            rows:[
+                row1,
+                {view:"resizer"},
+                row2
+            ]
+        });
+
+        webix.attachEvent("unload", function(){
+            webix.storage.local.put("stateApp", webix.UIManager.getState("main", true));
+            webix.storage.local.put("stateTabs", webix.UIManager.getState("tabs", true));
+        });
+
+        var stateApp = webix.storage.local.get("stateApp");
+        var stateTabs = webix.storage.local.get("stateTabs");
+
+        if(stateApp)
+            webix.UIManager.setState(stateApp);
+        if(stateTabs)
+            webix.UIManager.setState(stateTabs);
+    });
+
+</script>
+</body>
+</html>

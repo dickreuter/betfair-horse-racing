@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+   <head>
+	   <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	   <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	   <title>Grid Dashboard - saving state</title>
+   </head>
+   <body>
+<script type="text/javascript" charset="utf-8">
+
+var grid = {
+	view:"dashboard", id:"grid",
+	gridColumns:4, gridRows:4,
+	cellHeight: 200,
+	factory:function(obj){
+		obj.view = "panel";
+		obj.resize = true;
+		obj.body = { template: $$("list").getItem(obj.name).value };
+		return obj;
+	},
+	on:{
+		onChange:function(){
+			var state = this.serialize();
+			webix.storage.local.put("grid-dashboard-state", state);
+		}
+	}
+};
+
+var widgets = {
+	rows:[{
+		type:"header", 
+		template:"Widgets, drag from here",
+	},{
+		view:"list", id:"list",
+		width:200,
+		drag:true,
+		template:"#value# - (#dx#x#dy#)",
+		data:[
+			{ id:"a", value:"Widget A", dx:1, dy:1 },
+			{ id:"b", value:"Widget B", dx:1, dy:2 },
+			{ id:"c", value:"Widget C", dx:2, dy:1 },
+			{ id:"d", value:"Widget D", dx:2, dy:2 },
+			{ id:"e", value:"Widget E", dx:1, dy:1 },
+			{ id:"f", value:"Widget F", dx:1, dy:1 },
+			{ id:"g", value:"Widget G", dx:3, dy:1 }
+		]
+	},{
+		view:"button", value:"Reset", click:function(){
+			$$("grid").clearAll();
+		}
+	}]
+};
+
+webix.ui({
+	type:"space", cols:[
+		{ view:"scrollview", body:grid },
+		widgets
+	]
+});
+
+var state = webix.storage.local.get("grid-dashboard-state");
+if (state)
+	$$("grid").restore(state);
+
+
+
+
+</script>
+   </body>
+</html>

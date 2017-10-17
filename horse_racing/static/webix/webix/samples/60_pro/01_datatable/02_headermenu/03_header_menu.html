@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Header menu in the DataTable</title>
+		<link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../common/samples.css">
+		<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+        .highlight{
+            background-color:#edf4f9;
+            font-weight:bold;
+        }
+        </style>
+	</head>
+
+	<body>
+		<div class='header_comment'>Header menu in the DataTable</div>
+		<div class='sample_comment'>Right click on any header</div>
+		<div id="testA"></div>
+
+		<script type="text/javascript" charset="utf-8">
+		webix.ready(function(){
+			webix.ui({
+				container:"testA",
+				view:"datatable",
+
+				columns:[
+					{ id:"title", 	header:"Film title", width:250 },
+					{ id:"year",	header:"Released" , width:80 },
+					{ id:"votes",	header:"Votes", 	width:100 },
+                    { id:"rating",	header:"Rating", 	width:100 },
+                    { id:"dummy",   header:"Dummy column", width:100, hidden:true }
+				],
+				autoheight:true,
+				autowidth:true,
+				headermenu:true,
+                data:small_film_set
+			});
+		});
+		</script>
+	</body>
+</html>

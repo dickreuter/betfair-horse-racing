@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+	<title>Copy, Cut, Paste Events</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/filemanager.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/filemanager.css">
+
+
+</head>
+<body>
+<script type="text/javascript">
+	webix.ready(function(){
+
+		webix.ui({
+			type: "space",
+			rows:[
+				{
+					view: "label", label: "Try to copy/cut and paste a file to see a corresponding event fired", height: 40
+				},
+				{
+					view:"filemanager",
+					id:"files"
+				}
+			]
+
+		});
+
+		$$("files").load("../common/data.php");
+
+		$$("files").attachEvent("onBeforeMarkCopy", function(ids){
+			if (typeof ids === "string")
+				ids = [ids];
+			webix.message("Copy: "+ids.join(", "));
+			return true;
+		});
+		$$("files").attachEvent("onBeforeMarkCut", function(ids){
+			if (typeof ids === "string")
+				ids = [ids];
+			webix.message("Cut: "+ids.join(", "));
+			return true;
+		});
+		$$("files").attachEvent("onBeforePasteFile", function(ids){
+			if (typeof ids === "string")
+				ids = [ids];
+			webix.message("Paste: "+ids[0]);
+			return true;
+		});
+
+
+	});
+</script>
+</body>
+</html>

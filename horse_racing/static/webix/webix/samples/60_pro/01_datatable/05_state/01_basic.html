@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DataTable state object</title>
+		<link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+		
+		<link rel="stylesheet" type="text/css" href="../../common/samples.css">
+		<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class='header_comment'>DataTable state object</div>
+		<div class='sample_comment'>Click "save state", resize and sort grid, then click "restore state".</div>
+		<div id="testA" style='width:450px; height:300px;'></div>
+		<script type="text/javascript" charset="utf-8">
+		webix.ready(function(){
+			grid = webix.ui({
+				container:"testA",
+				view:"datatable",
+				columns:[
+					{ id:"rank",	header:"", css:"rank",  		sort:"int"},
+					{ id:"title",	header:"Film title",sort:"string" },
+					{ id:"year",	header:"Released",	sort:"int"   },
+					{ id:"votes",	header:"Votes"  ,	sort:"int"	}
+				],
+				resizeColumn:true, resizeRow:true,
+				data:small_film_set
+			});
+		});
+		
+		function save_state() {
+			webix.storage.local.put("state", grid.getState());
+		}
+		function restore_state() {
+			var state = webix.storage.local.get("state");
+			if (state)
+				grid.setState(state);
+		}
+		
+		</script>
+		<input type="button" name="save_state" value="Save state" onclick="save_state()" />
+		<input type="button" name="restore_state" value="Restore state" onclick="restore_state()" />
+	</body>
+</html>

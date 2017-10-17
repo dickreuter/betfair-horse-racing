@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+	<title>MultiSelect combobox - tag mode</title>
+</head>
+<body>
+<script type="text/javascript" charset="utf-8">
+
+	var form1 = [
+		{ rows:[
+			{
+				view:"multicombo", label:"Name", labelPosition: "top",
+				value:"1,7,9,12",
+				tagMode: false,
+				tagTemplate: function(values){
+					return (values.length? values.length+" item(s) selected":"");
+				},
+				suggest: {
+					selectAll: true,
+					body:{
+						data:big_film_set,
+						template: webix.template("#title#")
+					}
+				},
+				on:{
+					onChange:function(){
+						webix.message("Data was changed");
+					}
+				}
+			},
+			{ view:"checkbox", label:"In Stock", value: 1}
+		]},
+		{ cols:[
+			{  },
+			{ view:"button", value:"Find" , type:"form" },
+			{  }
+		]}
+	];
+
+	var form2 = [
+		{ rows:[
+			{ view:"multicombo", label:"To", tagMode: false, value:"2,3", suggest: "data/names.js" },
+			{ view: "text", label: "Subject" },
+			{ view:"textarea", label:"Message", height:150 }
+		]},
+		{cols:[
+			{  },
+			{ view:"button", value:"Send Message" , type:"form" },
+			{  }
+		]}
+	];
+
+
+	webix.ui({
+		 width:400,
+		type: "space",
+		rows:[
+			{ view:"form", rows:form1 },
+			{ view:"form", rows:form2 }
+		]
+	});
+
+</script>
+</body>
+</html>

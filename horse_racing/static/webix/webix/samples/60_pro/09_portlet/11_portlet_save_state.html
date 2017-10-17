@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+   <head>
+	   <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	   <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	   <script type="text/javascript" src="../common/testdata.js"></script>
+	   <title>Portlet: Save state</title>
+   </head>
+   <body>
+
+   	<div id='divA' style='width:800px; height:600px;'></div>
+<script type="text/javascript" charset="utf-8">
+
+//creates portlet by its name
+function factory(conf){
+	return { view:"portlet", icon:false, body:webix.copy(contents[conf]) };
+}
+//serializes portlet to a string
+function serializer(obj){
+	return obj.config.key;
+}
+
+var contents = {
+	"table1" : { 
+		key:"table1", view:"datatable", autoConfig:true, data:small_film_set
+	},
+	"list1" : { 
+		key:"list1", view:"list", template:"#votes#", data:small_film_set
+	},
+	"chart1" : { 
+		key:"chart1", view:"chart", type:"pie", value:"#votes#", data:small_film_set
+	},
+	"template1" : {
+		key:"template1", template:"Area A"
+	},
+	"template2" : {
+		key:"template2", template:"Area B"
+	}
+}
+
+
+
+var portlets = { type:"wide", id:"portlets", rows:[
+		factory("template1"),
+		factory("table1"),
+		{ type:"wide", cols:[
+			factory("chart1"),
+			factory("list1"),
+			factory("template2"),
+		]}
+]};
+
+webix.attachEvent("onAfterPortletMove", function(){
+	webix.storage.local.put("portlets_state", $$("portlets").serialize(serializer))
+});
+
+webix.ui({
+	container:"divA",
+	type:"space",
+	rows:[
+		{ template:"Reordering",  type:"header" },
+		portlets
+	]
+});
+
+//restore old state when possible
+var state = webix.storage.local.get("portlets_state");
+if (state){
+	$$("portlets").restore(state, factory);
+}
+
+</script>
+   </body>
+</html>

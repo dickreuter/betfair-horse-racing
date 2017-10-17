@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+		<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+		<script src="../../codebase/scheduler.js" type="text/javascript"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../../webix/codebase/skins/touch.css">
+		<link rel="stylesheet" type="text/css" href="../../codebase/scheduler.css">
+
+
+		<style>
+			.webix_schedulerbar .webix_el_segmented .segment_0,.webix_schedulerbar .webix_el_segmented .segment_N{
+				padding:0 6px 0 6px;
+			}
+			.webix_schedulerbar .webix_el_segmented .segment_1{
+				 padding: 0 4px;
+			}
+			.webix_el_button input{
+			   padding: 0 4px;
+			}
+		</style>
+		<title>Locale</title>
+		<script type="text/javascript" charset="utf-8">
+			scheduler.config.init_date = new Date(2014,5,12);
+		    /* Russian locale labels*/
+			webix.i18n.calendar.monthFull = ["Январь", "Февраль", "Март", "Апрель", "Maй", "Июнь", "Июль", "Август", "Сентябрь", "Oктябрь", "Ноябрь", "Декабрь"];
+			webix.i18n.calendar.monthShort = ["Янв.", "Февр.", "Март", "Апр.", "Maй", "Июн.", "Июл.", "Авг.", "Сент.", "Oкт.", "Нояб.", "Дек."];
+			webix.i18n.calendar.dayShort = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+			webix.i18n.calendar.dayFull = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+			webix.i18n.calendar.hours = "Часы";
+			webix.i18n.calendar.minutes = "Минуты";
+			webix.i18n.calendar.done = "Готово";
+
+			var labels = {
+				icon_back:"Назад",
+				icon_today:"Сегодня",
+				week_tab:"Неделя",
+				day_tab:"День",
+				month_tab:"Meсяц",
+				icon_cancel : "Отмена",
+				icon_close : "Закрытие формы",
+				icon_delete : "Удалить событие",
+				icon_edit : "Изменить",
+				icon_save : "Сохранить",
+				icon_yes : "Да",
+				icon_no : "Нет",
+				icon_done : "Готово",
+				confirm_deleting: "Событие будет удалено. Желаете продолжить?",
+				confirm_closing : "Измения не будут сохранены. Желаете продолжить?",
+				/*form*/
+				label_event:"Событие",
+				label_start:"Начало",
+				label_end:"Конец",
+				label_details:"Заметки",
+				label_from:"начало: ",
+				label_to:"конец: ",
+				label_allday:"День",
+				label_time:"Время",
+				label_no_events: "Нет событий"
+				
+			};
+			/*add values to the existed locale (defined in locale_ru.js)*/
+			webix.extend(scheduler.locale.labels,labels,true);
+			/* new format for date in week titles*/
+			scheduler.config.week_date = "%l, %d %M %Y";
+			scheduler.config.all_day_date = "%l, %d %M %Y";
+			webix.Date.startOnMonday = true;
+
+			/* new button sizes */
+			scheduler.xy.icon_today = 70;
+			scheduler.xy.week_tab = 70;
+			scheduler.xy.day_tab = 55;
+			scheduler.xy.month_tab = 65;
+			scheduler.xy.icon_save = 100;
+
+			webix.ready(function(){
+				webix.ui.fullScreen();
+				webix.ui({
+					view: "scheduler",
+					id: "scheduler"
+				});
+
+				webix.i18n.fullDateFormat="%Y-%m-%d %H:%i";
+				webix.i18n.setLocale();
+				
+				$$("scheduler").load("data/mobile.xml","scheduler");
+			});
+		</script>
+</head>
+	<body>
+	</body>
+</html>

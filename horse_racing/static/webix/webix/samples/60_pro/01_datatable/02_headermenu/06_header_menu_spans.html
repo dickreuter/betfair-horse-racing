@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Header menu in the DataTable with colspans</title>
+		<link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../common/samples.css">
+		<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+        .highlight{
+            background-color:#edf4f9;
+            font-weight:bold;
+        }
+        </style>
+	</head>
+
+	<body>
+		<div class='header_comment'>Header menu in the DataTable</div>
+		<div class='sample_comment'>Right click on any header</div>
+		<div id="testA"></div>
+
+		<script type="text/javascript" charset="utf-8">
+		webix.ready(function(){
+			webix.ui({
+				container:"testA",
+				view:"datatable",
+
+				columns:[
+					{ id:"num1",  header:[{text:"St.", rowspan:3}], width:50 },
+					{ id:"title", 	header:[{ text:"Info", colspan:6 }, { text:"Film", colspan:4 }, "Film title" ], width:250 },
+					{ id:"year",	header:[null,null, "Released"] , width:80 },
+					{ id:"votes",	header:[null,null, "Votes"], 	width:100 },
+                    { id:"rating",	header:[null,null, "Rating"], 	width:100 },
+                    { id:"author1",  header:[null,{ text:"Operator", colspan:2 }, "Main"], width:120 },
+                    { id:"author2",  header:[null,null, "Assistant"], width:120 },
+                    { id:"num2",  header:[{text:"En.", rowspan:3}], width:50 }
+				],
+				autoheight:true,
+				autowidth:true,
+				headermenu:{
+					view:"contextmenu",
+					data:[
+						{ id:"num1", value:"St."},
+						{ id:"title", value:"Info"},
+						{ id:"year", value:"Released"},
+						{ id:"votes", value:"Votes"},
+						{ id:"rating", value:"Rating"},
+						{ id:"author1", value:"Operator"},
+						{ id:"author2", value:"Assistant"},
+						{ id:"num2", value:"En."}
+					]
+				},
+                data:small_film_set
+			});
+		});
+		</script>
+	</body>
+</html>

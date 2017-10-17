@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+		<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+		<script src="../../codebase/scheduler.js" type="text/javascript"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../../webix/codebase/skins/touch.css">
+		<link rel="stylesheet" type="text/css" href="../../codebase/scheduler.css">
+
+		<title>Custom form</title>
+		<script type="text/javascript" charset="utf-8">
+
+		scheduler.config.init_date = new Date(2014,4,30);
+		scheduler.templates.selected_event = function(obj){
+			var html = "", fts="", fte="";
+			var start = obj.start_date;
+			var end = obj.end_date;
+
+			if(!start) return html;
+			html += "<div  class='selected_event "+scheduler.templates.event_class(obj)+"'  >";
+			html += "<div class='event_title'>"+obj.text+"</div>";
+
+			if(webix.Date.datePart(start,true).valueOf()==webix.Date.datePart(end,true).valueOf()){
+				var fd = webix.i18n.dateFormatStr(start);
+				fts = webix.i18n.timeFormatStr(start);
+				fte = webix.i18n.timeFormatStr(end);
+				html += "<div class='event_text'>"+fd+"</div>";
+				html += "<div class='event_text'>from "+fts+" to "+fte+"</div>";
+			}
+			else{
+				var fds = webix.i18n.longDateFormatStr(start);
+				var fde = webix.i18n.longDateFormatStr(end);
+				/*if not "all-day" event*/
+				if(!(webix.Date.datePart(start,true).valueOf()==start.valueOf()&&webix.Date.datePart(end,true).valueOf()==end.valueOf())){
+					fts = webix.i18n.timeFormatStr(start)+" ";
+					fte = webix.i18n.timeFormatStr(end)+" ";
+				}
+				html += "<div class='event_text'>from "+fts+fds+"</div>";
+				html += "<div class='event_text'>to "+fte+fde+"</div>";
+			}
+
+			if(obj.location){
+				html += "<div class='event_title'>Location</div>";
+				html += "<div class='event_text'>"+obj.location+"</div>";
+			}
+			html += "</div>";
+			return html;
+		};
+		scheduler.config.form = [
+			{view:"text",		label:scheduler.locale.labels.label_event, labelWidth: 90, id:"text", name:'text'},
+			{view:"datetext",	label:scheduler.locale.labels.label_start, labelWidth: 90,	id:'start_date',name:'start_date', dateFormat:scheduler.config.form_date},
+			{view:"datetext",	label:scheduler.locale.labels.label_end, labelWidth: 90,	id:'end_date',name:'end_date', dateFormat:scheduler.config.form_date},
+			{view:"checkbox",	id:'allDay', name:'allDay', label:scheduler.locale.labels.label_allday, labelWidth: 100,  value:0},
+			//custom section in form
+			{view:"text",		label:"Location",	id:'location', name:"location",labelWidth: 90 }
+		];
+
+		webix.ready(function(){
+			webix.ui.fullScreen();
+			webix.ui({
+				view: "scheduler",
+				id: "scheduler"
+			});
+			$$("scheduler").load("data/mobile.xml","scheduler");
+		});
+		</script>
+</head>
+	<body>
+	</body>
+</html>

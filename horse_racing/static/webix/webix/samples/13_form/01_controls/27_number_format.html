@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			#areaA{
+				margin: 30px;
+			}
+		</style>
+		<title>Text Input with Number format</title>
+	</head>
+	<body>
+
+		<div id="areaA"></div>
+	
+
+		<script type="text/javascript" charset="utf-8">
+		var form1 = [
+			{ view:"text", value:'12345678', name:"a", label:"Text" },
+			{ view:"text", value:'12345678', name:"b", label:"Comma", format:"1.111,00" },
+			{ view:"text", value:'12345678', name:"c", label:"Dot", format:"1'111.000" },
+			{ view:"text", value:'12345678', name:"d", label:"Numbers", format:"1-11" },
+			{ view:"button", value:"Get Values", click:function(){
+				$$("log").setValues({
+					form: JSON.stringify(this.getFormView().getValues(),null,"  ")
+				})
+			}},
+			{ template:"<pre>#form#</pre> ", id:"log", height:200, data:{ form:"" }}
+		];
+
+
+		webix.ui({
+			container:"areaA",
+			width: 320,
+			view:"form", rows:form1
+		});
+		</script>
+	</body>
+</html>

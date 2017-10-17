@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+
+	<title>Built-in types</title>
+	<link rel="stylesheet" type="text/css" href="../../../codebase/webix.css">
+	<script type="text/javascript" src="../../../codebase/webix.js"></script>
+</head>
+<body>
+<script>
+	webix.ready(function(){
+
+		var codes = {
+			"ean8": "1234567",
+			"ean13": "123456789012",
+			"upcA": "12345678901"
+		};
+
+		webix.ui({
+			padding: 20,
+			type: "clean",
+			cols:[
+				{
+					minWidth: 150,
+					type: "clean",
+					rows:[
+						{
+							view: "richselect", id: "type", labelPosition: "top", label: "Type",
+							options:["ean8","ean13","upcA"],
+							on:{
+								onChange: function(type){
+									var code = codes[type];
+									$$("value").setValue(code);
+									showBarcode(code);
+								}
+							}
+						},
+						{
+							view: "text", id:"value", labelPosition: "top", label: "Value",
+							on:{
+								onChange: showBarcode
+							}
+						}
+					]
+				},
+				{},
+				{ view: "barcode", id:"barcode"},
+				{}
+			]
+		});
+
+
+		function showBarcode(code){
+			$$("barcode").define("type",$$("type").getValue());
+			$$("barcode").setValue(code);
+		}
+
+		$$("type").setValue("ean8");
+	});
+
+
+</script>
+</body>
+</html>

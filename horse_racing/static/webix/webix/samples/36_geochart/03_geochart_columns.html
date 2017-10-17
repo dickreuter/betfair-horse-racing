@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./data/data.js" type="text/javascript" charset="utf-8"></script>
+	<title>GeoChart::Custom columns</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+		webix.ui({
+			cols:[
+				{ rows:[
+					{ type:"header", template:"JSON with custom columns (short)"},
+					{
+						view:"geochart",
+						// provide your own Google API key 
+						// https://developers.google.com/maps/documentation/javascript/get-api-key
+						key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+						columns:["country", "area"],
+						data:[
+							{id:1, a:124, country:'Germany', area:200}, 
+							{id:2, a:121, country:'United States', area:400}, 
+							{id:3, a:212, country:'Brazil', area:700}, 
+							{id:4, a:122, country:'Canada', area:500}, 
+							{id:5, a:152, country:'France', area:200},
+							{id:6, a:172, country:'Russia', area:880}
+						]
+					},
+					{ type:"header", template:"JSON with custom columns (full)"},
+					{
+						view:"geochart",
+						// provide your own Google API key 
+						// https://developers.google.com/maps/documentation/javascript/get-api-key
+						key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+						columns:[
+							{ type:"string", label:"country"}, 
+							{ type:"number", label:"area"}
+						],
+						data:[
+							{id:1, a:124, country:'Germany', area:200}, 
+							{id:2, a:121, country:'United States', area:400}, 
+							{id:3, a:212, country:'Brazil', area:700}, 
+							{id:4, a:122, country:'Canada', area:500}, 
+							{id:5, a:152, country:'France', area:200},
+							{id:6, a:172, country:'Russia', area:880}
+						]
+					}
+				]},
+				{ view:"resizer"},
+				{ rows:[
+					{ type:"header", template:"JSArray with custom columns (short)"},
+					{
+						view:"geochart",
+						// provide your own Google API key 
+						// https://developers.google.com/maps/documentation/javascript/get-api-key
+						key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+						columns:["data1", "data2"],
+						datatype:"jsarray",
+						data:[
+							[124, 'Germany', 200],
+							[121, 'United States', 400],
+							[212, 'Brazil', 700],
+							[122, 'Canada', 500],
+							[152, 'France', 200],
+							[172, 'Russia', 880]
+						]
+					},
+					{ type:"header", template:"JSArray with custom columns (full)"},
+					{
+						view:"geochart",
+						// provide your own Google API key 
+						// https://developers.google.com/maps/documentation/javascript/get-api-key
+						key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+						columns:[
+							{ type:"string", label:"data1"}, 
+							{ type:"number", label:"data2"}
+						],
+						datatype:"jsarray",
+						data:[
+							[124, 'Germany', 200],
+							[121, 'United States', 400],
+							[212, 'Brazil', 700],
+							[122, 'Canada', 500],
+							[152, 'France', 200],
+							[172, 'Russia', 880]
+						]
+					}
+				]}
+			]
+			
+		});
+
+	</script>
+</body>
+</html>

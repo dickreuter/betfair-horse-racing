@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tooltips definition</title>
+    <link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../common/samples.css">
+    <style>
+        .my_title{
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="testA"></div>
+
+<script type="text/javascript" charset="utf-8">
+
+    webix.ready(function(){
+        grida = webix.ui({
+            container:"testA",
+            view:"datatable",
+            columns:[
+                { id:"id", header:" ", width:50},
+                { id:"name", header:"Name", width:170},
+                // sparklines
+                { id:"balance", header:"Balance per Month", template: webix.Sparklines.getTemplate("bar") , tooltip: function(obj, common, value, index){
+                    if(!value)
+                        return "";
+                    return "<div class='my_title'>"+obj.name+",<br/>"+value.month+" : <b>"+value.value+"</b></div>";
+                },width:170}
+            ],
+            tooltip: true,
+            autoheight:true,
+            autowidth:true,
+            data: [
+                {id: 1, name: "Austria", balance: [{value: 2000, month: "January"},{value: -650, month: "February"},{value: 3000, month: "March"},{value: 2100, month: "April"},{value: 2500, month: "May"}] },
+                {id: 2, name: "France", balance: [{value: 1000, month: "January"},{value: 2000, month: "February"},{value: 1500, month: "March"},{value: 3000, month: "April"},{value: 2200, month: "May"}] },
+                {id: 3, name: "Germany", balance: [{value: 1800, month: "January"},{value: 1500, month: "February"},{value: 2200, month: "March"},{value: 2700, month: "April"},{value: 2100, month: "May"}] },
+                {id: 4, name: "UK", balance: [{value: 1200, month: "January"},{value: 2500, month: "February"},{value: 1500, month: "March"},{value: 2200, month: "April"},{value: 2600, month: "May"}] }
+            ]
+        });
+
+
+
+    });
+</script>
+</body>
+</html>

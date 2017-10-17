@@ -1,0 +1,156 @@
+
+Check the full list of changes in Pivot at https://docs.webix.com/pivot__whats_new.html
+
+Version 5.1 (November 2017)
+------------- 
+### Fixes
+
+- select filter doesn't use exact match
+- $exportView for Pivot Chart
+- Pivot data format in the webworker mode
+
+[Check the full list of changes](https://docs.webix.com/pivot__whats_new_5_1.html)
+
+Version 5.0 (September 2017)
+------------- 
+### Major features
+
+- support for custom math operations in Pivot with web worker
+- ability to access raw data from the pivot
+
+[Check the full list of changes](https://docs.webix.com/pivot__whats_new_5_0.html)
+
+Version 4.4 (June 2017)
+------------- 
+
+### Updates
+
+The ability to export Pivot data as a flat structure.
+
+### Fixes
+
+- regression in export API	
+- regression in multi-select filter	
+
+Version 4.3 (April 2017)
+---------------------------
+### Major features
+
+- stableRowId property
+- ping property to abort long processes
+- stable performance of web worker
+
+[Check the full list of changes](https://docs.webix.com/pivot__whats_new_4_3.html)
+
+
+Version 4.2 (February 2017)
+---------------------------
+### Major features
+
+- ability to offload work to a web worker
+- filterPlaceholder property to set placeholder for filters added
+- onFilterCreate event
+- "fields tree", datepicker, filter demos added
+
+### Updates
+
+- structure of the external data source is simplified
+- optional grouping fields as Tree
+
+[Check the full list of changes](https://docs.webix.com/pivot__whats_new_4_2.html)
+
+
+Version 4.1 (November 2016)
+---------------------------
+### Breaking Changes
+
+- filter Date values are converted into timestamp 
+- Multiselect filter is replaced with the Multicombo filter (you need to check your locale files)
+
+### Updates
+
+- ability to define custom Filters
+- ability to override structure of Pivot (onViewInit event)
+- ability to process data on the server side
+
+Version 4.0 (September 2016)
+---------------
+### Updates
+
+- "not equal" filter operation ("<>")
+
+### Fixes
+
+- "count" calculation for folders
+- header sorting
+
+
+Version 3.4 (July 2016)
+-----------------------
+### Updates
+
+- addOperation API added
+
+Version 3.3 (April 2016)
+---------------
+### Updates
+
+- enhanced FileManager appearance
+- onBeforeApply event for Pivot Table
+- sorting for options in select filters in Pivot Table
+- support for missed values in Pivot Table
+
+[Check the full list of changes](https://docs.webix.com/pivot__whats_new_3_3.html)
+
+
+Version 3.2 (February 2016)
+--------------------------
+### Updates
+
+- custom xAxis for Pivot Chart
+- support for structure without columns in Pivot Table
+- "missed values" support in Pivot Table
+- performance improvements
+
+### Fixes
+
+- filtering by multiple fields in Pivot Table
+
+
+Version 3.1 (November 2015)
+----------------
+### Updates
+
+- setStructure() for PivotTable
+
+### Fixes
+
+- totalColumn in Pivot Table
+
+
+Version 3.0 (September 2015)
+-----------
+### Updates
+
+- onHeaderInit event for Pivot Table
+
+### Fixes
+
+- total column, footer and data formatting in Pivot Table
+- grouping performance 
+
+
+Version 2.5 (July 2015)
+---------------
+### Major features
+
+- Total column and footer (both with sum counters) 
+
+[Check the full list of changes](https://docs.webix.com/pivot__whats_new_2_5.html)
+
+Version 2.3 (March 2015)
+---------------
+### Major features
+
+- multiselect and datepicker filters 
+- header sorting and value formatting 

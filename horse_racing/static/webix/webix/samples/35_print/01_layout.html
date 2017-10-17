@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../common/testdata.js"></script>
+	<title>Layout</title>
+</head>
+<body>
+	<input type="button" style="margin-left:20px;" value="Print App view" onclick="webix.print($$('app'))"/>
+	<div id="layout_div" style="width:800px; height:600px; margin:20px;"></div>
+
+	<script type="text/javascript" charset="utf-8">
+
+		webix.ui({
+			id:"app",
+			container:"layout_div",
+			rows:[
+				{ view:"toolbar", elements:[
+					{ view:"label", label:"My App"},
+					{},
+					{ view:"icon", icon:"users"},
+					{ view:"icon", icon:"star"},
+					{ view:"icon", icon:"cog"}
+				]},
+				{ rows:[
+					{cols:[
+						{ view:"form", width:200, elements:[
+							{ type:"section", template:"Add film"},
+							{ view:"text", placeholder:"Title"},
+							{ view:"text", placeholder:"Year"},
+							{ view:"text", placeholder:"Rating"},
+							{ view:"button", value:"Submit", type:"form"},
+							{}
+						]},
+						{ view:"resizer", id:"resizer" },
+						{ view:"datatable", data:big_film_set,  autoConfig:true, scrollX:false},
+					]},
+					{ autoheight:true, template:"All data is loaded"}
+				]}
+			]
+		});
+
+	</script>
+</body>
+</html>

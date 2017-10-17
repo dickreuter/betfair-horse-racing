@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Querybuilder as datatable filter</title>
+		<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../../codebase/querybuilder.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+		<link rel="stylesheet" type="text/css" href="../../codebase/querybuilder.css">
+	</head>
+	<body>
+		<script type="text/javascript" charset="utf-8">
+		var small_film_set = [
+			{ id:1, title:"The Shawshank Redemption", year:1994, votes:678790, rating:9, rank:1, category:"Thriller"},
+			{ id:2, title:"The Godfather", year:1972, votes:511495, rating:9, rank:2, category:"Crime"},
+			{ id:3, title:"The Godfather: Part II", year:1974, votes:319352, rating:9, rank:3, category:"Crime"},
+			{ id:4, title:"The Good, the Bad and the Ugly", year:1966, votes:213030, rating:7, rank:4, category:"Western"},
+			{ id:5, title:"Pulp fiction", year:1994, votes:533848, rating:8, rank:5, category:"Crime"},
+			{ id:6, title:"12 Angry Men", year:1957, votes:164558, rating:8, rank:6, category:"Western"}
+		];
+
+		var fields = [
+			{ id:"rating", value:"Rating", type:"number" },
+			{ id:"title", value:"Title",  type:"string" },
+			{ id:"votes",  value:"Votes", type:"number" }
+		];
+
+		var buttonSave = {
+			view:"button",
+			value:"Save state",
+			width:150,
+			click: function() {
+				webix.storage.local.put("state", $$("datatable1").getState());
+			}
+		};
+
+		var buttonRestore = {
+			view:"button",
+			value:"Restore state",
+			width:150,
+			click: function() {
+				var state = webix.storage.local.get("state");
+			if (state)
+				$$("datatable1").setState(state);
+			}
+		};
+
+		var grid = {
+			view:"datatable",
+			id: "datatable1",
+			columns:[					
+				{ id:"dummy", width:40, header:{ content:"queryBuilder", popupConfig:{width: 900}, maxLevel: 3, fields:fields }},
+				{ id:"title",   header:"Film title",    fillspace:true,  sort:"string"},
+				{ id:"year",    header:"Released",  width:100,  sort:"int"},
+				{ id:"votes",   header:"Votes",         width:100,  sort:"int"},
+				{ id:"rating",  header:"Rating",        width:70,  sort:"int"},
+				{ id:"category", header:"Category", width:100},
+			],
+			borderless:false,
+			autoheight:true,
+			
+			data:small_film_set
+		};        
+
+		webix.ready(function(){
+			webix.ui({
+				rows: [
+					{ view:"toolbar", cols:[buttonSave, buttonRestore]},
+					grid
+				]
+			});
+		});
+		</script>
+	</body>
+</html>

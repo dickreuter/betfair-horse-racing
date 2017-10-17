@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weighted Average</title>
+    <link rel="stylesheet" href="../../../webix/codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+    <script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+    <script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="testA"></div>
+
+
+<script type="text/javascript" charset="utf-8">
+    var data = [
+        {id: "1", client: "ACME", company: "A", country: "Germany", weight: 10, statValue:0.5},
+        {id: "2", client: "ACME", company: "A", country: "Germany", weight: 20, statValue:0.4},
+        {id: "3", client: "ACME", company: "B", country: "Germany", weight: 30, statValue:0.3},
+        {id: "4", client: "ACME", company: "B", country: "Germany", weight: 40, statValue:0.5},
+        {id: "5", client: "ACME", company: "A", country: "France", weight: 40, statValue:0.4},
+        {id: "6", client: "ACME", company: "A", country: "France", weight: 10, statValue:0.6},
+        {id: "7", client: "ACME", company: "B", country: "France", weight: 50, statValue:0.1},
+        {id: "8", client: "ACME", company: "B", country: "France", weight: 30, statValue:0.5},
+        {id: "9", client: "Samsung", company: "A", country: "Germany", weight: 20, statValue:0.7},
+        {id: "10", client: "Samsung", company: "A", country: "Germany", weight: 30, statValue:0.4},
+        {id: "11", client: "Samsung", company: "B", country: "Germany", weight: 10, statValue:0.3},
+        {id: "12", client: "Samsung", company: "B", country: "Germany", weight: 50, statValue:0.5},
+        {id: "13", client: "Samsung", company: "A", country: "France", weight: 70, statValue:0.8},
+        {id: "14", client: "Samsung", company: "A", country: "France", weight: 50, statValue:0.4},
+        {id: "15", client: "Samsung", company: "B", country: "France", weight: 50, statValue:0.3},
+        {id: "16", client: "Samsung", company: "B", country: "France", weight: 30, statValue:0.5}
+    ];
+
+    webix.ready(function(){
+        webix.ui({
+            id:"pivot",
+            view:"pivot",
+            container:"testA",
+            datatable:{
+                autowidth:true,
+                autoheight:true
+            },
+            footer: true,
+            structure: {
+                rows: ["company","client"],
+                columns: ["country"],
+                values: [{ name:"statValue", operation:["wAver","avg"]}]
+            }
+        });
+
+        $$("pivot").addOperation("avg", function(values, key, data, ids) {
+            var sum = 0;
+            for (i = 0; i < values.length; i++)
+                sum+=values[i]*1;
+            return values.length?(sum/values.length):0;
+        });
+        $$("pivot").addOperation("wAver", function(values, key, data, ids) {
+            var i, sum = 0, weight, weightSum = 0;
+            // calculate statSum and distanceSum for the leaves
+            if(ids && ids.length){
+                // get weighted sum for leave items
+                for (i = 0; i < values.length; i++) {
+                    weight = $$("pivot").getItem(ids[i]).weight*1;
+                    sum += values[i]*weight;
+                    weightSum += weight;
+                }
+                // add calculated sum properties
+                data[key+"$statSum"] = sum;
+                data[key+"$weightSum"] = weightSum;
+            }
+            // calculation of branches
+            if(data && data.data){
+                for(i = 0; i < data.data.length; i++){
+                    var childItem = data.data[i];
+                    if(childItem[key+"$statSum"] && childItem[key+"$weightSum"] ){
+                        sum += parseFloat(childItem[key+"$statSum"]);
+                        weightSum += parseFloat(childItem[key+"$weightSum"]);
+                    }
+                    data[key+"$statSum"] = sum;
+                    data[key+"$weightSum"] = weightSum;
+                }
+            }
+            // weighted average
+            return weightSum?(sum/weightSum):0;
+        }, {ids: true});
+
+        $$("pivot").addTotalOperation("wAver", function(values, key, data) {
+            var i, sum = 0, weightSum = 0;
+            if(data && data.length){
+                for(i = 0; i < data.length; i++){
+                    var item = data[i];
+                    if(item[key+"$statSum"] && item[key+"$weightSum"] ){
+                        sum += parseFloat(item[key+"$statSum"]);
+                        weightSum += parseFloat(item[key+"$weightSum"]);
+                    }
+                }
+            }
+            // weighted average
+            return weightSum?(sum/weightSum):0;
+        });
+
+        $$("pivot").parse(data);
+    });
+</script>
+</body>
+</html>

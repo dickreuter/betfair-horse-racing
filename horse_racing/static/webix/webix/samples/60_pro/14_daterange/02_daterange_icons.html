@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" media="screen" charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			#areaA, #areaB{
+				margin: 30px;
+			}
+			body{
+				background: #faf6ed;
+			}
+		</style>
+		<title>DateRange::Custom Icons</title>
+	</head>
+	<body>
+
+		<div id="areaA"></div>
+		<div id="areaB"></div>
+	
+
+		<script type="text/javascript" charset="utf-8">
+		
+		webix.ui({
+			container:"areaA",
+			view:"daterange",
+			icons:true
+		});	
+
+		webix.ui({
+			container:"areaB",
+			view:"daterange",
+			icons:[
+				//custom icon
+				{
+					template:function(){
+						return "<span role='button' tabindex='0' class='webix_cal_icon_week webix_cal_icon'>Current week</span>"
+					},
+					on_click:{
+						"webix_cal_icon_week":function(){
+							this.setValue({
+								start:new Date(),
+								end:webix.Date.add(new Date(), 1, "week")
+							});
+						}
+					}
+				},
+				//default "today" icon
+				{
+					template:function(){
+						return "<span role='button' tabindex='0' class='webix_cal_icon_today webix_cal_icon'>"+webix.i18n.calendar.today+"</span>"
+					},
+					on_click:{
+						"webix_cal_icon_today":function(){
+							this.addToRange(new Date());
+							this.callEvent("onTodaySet",[this.getValue()]);
+						}
+					}
+				},
+				//default "clear" icon
+				{
+					template:function(){
+						return "<span role='button' tabindex='0' class='webix_cal_icon_clear webix_cal_icon'>"+webix.i18n.calendar.clear+"</span>"
+					},
+					on_click:{
+						"webix_cal_icon_clear":function(){
+							this.setValue("");
+							this.callEvent("onDateClear", []);
+						}
+					}
+				}
+			],
+			timepicker:true,
+			value:{
+				start: new Date(), 
+				end: webix.Date.add(new Date(), 2, "month")
+			}
+		});	
+
+
+		</script>
+	</body>
+</html>

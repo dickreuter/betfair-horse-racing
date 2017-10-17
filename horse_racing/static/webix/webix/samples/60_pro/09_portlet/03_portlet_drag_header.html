@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+   <head>
+	   <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	   <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	   <title>Portlet: Drag Header</title>
+   </head>
+   <body>
+
+   	<div id='divA' style='width:600px; height:400px;'></div>
+<script type="text/javascript" charset="utf-8">
+
+webix.ui({
+	container:"divA",
+	type:"space",
+	rows:[
+		{ view:"portlet", header:"Drag me", body:{
+			template:"Drag and drop portlets"
+		}},
+		{ type:"wide", cols:[
+			{ view:"portlet", header:"Drag me", body:{
+				template:"A col 1"
+			}},
+			{ view:"portlet", header:"Drag me", body:{
+				template:"B col 2",
+			}},
+			{ view:"portlet", header:"Drag me", body:{
+				template:"C col 3"
+			}},
+		]
+		}
+	]
+});
+
+</script>
+   </body>
+</html>

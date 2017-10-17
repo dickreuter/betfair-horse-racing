@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" media="screen" charset="utf-8">
+        <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+        <title>Double List as Form Input</title>
+    </head>
+    <body>
+        <script type="text/javascript" charset="utf-8">
+
+var list1 = { 
+    view:"dbllist", 
+    list:{ height: 200, scroll:false },
+    labelBottomLeft:"User groups",
+    labelBottomRight:"Selected",
+    data:[
+        {id:"1", value:"Guest"},
+        {id:"2", value:"Member"},
+        {id:"3", value:"Moderator"},
+        {id:"4", value:"Admin"},
+        {id:"5", value:"Super Admin"}
+    ]
+};
+
+var list2 = { 
+    view:"dbllist",
+    list:{ autoheight: true },
+    labelLeft:"Available screens",
+    labelRight:"Selected",
+    data:[
+        {id:"1", value:"Contacts"},
+        {id:"2", value:"Products"},
+        {id:"3", value:"Reports"},
+        {id:"4", value:"Customers"},
+        {id:"5", value:"Deals"}
+    ]
+};
+
+            webix.ui({
+                view:"form", id:"f1", width:700,
+                rows:[
+                { template:"Label Left", type:"section" },
+
+                { view:"text", label:"User Name", labelAlign:"right", labelWidth: 140 },
+                { view:"forminput", name:"access", body:list1, labelWidth: 140,
+                	labelAlign:"right", label:"Access levels" },
+
+                { template:"Label Top", type:"section"},
+
+                { view:"text", label:"User Name", labelPosition:"top" },
+                { view:"forminput", name:"screens", body:list2, labelWidth:0 },
+              ],
+            });
+
+            $$("f1").setValues({
+                access:"1,2",
+                screens:"3"
+            });
+        </script>
+    </body>
+</html>

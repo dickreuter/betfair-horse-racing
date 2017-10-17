@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+	<title>DND Events in File Manager</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/filemanager.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/filemanager.css">
+
+
+</head>
+<body>
+<script type="text/javascript">
+	var count = 1;
+	webix.ready(function(){
+
+		webix.ui({
+			view:"filemanager",
+			id:"files"
+		});
+		$$("files").load("../common/data.php");
+
+		$$("files").attachEvent("onBeforeDrag",function(context,ev){
+			webix.message("Drag-n-drop started: "+context.start);
+			return true;
+		});
+		$$("files").attachEvent("onBeforeDragIn",function(context,ev){
+			webix.message("Drag in "+context.target);
+			return true;
+		});
+		$$("files").attachEvent("onBeforeDrop",function(context,ev){
+			webix.message(context.source+" will be dropped to "+context.target);
+			return true;
+		});
+		$$("files").attachEvent("onAfterDrop",function(context,ev){
+			webix.message("Drop "+context.source+" to "+context.target);
+			return true;
+		});
+	});
+</script>
+</body>
+</html>

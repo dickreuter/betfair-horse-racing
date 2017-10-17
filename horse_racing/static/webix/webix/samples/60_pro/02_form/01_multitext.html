@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+		<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			#areaA{
+				margin: 30px;
+			}
+		</style>
+		<title>Multi-Text input</title>
+	</head>
+	<body>
+
+		<div id="areaA"></div>
+	
+
+		<script type="text/javascript" charset="utf-8">
+		var form1 = [
+			{ rows:[
+				{ view:"multitext", value:'dummy@email.com', label:"Email" }
+			]},
+			{ margin:5, cols:[
+				{ view:"button", value:"Login" , type:"form" },
+				{ view:"button", value:"Cancel" }
+			]}
+		];
+
+		var form2 = [
+			{ rows:[
+				{ view:"multitext", value:'dummy@email.com, mirror@email.com, third@email.com', label:"Email" }
+			]},
+			{ margin:5, cols:[
+				{ view:"button", value:"Login" , type:"form" },
+				{ view:"button", value:"Cancel" }
+			]}
+		];
+		webix.ui({
+			container:"areaA",
+			margin:30, cols:[
+				{ view:"form", scroll:false, width:300, elements: form1 },
+				{ view:"form", scroll:false, width:300, elements: form2 }
+			]
+		});
+		</script>
+	</body>
+</html>

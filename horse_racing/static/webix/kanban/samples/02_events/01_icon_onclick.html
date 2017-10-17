@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+	<title>Icon Click</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/kanban.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/kanban.css">
+
+	<script src="../common/data.js"></script>
+	<script src="../common/types.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+
+
+
+		webix.ready(function(){
+			webix.ui({
+				view:"kanban",
+				id: "myBoard",
+				type:"space",
+				on:{
+					onListIconClick: function(iconId, itemId){
+						webix.message("Icon '"+iconId+"' has been clicked in '"+this.getItem(itemId).text+"' item")
+					}
+				},
+				cols:[
+					{ header:"Backlog",
+						body:{ view:"kanbanlist", status:"new", type: "icons" }},
+					{ header:"In Progress",
+						body:{ view:"kanbanlist", status:"work", type: "icons"}
+					},
+					{ header:"Testing",
+						body:{ view:"kanbanlist", status:"test", type: "icons" }},
+					{ header:"Done",
+						body:{ view:"kanbanlist", status:"done", type: "icons" }}
+				],
+				data:base_task_set
+			});
+
+
+		});
+	</script>
+</body>
+</html>

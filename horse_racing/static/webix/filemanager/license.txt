@@ -1,0 +1,57 @@
+Webix FileManager Trial License
+===========================
+
+By purchasing, installing, or otherwise using the product identified above and/or its related materials, you agree to be bound by the terms and conditions of this License Agreement.
+
+READ CAREFULLY
+This license agreement ("LICENSE") is a legal agreement between you (either an individual or a single entity, also referred to as "YOU") and XB Software Ltd. ("XB Software"), for the software containing this LICENSE which may also include the software's source code written in a high-level computer language, associated media, printed materials, and "online" or electronic documentation (collectively referred to as "SOFTWARE").
+
+SOFTWARE PRODUCT LICENSE
+The SOFTWARE is protected by copyright laws and international copyright treaties, as well as other intellectual property laws and treaties and contains confidential information and trade secrets. XB Software retains all rights not expressly granted to you in this LICENSE.
+
+I. GRANT OF LICENSE
+XB Software hereby grants to you, and you accept, a non-exclusive, non-transferable license to install, copy, use and modify the SOFTWARE only as authorized below.
+
+ Trial License
+You are granted a license for evaluation purposes only. Trial period is 30 days.You are authorized to install, copy, and use the SOFTWARE for the sole purpose of testing its functionality. You may only use the SOFTWARE on a single computer at one time. You may not distribute original or modified copies of the SOFTWARE in any form to others, nor disseminate, distribute or resell the SOFTWARE in any manner.
+
+II. OTHER RIGHTS AND LIMITATIONS
+1. At no time may the SOFTWARE be used for development purposes by other individuals than the licensed developer(s).
+2. The SOFTWARE may not be distributed as part of products that have the same or substantially the same primary functionality, or are competitive to the Software.
+3. You may not use the XB Software product names, logos or trademarks to market YOUR SOFTWARE.
+4. You are not allowed to disassemble, decompile or "unlock", decode or otherwise reverse translate or engineer, or attempt in any manner to reconstruct or discover any source code or underlying algorithms of SOFTWARE if your License provides the Software in obfuscated code only.
+5. You are not allowed to use, copy, modify, or merge copies of the SOFTWARE and any accompanying documents except as permitted in this LICENSE.
+6. You agree to indemnify, hold harmless, and defend XB Software and its resellers from and against any and all claims or lawsuits including attorney's fees that arise or result from the use or distribution of YOUR SOFTWARE.
+
+Source code license limitations.
+7. Under no circumstances may any portion of the SOFTWARE's source code or any modified version of the source code be distributed, disclosed or otherwise made available to any third party.
+8. XB Software DOES NOT provide technical support for modified source code.
+9. The SOFTWARE's source code is provided as is. Refunds are not available for licenses that include source code.
+10. In the event you develop any troubleshooting-related modifications of the SOFTWARE, either independently or jointly with XB Software, such modifications and all rights associated therewith will be the exclusive property of XB Software. You are granted the right to use such modifications as set forth in this agreement.
+11. You acknowledge that the SOFTWARE's source code contains valuable and proprietary trade secrets of XB Software. All individuals employed by or belonging to your entity agree to expend every effort to insure its confidentiality. You agree to assume full responsibility for such employees' or contractors' use, or misuse, of such disclosed source code as if it was your use. These obligations shall not apply to any information generally available to the public, independently developed or obtained without reliance on XB Software information, or approved in writing for release by XB Software without restriction.
+
+III. DELIVERY
+XB Software shall deliver to you a master copy of the SOFTWARE licensed hereunder in electronic files only. Documentation shall also be provided in electronic format.
+
+IV. TERMINATION
+This LICENSE shall last as long as you use the SOFTWARE in compliance with this LICENSE. XB Software may terminate this LICENSE if you fail to comply with any of the terms and conditions herein. In such event you agree to remove and destroy all copies of the SOFTWARE and any applicable source code.
+
+V. COPYRIGHT
+All title and copyrights in and to the SOFTWARE (including but not limited to any images, photographs, animations, video, audio, music, text, incorporated into the SOFTWARE), the accompanying printed materials, and any copies of the SOFTWARE, and any trademarks or service marks of XB Software are owned by XB Software. All title and intellectual property rights in and to the content that may be accessed through use of the SOFTWARE is the property of the respective content owner and may be protected by applicable copyright or other intellectual property laws and treaties. This LICENSE grants you no rights to use such content.
+
+Use of the software and related documentation is governed by this license agreement accompanying the software and applicable copyright law. The documentation must always follow the related software. Making unauthorized copies, adaptations, or compilation works is prohibited. XB Software may revise this documentation from time to time without notice.
+
+VI. DISCLAIMER OF WARRANTIES
+The Software and documentation is provided "AS IS," without a warranty of any kind.
+
+ALL EXPRESS OR IMPLIED REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE HEREBY EXCLUDED.
+
+VII. LIMITATION OF LIABILITY
+XB Software SHALL NOT BE LIABLE OR RESPONSIBLE FOR ANY LOST DATA, REVENUE OR PROFITS, OR FOR ANY DIRECT OR INDIRECT DAMAGES, INJURIES OR LIABILITIES, CAUSED DIRECTLY OR INDIRECTLY BY THE USE OF THE LICENSED SOFTWARE OR DOCUMENTATION, INCLUDING BUT NOT LIMITED TO, INCIDENTAL, CONSEQUENTIAL OR SPECIAL DAMAGES, EVEN IF XB Software HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+VIII. MISCELLANEOUS
+The Uniform Computer Information Transactions Act and the United Nations Convention on the International Sale of Goods shall not apply to this Agreement. If any provision of this LICENSE is to be held unenforceable, such holding will not affect the validity of the other provisions hereof. Failure of a party to enforce any provision of this LICENSE shall not constitute or be construed as a waiver of such provision or of the right to enforce such provision.
+
+This License represents the entire understanding between the parties with respect to its subject matter.
+
+YOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT, THAT YOU UNDERSTAND THIS AGREEMENT, AND UNDERSTAND THAT BY CONTINUING THE INSTALLATION OF THE SOFTWARE PRODUCT, BY LOADING OR RUNNING THE SOFTWARE PRODUCT, OR BY PLACING OR COPYING THE SOFTWARE ONTO YOUR COMPUTER HARD DRIVE, YOU AGREE TO BE BOUND BY THIS AGREEMENT'S TERMS AND CONDITIONS. YOU FURTHER AGREE THAT, EXCEPT FOR WRITTEN SEPARATE AGREEMENTS BETWEEN TELERIK AND YOU, THIS AGREEMENT IS A COMPLETE AND EXCLUSIVE STATEMENT OF THE RIGHTS AND LIABILITIES OF THE PARTIES.

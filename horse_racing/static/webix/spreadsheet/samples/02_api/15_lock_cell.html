@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+	<title>Lock cells</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+	<script src="../common/data.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	webix.ready(function(){
+
+		function lock(){
+			var ids = $$("ssheet").getSelectedId(true);
+			if(!ids)
+				$$("ssheet").alert({text: "A cell is not selected"});
+			else{
+				var state = $$("ssheet").isCellLocked(ids[0].row, ids[0].column);
+				for(var i=0; i < ids.length; i++){
+					$$("ssheet").lockCell(ids[i].row,ids[i].column,!state);
+				}
+
+			}
+		}
+
+		webix.ui({
+			cols:[
+				{
+					width:200,type: "space",
+					rows:[
+						{ view:"button", label: "Lock / unlock cell",  click: lock},
+						{}
+					]
+				},
+				{
+					view:"spreadsheet",
+					id:"ssheet",
+					toolbar: "full",
+					data:{
+						data:[
+							[3,2,"Webix"],
+							[3,3,"SpreadSheet"]
+						]
+					}
+				}
+			]
+
+		});
+	});
+</script>
+</body>
+</html>

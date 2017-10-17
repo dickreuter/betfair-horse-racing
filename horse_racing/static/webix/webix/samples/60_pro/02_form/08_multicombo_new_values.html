@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+	<title>New values</title>
+</head>
+<body>
+<script type="text/javascript" charset="utf-8">
+
+	webix.ui({
+		width:400,
+		view:"form",
+		elements: [
+			{ view:"multicombo", name: "tags", value: "webix", placeholder:"Tags",
+				options:["webix", "test"],
+				newValues: true
+			},
+			{ view: "text", name: "title", placeholder: "Title" },
+			{ view:"textarea", name: "comments", placeholder:"Comments", height:150 },
+			{ view:"button", type:"form", value:"Submit data", click:function(){
+				webix.message(JSON.stringify( this.getParentView().getValues()));
+			}}
+		]
+	});
+
+</script>
+</body>
+</html>

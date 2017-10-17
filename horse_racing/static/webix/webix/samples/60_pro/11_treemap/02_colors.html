@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+	<title>Colors</title>
+	<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<style>
+		.item0{ background: #bbdefb; }
+		.item1{ background: #90caf9; }
+		.item2{ background: #64b5f6; }
+		.item3{ background: #42a5f5; }
+
+	</style>
+</head>
+<body>
+<div id="testA" style='width:710px; height:500px;'></div>
+<script type="text/javascript" charset="utf-8">
+
+
+	webix.ready(function(){
+		webix.ui({
+			container:"testA",
+			view:"treemap",
+			select: true,
+			value: "#views#",
+			type:{
+				cssClass: function(item){
+					var css,
+						comments = item.comments;
+
+					if(!this.isBranch(item.id)){
+						if(comments > 30)
+							css = "item3";
+						else if(comments > 20)
+							css = "item2";
+						else if(comments > 10)
+							css = "item1";
+						else
+							css = "item0";
+					}
+					return css;
+				},
+				template: function(item){
+					return item.category|| "";
+				}
+			},
+			url: "data/data_colors.json"
+		});
+
+
+	});
+</script>
+</body>
+</html>

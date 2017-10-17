@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+	<title>Dynamic Branch Loading</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/filemanager.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/filemanager.css">
+
+
+</head>
+<body>
+<script type="text/javascript">
+	webix.ready(function(){
+
+		webix.ui({
+			view:"filemanager",
+			id:"files",
+			handlers:{
+				"branch"    :  "../common/data_branch.php",
+				"search" 	: "../common/data_branch.php",
+				"upload" 	: "../common/data_branch.php",
+				"download"	: "../common/data_branch.php",
+				"copy"		: "../common/data_branch.php",
+				"move"		: "../common/data_branch.php",
+				"remove"	: "../common/data_branch.php",
+				"rename"	: "../common/data_branch.php",
+				"create"	: "../common/data_branch.php"
+			}
+		});
+
+		$$("files").load("../common/data_branch.php");
+
+
+
+	});
+</script>
+</body>
+</html>

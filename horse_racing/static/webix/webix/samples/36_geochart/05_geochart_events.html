@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./data/data.js" type="text/javascript" charset="utf-8"></script>
+	<title>GeoChart::Events</title>
+</head>
+<body>
+	<div class="sample_comment" style="margin:20px">Click on any region</div>
+	<div id="sample_div" style="width:800px; height:500px; margin:20px;"></div>
+	<script type="text/javascript">
+
+		webix.ui({
+			container:"sample_div",
+    		view:"geochart", 
+    		id:"map",
+    		data:json_data,
+		    // provide your own Google API key 
+		    // https://developers.google.com/maps/documentation/javascript/get-api-key
+			key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+			on:{
+				onItemClick:function(id){
+					webix.message("Data item clicked: "+this.getItem(id).country);
+				},
+				onRegionClick:function(obj){
+					webix.message("Region clicked: "+obj.region);
+				}
+
+			}
+		});
+	</script>
+</body>
+</html>

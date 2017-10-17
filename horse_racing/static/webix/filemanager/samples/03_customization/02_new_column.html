@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+	<title>Adding New Column</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/filemanager.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/filemanager.css">
+
+	<style>
+		.my_style{
+			background-color:#f5f5f5;
+		}
+	</style>
+</head>
+<body>
+<script type="text/javascript">
+	webix.ready(function(){
+
+		webix.ui({
+			view:"filemanager",
+			id:"files",
+
+			on:{
+				"onViewInit": function(name, config){
+					if (name == "table"){
+						var columns = config.columns;
+						var newColumn1 = {id: "date",
+							header:"Date",
+							fillspace: 1,
+							css: "my_style",
+							template: function(obj,common){
+								var date = new Date(obj.date*1000);
+								return webix.i18n.dateFormatStr(date);
+							}
+						};
+						webix.toArray(columns).removeAt(1);
+						webix.toArray(columns).insertAt(newColumn1,1);
+						var newColumn2 = {id: "time",
+							header:"Time",
+							fillspace: 1,
+							css: "my_style",
+							template: function(obj,common){
+								var date = new Date(obj.date*1000);
+								return webix.i18n.timeFormatStr(date);
+							}
+						};
+
+
+						webix.toArray(columns).insertAt(newColumn2,2);
+
+					}
+				}
+			}
+		});
+
+		$$("files").load("../common/data.php");
+
+
+	});
+</script>
+</body>
+</html>

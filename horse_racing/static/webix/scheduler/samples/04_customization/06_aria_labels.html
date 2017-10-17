@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+		<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+		<script src="../../codebase/scheduler.js" type="text/javascript"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../../webix/codebase/skins/touch.css">
+		<link rel="stylesheet" type="text/css" href="../../codebase/scheduler.css">
+
+		<title>Aria labels</title>
+		<script type="text/javascript" charset="utf-8">
+
+			scheduler.config.init_date = new Date(2014,5,1);
+
+			scheduler.templates.calendar_event  =  function(day){
+				return {
+					text:"<div class='webix_cal_day_event'>"+day.getDate()+"</div>"+"<div class='webix_cal_event_marker'></div>",
+					aria:"Navigated to: "+webix.Date.dateToStr("%d %F %Y")(day)+
+						". There are "+$$("scheduler").$$("calendarDayEvents").count()+" events on this day." 
+				}
+			};
+			scheduler.templates.calendar_day  =  function(day){
+				return {
+					text:day.getDate(),
+					aria:"Navigated to: "+webix.Date.dateToStr("%d %F %Y")(day)+". There are no events on this day."
+				}
+			};
+
+			//webix.env.touch = true;
+			webix.ready(function(){
+
+				webix.ui.fullScreen();
+				webix.ui({
+					view: "scheduler",
+					id: "scheduler"
+				});
+
+				$$("scheduler").load("data/mobile.xml","scheduler");
+			});
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="../../codebase/webix.css" type="text/css"   charset="utf-8">
+	<script src="../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+	<title>GeoChart::Custom Tooltip</title>
+</head>
+<body>
+	<div class="sample_comment" style="margin:20px">The sample shows how to render particular columns and display a custom tooltip.</div>
+	<div id="sample_div" style="width:800px; height:500px; margin:20px;"></div>
+	<script type="text/javascript">
+
+		var data = [
+			{ id:1, country:'Germany', population:82114224, area:357114 }, 
+			{ id:2, country:'United States', population:324459463, area:9833517 }, 
+			{ id:3, country:'Brazil', population:209288278, area:8515767 }, 
+			{ id:4, country:'Canada', population:36624199, area:9984670 }, 
+			{ id:5, country:'France', population:64979548, area:640679 },
+			{ id:6, country:'Russia', population:143989754, area:17098246 }
+		];
+
+		webix.ui({
+			container:"sample_div",
+    		view:"geochart", 
+    		id:"map",
+    		data:data,
+		    // provide your own Google API key
+		    // https://developers.google.com/maps/documentation/javascript/get-api-key
+			key:"AIzaSyAi0oVNVO-e603aUY8SILdD4v9bVBkmiTg",
+			columns:["country", "population"],
+			tooltip:"Population: #population#<br>Area: #area#",
+			chart:{
+				legend:"none"
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>100 000 records</title>
+		<link rel="stylesheet" href="../../../webix/codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../webix/codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+		<script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+		<script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class='header_comment'>100 000 records</div>
+		<div id="testA"></div>
+
+        <style type="text/css">
+            html, body {
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                margin: 0;
+            }
+        </style>
+
+		<script type="text/javascript" charset="utf-8">
+
+
+
+	var numbers = [];
+	var current = 0;
+	var start = 0;
+	for (var i=0; i<999; i++)
+		numbers[i] = i+2;
+	
+	function random(){
+		current = (current + numbers[current]);
+		if (current > 999){
+			current = start % 999;
+			start++;
+		}
+		return current;
+		//return Math.floor(Math.random()*100);
+	}
+
+	function get_data(size){
+		var data = []; 
+		data[size-1] = null;
+
+		var years = [1980,1981,1982,1983,1984,1985,1986,1987,1988,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009];
+		var surnames = ["Carasco","Upham","Curtsinger","Mccallion","Haskins","Marini","Bucher","Mart","Mcglade","Shrock","Byrd","Koll","Kincade","Schnitzer","Moorehouse","Montilla","Gammon","Hursh","Alvarado","Byerley"];
+		var nums = [1250, 864, 984, 742, 697, 440, 2087, 1897, 1354, 250, 890, 159, 1840, 1240, 1408, 1698, 559, 654, 284, 650];
+
+		var ind = 0;
+		var step = 0;
+		for (var i = 0; i < size; i++){
+			step += random();
+			var year = years[step % 20];
+			step += random();
+			var surname = surnames[step % 20];
+			step += random();
+			var income = nums[step % 20];
+			step += random();
+			var expenses = nums[step % 20];
+			var ballance = income - expenses;
+
+			data[i] = {
+				id:i+1,
+				year:year,
+				group:surname.substr(0,1),
+				name:surname,
+				inc:income,
+				exp:expenses,
+				bal:ballance
+			};
+
+
+
+		}
+
+		
+
+		return data;
+	} 
+
+	webix.ready(function(){
+		grida = webix.ui({
+			container:"testA",
+            id:"pivot",
+			view:"pivot",
+            height:400,
+            width:1000,
+            max: true,
+            fieldMap:{
+            	inc:"Income",
+            	ext:"Expenses",
+            	name:"Name",
+            	year:"Year"
+            },
+            structure: {
+                rows: ["group", "name"],
+                columns: ["year"],
+                values: [{ name:"inc", operation:"sum"}, { name:"exp", operation:"sum"}],
+                filters:[]
+            }
+		});
+
+		grida.parse(get_data(100000));
+	});
+
+	</script>
+	</body>
+</html>

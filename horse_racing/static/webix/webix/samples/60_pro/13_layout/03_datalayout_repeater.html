@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+    <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+    <title>Data Layout - Repeater Mode</title>
+  </head>
+  <body>
+    <div id='layout_div' style='width:800px; height:600px; margin:20px;'></div>
+    <script type="text/javascript" charset="utf-8">
+
+   	var left = {
+        container:"layout_div",
+		    view:"datalayout",
+        type:"space",
+        rows:[
+        	{ name:"$value", type:"header", template:"#month# 2016" },
+   			{ name:"data", view:"list", template:"#income#, #count#" }
+        ],
+        data:[
+        	{ month:"January", data:[{ income: 122342, count:12 }, { income: 92342, count:8 }, { income: 222342, count:20 }] },
+        	{ month:"February", data:[{ income: 2342, count:2 }] }
+        ]
+    };
+
+    webix.ui(left);
+
+    </script>
+  </body>
+</html>

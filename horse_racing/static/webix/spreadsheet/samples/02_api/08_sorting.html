@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <title>Sorting</title>
+    <meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+    <script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+    <script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+    <link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+    <script src="../common/data.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    webix.ready(function(){
+        var buttons = {
+            width:200,type: "space",
+            rows:[
+                { view:"button", label: "Sort C3:C7",   click:function(){
+                    $$("ssheet").sortRange("C3:C7");
+                }},
+                { view:"button", label: "Sort selected: A to Z",  click: function(){
+                    $$("ssheet").sortRange(null,"asc");
+                }},
+                { view:"button", label: "Sort selected: Z to A",   click:function(){
+                    $$("ssheet").sortRange(null,"desc");
+                }},
+                {}
+            ]
+        };
+
+        webix.ui({
+            cols:[
+                buttons,
+                {
+                    view:"spreadsheet",
+                    id:"ssheet",
+                    toolbar: "full",
+                    data: base_data
+                }
+            ]
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Multi-combo filter in the DataTable</title>
+		<link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../common/samples.css">
+		<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+        .highlight{
+            background-color:#edf4f9;
+            font-weight:bold;
+        }
+         </style>
+	</head>
+	<body>
+
+		<div class='header_comment'>Multi-combo filter in the DataTable</div>
+		<div id="testB"></div>
+		<script type="text/javascript" charset="utf-8">
+		webix.ready(function(){
+			webix.ui({
+				container:"testB",
+				view:"datatable",
+
+				columns:[
+					{ id:"rank", 	header:"" ,width:40},
+					{ id:"title", 	header:"Film title" ,width:200},
+					{ id:"votes", 	header:"Votes" ,width:100},
+					{ id:"year",	header:["Released", { content:"multiComboFilter" }] , fillspace:1 }
+				],
+                spans:true,
+                select:"cell",
+				height:300,
+				width:520,
+				data:big_film_set
+			});				
+		});
+		
+		</script>
+	</body>
+</html>

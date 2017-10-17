@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		 <meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+		<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+		<script src="../../codebase/scheduler.js" type="text/javascript"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../../webix/codebase/skins/touch.css">
+		<link rel="stylesheet" type="text/css" href="../../codebase/scheduler.css">
+
+
+		<title>Templates</title>
+		<style>
+			.end_time{
+				color: #888;
+			}
+			.webix_event_time{
+				height: 50px;
+			}
+			.webix_event_marker{
+				height: 50px;
+				line-height: 25px !important;
+			}
+			.webix_event_overall{
+				padding-top: 5px;
+				height: 50px;
+				line-height: 25px;
+			}
+			.webix_event_overall .webix_event_text{
+				height: 50px;
+				white-space: normal;
+			}
+		</style>
+		<script type="text/javascript" charset="utf-8">
+			scheduler.config.init_date = new Date(2014,5,1);
+			scheduler.xy.list_height = 60;
+			scheduler.xy.month_list_height = 60;
+			/*The template for events in Day view*/
+			scheduler.templates.event_time = function(obj){
+				var start = obj.start_date;
+				var end = obj.end_date;
+				if(!(webix.Date.datePart(start,true).valueOf()==start.valueOf()&&webix.Date.datePart(end,true).valueOf()==end.valueOf())){
+					var startTime = webix.i18n.timeFormatStr(start);
+					var endTime = webix.i18n.timeFormatStr(end);
+					return startTime+"<div class='end_time'>"+endTime+"</div>";
+				}
+				else
+					return scheduler.locale.labels.label_allday;
+			};
+			
+
+			
+			webix.ready(function(){
+				webix.ui.fullScreen();
+    			webix.ui({
+					view: "scheduler",
+					id: "scheduler"
+				});
+				$$("scheduler").load("data/mobile.xml","scheduler");
+			});
+		</script>
+</head>
+	<body>
+	</body>
+</html>

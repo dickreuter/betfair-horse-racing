@@ -1,0 +1,55 @@
+Version 5.0 (September 2017)
+------------------
+### Fixes
+
+ - readonly mode regression
+ - remove string sizes 
+
+Version 4.2 (February 2017)
+----------------------
+### Updates
+
+- Enhanced accessibility
+
+
+Version 3.2 (February 2016)
+------------------
+### Updates
+
+- Improved performance
+
+### Fixes
+
+- multi-day rendering 
+
+
+Version 3.1 (November 2015)
+------------
+### Major features
+
+- animateView method and "month" view animation for Scheduler on touch devices
+
+
+Version 3.0 (September 2015)
+-----------
+### Fixes
+
+- event starts in lists templates for all-day events in scheduler
+
+
+Version 2.4 (May 2015)
+------------
+### Major features
+
+- onBeforeEventShow event for Scheduler
+
+### Fixes
+
+- bottom toolbar height
+
+
+Version 2.3 (March 2015)
+-------
+### Fixes
+
+- remove icons from Scheduler's calendars

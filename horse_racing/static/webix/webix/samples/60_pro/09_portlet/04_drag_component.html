@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+   <head>
+	   <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+	   <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	   <script type="text/javascript" src="../../common/testdata.js"></script>
+	   <script type="text/javascript" src="../../common/treedata.js"></script>
+	   <title>Portlet: Drag Components</title>
+   </head>
+   <body>
+
+   	<div id='divA' style='width:900px; height:400px;'></div>
+<script type="text/javascript" charset="utf-8">
+
+webix.ui({
+	container:"divA",
+	type:"space",
+	rows:[
+		{ template:"Only X-snap here", type:"header"},
+		{ type:"wide", cols:[
+			{ view:"portlet", icon:false, mode:"cols", body:{
+				view:"tree", data:smalltreedata
+			}},
+			{ view:"portlet", icon:false, mode:"cols", body:{
+				view:"list", data:small_film_values_set, select:true, autoheight:true
+			}},
+			{ view:"portlet", icon:false, mode:"cols", body:{
+				view:"datatable", data:small_film_set, autoConfig:true, autoheight:true
+			}}
+		]
+		}
+	]
+});
+
+
+</script>
+   </body>
+</html>

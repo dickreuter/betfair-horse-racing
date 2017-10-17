@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+	<title>One-Level Rendering</title>
+	<link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+</head>
+<body>
+<p class="sample_comment">Click to see sub-data</p>
+<div id="divA" style='width:500px; height:350px;'></div>
+<script type="text/javascript" charset="utf-8">
+
+	function getCss(item){
+		var color = "",
+				comments = item.comments,
+				id = item.id,
+				num = 0, sum = 0;
+
+		if(this.isBranch(id)){
+			// average number of comments in a branch
+			this.data.eachLeaf(id,function(item){
+				sum += item.comments*1;
+				num++;
+			});
+			comments = sum/num;
+		}
+
+		if(comments > 30)
+			color ="#26a69a";
+		else if(comments > 20)
+			color ="#4db6ac";
+		else if(comments > 10)
+			color ="#80cbc4";
+		else
+			color ="#b2dfdb";
+
+		return { background: color};
+	}
+
+	webix.ready(function(){
+		webix.ui({
+			container:"divA",
+			view:"treemap",
+			type:{
+				cssClass: getCss
+			},
+			activeItem: true,
+			subRender: false,
+			headerTemplate: "#category#",
+			template: function(obj){
+				return obj.$level == 1? obj.category: "";
+			},
+			value: "#views#",
+			url: "data/data.json"
+		});
+
+
+	});
+</script>
+</body>
+</html>

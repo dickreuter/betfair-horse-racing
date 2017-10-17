@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sparklines outside of datatable</title>
+    <link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../common/samples.css">
+</head>
+<body>
+
+<div id="testA"></div>
+
+
+<script type="text/javascript" charset="utf-8">
+
+    webix.ready(function(){
+        var bar1 = webix.Sparklines.getTemplate({type:"bar", color: "#5868bf"});
+        var bar2 = webix.Sparklines.getTemplate({type:"bar", color: "#3ea4f5"});
+
+        grida = webix.ui({
+            container:"testA",
+            cols:[{
+                view:"list",
+                template:bar1, scroll:false, type:{ height: 50, width:300 },
+                data: [
+                    {id: 1, name: "Austria", data: [710, 780, 390, 660, 600] },
+                    {id: 2, name: "France", data: [810, 500, 780, 800, 940] },
+                    {id: 3, name: "Germany", data: [630, 800, 120, 490, 520] },
+                    {id: 4, name: "UK", data: [200, 640, 440, 870, 850] }
+                ]
+            },{
+                view:"list",
+                scroll:false, type:{ height: 80, width:300 },
+                template:function(obj){
+                    return obj.name + "<div style='height:50px'>" + bar2(obj.data, { width:300, height: 50 }) + "</div>";
+                },
+                data: [
+                    {id: 1, name: "Austria", data: [710, 780, 390, 660, 600] },
+                    {id: 2, name: "France", data: [810, 500, 780, 800, 940] },
+                    {id: 3, name: "Germany", data: [630, 800, 120, 490, 520] },
+                    {id: 4, name: "UK", data: [200, 640, 440, 870, 850] }
+                ]
+            }]
+        });
+    });
+</script>
+</body>
+</html>

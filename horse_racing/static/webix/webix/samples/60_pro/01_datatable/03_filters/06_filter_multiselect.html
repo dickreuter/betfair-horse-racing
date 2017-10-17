@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Multi-select filter in the DataTable</title>
+		<link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../common/samples.css">
+		<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+        .highlight{
+            background-color:#edf4f9;
+            font-weight:bold;
+        }
+         </style>
+	</head>
+	<body>
+		<div class='header_comment'>Rich-select filter in the DataTable</div>
+		<div id="testA"></div>
+
+		<script type="text/javascript" charset="utf-8">
+		webix.ready(function(){
+			webix.ui({
+				container:"testA",
+				view:"datatable",
+
+				columns:[
+					{ id:"title", 	header:"Film title" ,width:200},
+					{ id:"year",	header:["Released", { content:"richSelectFilter" }] , width:120, css:{ "text-align": "center" }, tooltip: "", editor:"text"},
+					{ id:"votes",	header:"Votes", 	width:100 },
+                    { id:"rating",	header:"Rating", 	width:100 }
+				],
+                spans:true,
+                select:"cell",
+				height:300,
+				autowidth:true,
+				data:big_film_set
+			});				
+		});
+		
+		</script>
+		<div class='header_comment'>Multi-select filter in the DataTable</div>
+		<div id="testB"></div>
+		<script type="text/javascript" charset="utf-8">
+		webix.ready(function(){
+			webix.ui({
+				container:"testB",
+				view:"datatable",
+
+				columns:[
+					{ id:"title", 	header:"Film title" ,width:200},
+					{ id:"year",	header:["Released", { content:"multiSelectFilter" }] , width:120, css:{ "text-align": "center" }, tooltip: "", editor:"text"},
+					{ id:"votes",	header:"Votes", 	width:100 },
+                    { id:"rating",	header:"Rating", 	width:100 }
+				],
+                spans:true,
+                select:"cell",
+				height:300,
+				autowidth:true,
+				data:big_film_set
+			});				
+		});
+		
+		</script>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pie</title>
+    <link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../common/samples.css">
+</head>
+<body>
+
+<div id="testA"></div>
+
+<script type="text/javascript" charset="utf-8">
+
+    webix.ready(function(){
+        grida = webix.ui({
+            container:"testA",
+            view:"datatable",
+            columns:[
+                { id:"id", header:" ", width:50},
+                { id:"name", header:"Name", width:160},
+                { id:"income", header:"Average", template:function(obj){
+                    var arr = obj.income;
+                    var sum = 0;
+                    for(var i =0; i< arr.length; i++)
+                        sum +=  arr[i];
+                    return sum?(sum/arr.length).toFixed(2):0;
+                }, width:150},
+                // sparklines
+                { id:"income", header:"Income per Month", template: webix.Sparklines.getTemplate("pie"), width:200}
+            ],
+            autoheight:true,
+            autowidth:true,
+            data: [
+                {id: 1, name: "Austria", income: [50,200,170,210] },
+                {id: 2, name: "France", income: [100,300,220,270] },
+                {id: 3, name: "Germany", income: [200,240,300,230] },
+                {id: 4, name: "UK", income: [280,230,280,290]}
+            ]
+        });
+
+
+
+    });
+</script>
+</body>
+</html>

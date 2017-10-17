@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+    <title>Custom menu</title>
+    <meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+    <script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+    <script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+    <link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+
+    <script src="../common/data.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    var myMenu = [
+        { id:"file", submenu:[
+            {id: "sheet", submenu: [
+                {id: "new-sheet"},
+                {id: "copy-sheet"},
+                {id: "remove-sheet"}
+            ]},
+            {id: "excel-import"},
+            {id: "excel-export"}
+        ]},
+        { id:"edit", submenu:[
+            {id: "add-range"},
+            {id: "add-dropdown"},
+            {id: "add-link"},
+            {id: "lock-cell"},
+            {id: "conditional-format"},
+            {id: "clear-styles"}
+        ]},
+        { id:"insert", submenu:[
+            {id: "add-image"},
+            {id: "add-sparkline"}
+        ]},
+        { id:"data", submenu:[
+            {id: "sort", submenu: [
+                {id: "sort-asc"},
+                {id: "sort-desc"}
+            ]},
+            {id: "create-filter"}
+        ]},
+        {id: "view", submenu:[
+            {id: "freeze-columns"},
+            {id: "freeze-rows"},
+            {id: "hide-gridlines"},
+            {id: "hide-headers"}
+        ]},
+        {id: "columns", submenu: [
+            {id: "insert-column"},
+            {id: "delete-column"},
+            {id: "show-column"},
+            {id: "hide-column"}
+        ]},
+        {id: "rows", submenu: [
+            {id: "insert-row"},
+            {id: "delete-row"},
+            {id: "show-row"},
+            {id: "hide-row"}
+        ]},
+        { id: "my-options", value: "<span class='my_option'>My Options</span>", submenu: [
+            {id: "option-a", value: "Option A"},
+            {id: "option-b", value: "Option B"},
+            {id: "option-c", value: "Option C"}
+        ]}
+    ];
+
+    webix.ready(function(){
+        webix.ui({
+            view:"spreadsheet",
+            data: math_data_simple,
+            // custom menu
+            menu: myMenu,
+            on:{
+                onMenuItemClick: function(id){
+                    webix.message(id);
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

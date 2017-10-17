@@ -1,0 +1,59 @@
+  <!DOCTYPE html>
+<html>
+	<head>
+		<title>Sub-Grid in a DataTable - Loading Data</title>
+		<link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../common/samples.css">
+		<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+        <style type="text/css">
+        .multiline{
+            line-height: 30px !important;
+        }
+        </style>
+	</head>
+	<body>
+		<div class='header_comment'>Sub-Grid in a DataTable - Loading Data</div>
+		<div id="testA"></div>
+
+		<script type="text/javascript" charset="utf-8">
+		webix.ready(function(){
+			webix.ui({
+				container:"testA",
+				view:"datatable",
+				subview:{
+					borderless:true,
+					view:"datatable",
+					headerRowHeight:28,
+					columns:[
+						{ id:"dummy", template:"{common.checkbox()}", width:35, header:" "},
+						{ id:"package", sort:"string", fillspace:true },
+						{ id:"size" }
+					],
+					minHeight:400,
+					scrollX:false
+				},
+				on:{
+					onSubViewCreate:function(view, item){
+						view.load("../../../15_datatable/16_dyn_loading/data/data_dyn.php?for="+item.id);
+					}
+				},
+				columns:[
+					{ id:"title",	header:"Title", sort:"string",
+						template:"{common.subrow()} #title#", width:220 },
+					{ id:"year",	header:"Year", 		width:100, sort:"int"},
+					{ id:"votes",	header:"Votes", 	width:100,	sort:"int"}
+				],
+				autoheight:true,
+				autowidth:true,
+				data:[
+					{ id:1, title:"The Shawshank Redemption", year:1994, votes:678790 },
+					{ id:2, title:"The Godfather", year:1972, votes:511495 },
+					{ id:3, title:"The Godfather: Part II", year:1974, votes:319352 }
+				]
+			});
+		});			
+		</script>
+	</body>
+</html>

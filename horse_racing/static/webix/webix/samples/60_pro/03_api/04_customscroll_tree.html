@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css"   charset="utf-8">
+    <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+    <style>
+        #areaA{
+            margin: 30px; width:500px; height:300px;
+        }
+    </style>
+    <title>Custom Scroll in The Tree</title>
+</head>
+<body>
+<div id="areaA"></div>
+<script>
+    webix.ready(function(){
+
+        var smalltreedata = [
+            {id:"root", value:"Films data", open:true, data:[
+                { id:"1", open:true, value:"The Shawshank Redemption", data:[
+                    { id:"1.1", value:"Part 1" },
+                    { id:"1.2", value:"Part 2", open:true, data:[
+                        { id:"1.2.1", value:"Page 1" },
+                        { id:"1.2.2", value:"Page 2" },
+                        { id:"1.2.3", value:"Page 3" },
+                        { id:"1.2.4", value:"Page 4" },
+                        { id:"1.2.5", value:"Page 5" },
+                        { id:"2.2.1", value:"Page 1" },
+                        { id:"2.2.2", value:"Page 2" },
+                        { id:"2.2.3", value:"Page 3" },
+                        { id:"2.2.4", value:"Page 4" },
+                        { id:"2.2.5", value:"Page 5" },
+                        { id:"3.2.1", value:"Page 1" },
+                        { id:"3.2.2", value:"Page 2" },
+                        { id:"3.2.3", value:"Page 3" },
+                        { id:"3.2.4", value:"Page 4" },
+                        { id:"3.2.5", value:"Page 5" },
+                        { id:"4.2.1", value:"Page 1" },
+                        { id:"4.2.2", value:"Page 2" },
+                        { id:"4.2.3", value:"Page 3" },
+                        { id:"4.2.4", value:"Page 4" },
+                        { id:"4.2.5", value:"Page 5" },
+                        { id:"1.2.1", value:"Page 1" },
+                        { id:"5.2.2", value:"Page 2" },
+                        { id:"5.2.3", value:"Page 3" },
+                        { id:"5.2.4", value:"Page 4" },
+                        { id:"5.2.5", value:"Page 5" },
+                        { id:"6.2.1", value:"Page 1" },
+                        { id:"6.2.2", value:"Page 2" },
+                        { id:"6.2.3", value:"Page 3" },
+                        { id:"6.2.4", value:"Page 4" },
+                        { id:"6.2.5", value:"Page 5" }
+                    ]},
+                    { id:"1.3", value:"Part 3" }
+                ]},
+                { id:"2", open:true, value:"The Godfather", data:[
+                    { id:"2.1", value:"Part 1" },
+                    { id:"2.2", value:"Part 2" }
+                ]}
+            ]}
+        ];
+
+        if (!webix.env.touch && webix.ui.scrollSize)
+            webix.CustomScroll.init();
+
+        webix.ui({
+            container:"areaA",
+            height:300,
+            view:"tree",
+            data: smalltreedata
+        });
+    });
+</script>
+
+</body>
+</html>

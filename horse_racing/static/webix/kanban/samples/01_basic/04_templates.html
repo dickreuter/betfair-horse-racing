@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+	<title>Templates</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/kanban.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/kanban.css">
+
+	<script src="../common/data.js"></script>
+	<script src="../common/types.js"></script>
+	<link rel="stylesheet" type="text/css" href="../common/style.css">
+
+</head>
+<body>
+<script type="text/javascript">
+
+	webix.type(webix.ui.kanbanlist,{
+		name: "cards",
+		icons:[
+			{icon: "comment" , show: function(obj){ return !!obj.comments }, template:"#comments.length#"},
+			{icon: "pencil"}
+		],
+		// avatar template
+		templateAvatar: function(obj){
+			if(obj.personId){
+				var name = "";
+				for(var i=0; i < staff.length && !name;i++){
+					if(staff[i].id == obj.personId){
+						name = staff[i].name;
+					}
+				}
+				return '<img class="avatar" src="../common/imgs/'+obj.personId+'.jpg" title="'+name+'"/>';
+			}
+			return "";
+		},
+		// template for item body
+		// show item image and text
+		templateBody: function(obj){
+			var html = "";
+			if(obj.image)
+				html += "<img class='image' src='../common/imgs/attachments/"+obj.image+"'/>";
+			html += "<div>"+obj.text+"</div>";
+			return html;
+		}
+	});
+
+	webix.ready(function(){
+		webix.ui({
+			view:"kanban", type:"space",
+			cols:[
+				{ header:"Backlog",
+					body:{ view:"kanbanlist", status:"new", type: "cards" }},
+				{ header:"In Progress",
+					body:{ view:"kanbanlist", status:"work", type: "cards"}
+				},
+				{ header:"Testing",
+					body:{ view:"kanbanlist", status:"test", type: "cards" }},
+				{ header:"Done",
+					body:{ view:"kanbanlist", status:"done", type: "cards" }}
+			],
+			data: base_task_set
+		});
+	});
+</script>
+</body>
+</html>

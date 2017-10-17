@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+	<title>Subbar</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/spreadsheet.js" type="text/javascript"></script>
+	<script src="../../../webix/sources/core/i18n/ru.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/spreadsheet.css">
+	
+	<script src="../common/data.js"></script>
+
+</head>
+<body>
+	<script type="text/javascript">
+		
+		
+			
+		var elements = [			
+			{
+				view:"button", value:"Dummy button"
+			},
+			{
+				view:"richselect", options:["Dummy preset 1", "Dummy preset 2", "Dummy preset 3"]
+			},
+			{}
+		];		
+
+	
+		webix.ready(function(){
+			webix.ui({
+				view:"spreadsheet", id:"ss",
+				columnCount:15,					
+				subbar:{
+					view:"toolbar", css:"webix_ssheet_toolbar", elements:elements
+				},				
+				data:base_data				
+			});	
+		});
+	</script>
+</body>
+</html>

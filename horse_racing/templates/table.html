@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<BR><BR>
+{% for table in tables %}
+<font size="1">
+    <h1>{{titles[loop.index]}}</h1>
+</font>
+<font size="1">
+    {{ table|safe }}
+</font>
+{% endfor %}
+<BR>
+
+
+{% endblock %}

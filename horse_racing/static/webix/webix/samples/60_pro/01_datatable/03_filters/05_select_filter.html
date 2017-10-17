@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Select filter and Multi-select editor in the DataTable</title>
+		<link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+		<script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../common/samples.css">
+		<script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+        .highlight{
+            background-color:#edf4f9;
+            font-weight:bold;
+        }
+        </style>
+	</head>
+	<body>
+		<div class='header_comment'>Multi-select editor in the DataTable</div>
+		<div id="testA"></div>
+
+		<script type="text/javascript" charset="utf-8">
+		function multiSelectCompare(test, filter){
+			if (test){
+				test = test.split(",");
+				for (var i = 0; i < test.length; i++)
+					if (test[i] == filter) 
+						return true;
+			}
+		}
+
+		webix.ready(function(){
+			webix.ui({
+				container:"testA",
+				view:"datatable",
+				columns:[
+					{ id:"task", 		header:"Task" ,width:200, editor:"text"},
+					{ id:"assigned",	header:{ content:"selectFilter", compare:multiSelectCompare }, width:500,
+						optionslist:true,
+						options:[
+							{ id:1, value:"Alex Brown" },
+							{ id:2, value:"Dan Simons" },
+							{ id:3, value:"Gron Alanski" },
+							{ id:4, value:"Dan Alanski" }
+						],
+					 	editor:"multiselect"
+					 }
+				],
+				editable:true,
+                autoheight:true,
+				autowidth:true,
+				data:[
+					{ task:"Fix colspans", assigned:"1" },
+					{ task:"Fix rowspans" },
+					{ task:"Add something new", assigned:"3,2" },
+				]
+			});				
+		});
+		
+		</script>
+	</body>
+</html>

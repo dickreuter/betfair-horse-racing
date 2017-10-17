@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+	<title>onContext event</title>
+	<meta  name = "viewport" content = "initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+
+	<script src="../../../webix/codebase/webix.js" type="text/javascript"></script>
+	<script src="../../codebase/kanban.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="../../../webix/codebase/webix.css">
+	<link rel="stylesheet" type="text/css" href="../../codebase/kanban.css">
+
+	<script src="../common/data.js"></script>
+	<script src="../common/types.js"></script>
+	<link rel="stylesheet" type="text/css" href="../common/style.css">
+</head>
+<body>
+<script type="text/javascript">
+
+
+	function menuClick(id){
+		var menu = this.getMenu(id);
+		webix.message(menu.getItem(id).value);
+	}
+
+	webix.ui({
+		view:"contextmenu",
+		id: "cmenu",
+		data:[
+			{ value: "Assign to ..."},
+			{ value:"Modify", submenu:[
+				{id: "edit", value: "Edit"},
+				{id: "status", value: "Change Status"},
+				{id: "remove", value: "Remove"}
+			]},
+			{ value: "Add comment" }
+		],
+		on:{
+			onMenuItemClick: menuClick
+		}
+	});
+
+	function showMenu(id,e,node,list){
+
+		// show context menu for list
+		$$("cmenu").attachTo(list);
+
+		// block native context menu
+		webix.html.preventEvent(e);
+	}
+	webix.ready(function(){
+		webix.ui({
+			view:"kanban",
+			id: "myBoard",
+			type:"space",
+			cols:[
+				{ header:"Backlog",
+					body:{ view:"kanbanlist", status:"new", type: "avatars"}},
+				{ header:"In Progress",
+					body:{ view:"kanbanlist", status:"work", type: "avatars"}
+				},
+				{ header:"Testing",
+					body:{ view:"kanbanlist", status:"test", type: "avatars" }},
+				{ header:"Done",
+					body:{ view:"kanbanlist", status:"done", type: "avatars" }}
+			],
+			on:{
+				onListBeforeContextMenu: showMenu
+			},
+			data:base_task_set
+		});
+	});
+</script>
+</body>
+</html>

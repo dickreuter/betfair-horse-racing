@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DataTable state object::Session</title>
+    <link rel="stylesheet" href="../../../../codebase/webix.css" type="text/css" charset="utf-8">
+    <script src="../../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../common/samples.css">
+    <script src="../../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div class='header_comment'>DataTable state object</div>
+<div class='sample_comment'>Perform actions over the table (resize, filter, sort) and refresh the page.</div>
+<div id="testA" style='width:450px;height:320px; margin:20px;'></div>
+<script type="text/javascript" charset="utf-8">
+    webix.ready(function(){
+        var grid = webix.ui({
+            container:"testA",
+            view:"datatable",
+            id:"datatable",
+            columns:[
+                { id:"rank", hidden:true,	header:"", css:"rank",  		sort:"int"},
+                { id:"title",	header:"Film title",sort:"string", fillspace:true },
+                { id:"year",	header:["Released", {content:"selectFilter"}],	sort:"int", width:100 },
+                { id:"votes",	header:"Votes"  ,	sort:"int"	}
+            ],
+            resizeColumn:true,
+            resizeRow:true,
+            select:"cell",
+            data:big_film_set
+        });
+
+        webix.attachEvent('unload', function(){
+            webix.storage.local.put("state", grid.getState());
+        });
+
+        var state = webix.storage.local.get("state");
+        if (state)
+            grid.setState(state);
+    });
+
+    function showColumn(col){
+        var grid = $$("datatable");
+        if(grid.isColumnVisible(col))
+            grid.hideColumn(col);
+        else
+            grid.showColumn(col);
+    }
+
+
+</script>
+    <input type="button" style="margin-left:20px;" value="Show/hide votes" width="150" onclick="showColumn('votes')"/>
+    <input type="button" style="margin-left:20px;" value="Show/hide rank" width="150" onclick="showColumn('rank')"/>
+</body>
+</html>
